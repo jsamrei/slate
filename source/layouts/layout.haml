@@ -15,7 +15,6 @@
   -# Place favicon.ico and apple-touch-icon.png in the root directory
 
   = stylesheet_link_tag "screen"
-
 %body
   .container
     .navbar.navbar-inverse.navbar-fixed-top
@@ -31,7 +30,7 @@
               %li.active
                 %a{ "href" =>"/setup.html" } Getting Started
               %li
-                %a{ "href" => "documentation.html"} Documentation
+                %a{ "href" => "/documentation.html"} Documentation
               %li
                 %a{ "href" => "/how_to.html"} Cookbook
     %h1= @title
@@ -46,7 +45,7 @@
 
   = javascript_include_tag "plugins", "script"
   = javascript_include_tag "bootstrap.js"
-  = javascript_include_tag "highlight.pack"
+  = javascript_include_tag "highlight.pack.js"
   = stylesheet_link_tag "solarized_light"
   %script hljs.initHighlightingOnLoad();
 

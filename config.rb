@@ -68,6 +68,13 @@ end
 # Change the images directory
 # set :images_dir, "alternative_image_directory"
 
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :smartypants => true
+
+activate :rouge_syntax
+#set :markdown_engine, :redcarpet
+#set :markdown, :fenced_code_blocks => true, :smartypants => true
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment

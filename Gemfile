@@ -5,9 +5,8 @@ gem "haml"
 gem "sass"
 gem "builder"
 
-gem "redcarpet", "~> 2.0.0"
 gem "middleman"
-gem "middleman-blog"
+gem "middleman-syntax"
 gem 'bootstrap-sass', '~> 2.2.2.0'
 
 # Compass plugins

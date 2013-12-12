@@ -1,0 +1,132 @@
+!!!
+%html{ :lang => 'en' }
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{'http-equiv' => "X-UA-Compatible", :content =>"IE=edge,chrome=1"}
+    %title= @title
+    %meta{:name => "description", :content => ""}
+    %meta{:name => "author", :content => ""}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag "root"
+    
+  %body.root
+    
+    :sass
+      body,html
+        margin: 0
+        height: 100%
+        width: 100% 
+        font-family: 'Helvetica Neue', Helvetica, sans-serif
+        
+      body.root
+        background-color: #f2f2f2
+        
+      #root_header
+        overflow: hidden
+        width: 100%
+        height: 340px
+      
+      #root_header_outer
+        width: 950px
+        margin: 0 auto
+        min-height: 400px         
+        
+      #root_header_inner
+        background-image: url(/images/zillabyte_docs_blueprint.jpg)
+        width: 1916px
+        height: 482px
+        position: relative
+        top: -80px
+        left: -481px
+        margin: 0 auto
+        
+      .root_body
+        background: white
+        width: 900px
+        margin: 0 auto
+        min-height: 400px 
+        padding: 30px
+        
+      h2
+        font-size: 28px
+        font-weight: bold
+        margin: 0
+      p
+        margin: 0
+      
+      .root_box
+        width: 370px
+        margin: 20px 60px 30px 20px
+        float: left
+        overflow: auto
+        ul
+          margin: 10px 0 0 0
+          padding: 0
+        li
+          list-style: none
+          margin: 0
+          padding: 0
+          padding-top: 6px
+          font-weight: 500
+          cursor: pointer 
+        
+      
+      
+    
+    #root_header
+      #root_header_outer
+        #root_header_inner
+    
+    .root_body
+    
+      .root_box
+        %h2 
+          Getting Started
+        %p
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          %ul
+            %li
+              &raquo; Hello Worlds
+            %li
+              &raquo; Hello Worlds in Silicon Valley
+            %li
+              &raquo; Beyond the Web: Patents in Silicon Valley
+            %li
+              &raquo; Advanced Processing
+              
+      .root_box
+        %h2 
+          API Reference
+        %p
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          %ul
+            %li
+              &raquo; The Basics
+            %li
+              &raquo; CLI Reference
+            %li
+              &raquo; The Zilla Namespace
+            %li
+              &raquo; External Languages
+    
+      = yield
+    
+
+    %footer
+
+
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+    = javascript_include_tag "plugins", "script"
+    = javascript_include_tag "bootstrap.js"
+    = javascript_include_tag "highlight.pack.js"
+    = stylesheet_link_tag "solarized_light"
+    %script hljs.initHighlightingOnLoad();
+
+
+    -# Google Analytics: change UA-XXXXX-X to be your site's ID.
+    -# uncomment when deploying
+    / :javascript
+    /   var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    /   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    /   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    /   s.parentNode.insertBefore(g,s)}(document,'script'));

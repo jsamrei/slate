@@ -1,0 +1,118 @@
+---
+layout: page
+---
+- @title = "Hello Worlds Quickstart"
+- @bodyclass = "newproject"
+
+%p
+= link_to "Documentation Home", "/index.html"
+
+%br
+%br
+
+%h2
+  Hello Worlds Quickstart
+
+%br
+%br
+
+.code_snippet
+  require 'zillabyte'
+
+  %br
+  %br
+
+  Zillabyte.simple_function do |fn|
+
+  %br
+  %br
+
+  \# This directive instructs zillabyte to give your function every
+  %br
+  \# web page in our known universe.  Your function will have access
+  %br
+  \# to two fields: URL and HTML
+  %br
+  %br
+  &nbsp; fn.matches [["web_page", ["URL" "HTML"]]]
+
+  %br
+  %br
+
+  \# This directive tells Zillabyte what kind of data your function
+  %br
+  \# produces.  In this case, we're saying we will emit a tuple that 
+  %br
+  \# is one-column wide and contains the field 'URL'
+  %br
+  %br
+  &nbsp; fn.emits   [["has_hello_world", ["URL"]]]
+
+  %br
+  %br
+
+  \# This is the heart of your algorithm.  It's processed on every
+  %br
+  \# web page.  This algorithm is run in parallel on possibly hundreds
+  %br
+  \# of machines.
+  %br
+  %br
+  &nbsp; fn.execute do |tuple, collector|
+
+  %br
+  %br
+
+  &nbsp; # get the fields
+  %br
+  %br
+  &nbsp; &nbsp; url = tuple['url']
+  %br
+  &nbsp; &nbsp; html = tuple['html']
+
+  %br
+  %br
+
+  &nbsp; # does this page contains the 'hello world' phrase? If so, emit it
+  %br
+  %br
+  &nbsp; &nbsp; if html.include?('hello world')
+  %br
+  &nbsp; &nbsp; &nbsp; collector.emit(url)
+  %br
+  &nbsp; &nbsp; end
+
+  %br
+  %br
+
+  &nbsp; end
+
+  %br
+  %br
+
+  end
+
+%br
+%br
+
+%p
+  In the above, zillabyte.simple_function defines a new simple flow which is stored in fn. 
+  %br
+  %br
+  fn.name will define a name for the
+  flow (this is optional, but makes testing easier as running zillabyte live_run [name] will allow you to test the function
+  interactively). 
+  %br
+  %br
+  fn.emits defines the relations that the function should emit. These are given in a list. Each
+  relation is then given as a list as well, where the first element is the relation name and the second element is yet 
+  another list of the field names for that relation. 
+  %br 
+  %br
+  fn.prepare executes any prep work required before the function runs. 
+  %br
+  %br
+  fn.execute includes code that the actual function is meant to execute. The results of execute are emitted by the collector
+  which has a collect.emit method. This method takes in the relation name as the first argument, the tuple to be emited as
+  the second argument and the meta data as an optional third argument. The tuple must be specified in hash format with keys
+  being the fields of the relations specified in "emits" and values being the relevant values computed by the function.

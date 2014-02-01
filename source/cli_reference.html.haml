@@ -1,0 +1,111 @@
+---
+layout: page
+---
+- @title = "CLI Reference Page"
+- @bodyclass = "newproject"
+
+%p
+= link_to "Documentation Home", "/index.html"
+
+%br
+%br
+
+%h2
+  CLI Reference Page
+
+%br
+%br
+
+.cli_topic
+  Flows
+
+%br
+
+.cli_command
+  flows
+.cli_description
+  Lists all of the flows uploaded by the user.
+
+.cli_command
+  flows : info
+.cli_description
+  Prints flow meta info.
+
+.cli_command
+  flows : live_run [operation_name]
+.cli_description
+  Runs the operation through user-interaction.
+
+.cli_command
+  flows : push
+.cli_description
+  Pushes the flow up to the Zillabyte servers where they are then executed.
+
+.cli_command
+  flows : pull [flow_id] [directory]
+.cli_description
+  Pulls the flow corresponding to flow_id into directory.
+
+.cli_command
+  flows : test [data_set_id]
+.cli_description
+  Tests the flow locally. Uses a custom dataset if specified.
+
+.cli_command
+  flows : status [flow_id]
+.cli_description
+  Gets the flow status.
+
+.cli_command
+  flows : kill [flow_id]
+.cli_description
+  Kills the execution of a flow with the specified id.
+
+%br
+
+.cli_topic
+  Data
+
+%br
+
+.cli_command
+  data
+.cli_description
+  Lists all datasets uploaded by the user.
+
+.cli_command
+  data : create [data_set_name]
+.cli_description
+  Creates a new data set with the specified name on the Zillabyte server.
+
+.cli_command
+  data : append [data_set_id] [file_name]
+.cli_description
+  Uploads a new file and appends it to the data set indicated by the id.
+
+.cli_command
+  data : show [data_set_id]
+.cli_description
+  Retrieves the first few rows of the specified data set and displays them to user.
+
+.cli_command
+  data : test [data_set_name] [file_name]
+.cli_description
+  Uploads a user-defined data test for testing flows.
+
+%br
+
+.cli_topic
+  Query
+
+%br
+
+.cli_command
+  query : sql [command]
+.cli_description
+  Executes the sql query in command against Zillabyte data.
+
+.cli_command
+  query : sxp [command]
+.cli_description
+  Executes the sxp query in command against Zillabyte data.

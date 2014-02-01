@@ -7,7 +7,7 @@
     %meta{:name => "description", :content => ""}
     %meta{:name => "author", :content => ""}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    = stylesheet_link_tag "root"
+    = stylesheet_link_tag "page"
     
   %body.root
     
@@ -39,7 +39,25 @@
         top: -80px
         left: -481px
         margin: 0 auto
-        
+      
+      .cli_topic
+        font-size: 26px
+        font-weight: bold
+ 
+      .cli_command
+        font-size: 20px
+        font-weight: bold
+        font-style: italic
+
+      .cli_description
+        font-size: 18px
+        margin: 10px
+ 
+      .code_snippet
+        background: #ccc
+        font-size: 18px
+        font-family: 'Courier New', monospace, serif
+
       .root_body
         background: white
         width: 900px
@@ -86,48 +104,6 @@
     
     .root_body
     
-      .root_box
-        %h2 
-          Getting Started
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-          %ul
-            %li
-              &raquo; 
-              = link_to "Hello Worlds", "/hello_worlds_quickstart.html"
-            %li
-              &raquo;
-              = link_to "Hello Worlds in Silicon Valley", "/hello_worlds_in_silicon_valley_quickstart.html"
-            %li
-              &raquo;
-              = link_to "Beyond the Web: Patents in Silicon Valley", "/patents_in_silicon_valley_quickstart.html"
-            %li
-              &raquo; Advanced Processing
-              
-      .root_box
-        %h2 
-          API Reference
-        %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-          %ul
-            %li
-              &raquo; The Basics
-            %li
-              &raquo;
-              = link_to "CLI Reference", "/cli_reference.html"
-            %li
-              &raquo; Languages
-            %ul
-              %li
-                Python
-              %li
-                Ruby
-              %li
-                Javascript
-              %li
-                Hack Your Own
-              
-                
       = yield
     
 

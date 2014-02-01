@@ -4,6 +4,7 @@ build/
 .sass-cache
 bin/
 =======
+*.swp
 *.rbc
 *.sassc
 .sass-cache

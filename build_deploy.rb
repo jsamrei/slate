@@ -4,7 +4,7 @@ build = system('middleman build')
 
 if build
 	puts "Pushing Documentation to S3 => s3://docs.zillabyte.com"
-	push_s3 = system("s3cmd put -P --recursive ./build s3://docs.zillabyte.com")
+	push_s3 = system("cd ./build && s3cmd put -P --recursive ./ s3://docs.zillabyte.com")
 else
 	"[FAIL] Middleman build failed"
 end

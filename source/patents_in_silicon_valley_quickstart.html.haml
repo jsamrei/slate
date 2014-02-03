@@ -12,3 +12,104 @@ layout: page
 
 %h2
   Patents in Silicon Valley Quickstart
+
+%br
+%br
+
+.code_snippet
+  require 'zillabyte'
+
+  %br
+  %br
+
+  Zillabyte.simple_function do |fn|
+
+  %br
+  %br
+
+  \# The following matches directive instructs zillabyte to query the
+  %br
+  \# patents table as well as the location table to identify only the
+  %br
+  \# patents belonging to companies in Silicon Valley. Your function 
+  %br
+  \# will have access to PATENT_ID, PATENT_TEXT, PATENT_COMPANY, LAT
+  %br
+  \# and LNG.
+  %br
+  %br
+  &nbsp; fn.matches [
+  %br
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ["patents", ["PATENT_ID", "PATENT_TEXT", "PATENT_COMPANY"]
+  %br
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ["location_of", ["PATENT_COMPANY", "LAT", "LNG"]]
+  %br
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ["between", ["LAT", 37.3, 37.8]]
+  %br
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ["between", ["LNG", -121.8, -122.4]]
+  %br
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
+
+  %br
+  %br
+
+  \# This directive tells Zillabyte what kind of data your function
+  %br
+  \# produces.  In this case, we're saying we will emit a tuple that
+  %br
+  \# is one-column wide and contains the field 'URL'
+  %br
+  %br
+  &nbsp; fn.emits   [["has_patent", ["COMPANY", "PATENT"]]]
+
+  %br
+  %br
+
+  \# This is the heart of your algorithm.  It's processed on every
+  %br
+  \# web page.  This algorithm is run in parallel on possibly hundreds
+  %br
+  \# of machines.
+  %br
+  %br
+  &nbsp; fn.execute do |tuple, collector|
+
+  %br
+  %br
+
+  &nbsp; # get the fields
+  %br
+  %br
+  &nbsp; &nbsp; company = tuple['patent_company']
+  %br
+  &nbsp; &nbsp; patent = tuple['patent_text']
+
+  %br
+  %br
+
+  &nbsp; # does this page contains the 'hello world' phrase? If so, emit it
+  %br
+  %br
+  &nbsp; &nbsp; if html.include?('hello world')
+  %br
+  &nbsp; &nbsp; &nbsp; collector.emit(has_patent, {"company" => company, "patent" => patent})
+  %br
+  &nbsp; &nbsp; end
+
+  %br
+  %br
+
+  &nbsp; end
+
+  %br
+  %br
+
+  end
+
+%br
+%br
+
+%p
+  This is again the same as the previous examples, except we introduce the patents table in matches. 
+  Zillabyte provides many pre-defined data tables that users can pull data from. Descriptions for these
+  will be provided at a later date (once we compile them).

@@ -64,34 +64,29 @@ layout: page
 %br
 
 .cli_topic
-  Data
+  Relations
 
 %br
 
 .cli_command
-  data
+  relations
 .cli_description
-  Lists all datasets uploaded by the user.
+  Lists all relations (tables/data) uploaded by the user.
 
 .cli_command
-  data : create [data_set_name]
+  relations : create [relation_name] [file_name (optional)]
 .cli_description
-  Creates a new data set with the specified name on the Zillabyte server.
+  Creates a new relation with the specified name on the Zillabyte server. Puts the contents of file_name in the relation if specified.
 
 .cli_command
-  data : append [data_set_id] [file_name]
+  relations : append [relation_id] [file_name]
 .cli_description
-  Uploads a new file and appends it to the data set indicated by the id.
+  Uploads a new file and appends it to the relation indicated by the id.
 
 .cli_command
-  data : show [data_set_id]
+  relations : show [relation_id]
 .cli_description
-  Retrieves the first few rows of the specified data set and displays them to user.
-
-.cli_command
-  data : test [data_set_name] [file_name]
-.cli_description
-  Uploads a user-defined data test for testing flows.
+  Retrieves the first few rows of the specified relation and displays them to user.
 
 %br
 

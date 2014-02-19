@@ -61,6 +61,11 @@ layout: page
 .cli_description
   Kills the execution of a flow with the specified id.
 
+.cli_command
+  flows : logs [flow_id]
+.cli_description
+  Shows logs for the specified flow.
+
 %br
 
 .cli_topic
@@ -87,6 +92,11 @@ layout: page
   relations : show [relation_id]
 .cli_description
   Retrieves the first few rows of the specified relation and displays them to user.
+
+.cli_command
+  relations : pull [relation_id] [output_file]
+.cli_description
+  Downloads the specified relation to output_file.
 
 %br
 

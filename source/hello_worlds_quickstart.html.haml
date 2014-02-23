@@ -15,7 +15,6 @@ layout: page
 
 %br
 %br
-
 .code_snippet
   require 'zillabyte'
 
@@ -27,11 +26,7 @@ layout: page
   %br
   %br
 
-  \# This directive instructs zillabyte to give your function every
-  %br
-  \# web page in our known universe.  Your function will have access
-  %br
-  \# to two fields: URL and HTML
+  \# This directive instructs zillabyte to give your function every web page in our known universe.  Your function will have access to two fields: URL and HTML
   %br
   %br
   &nbsp; fn.matches [["web_page", ["URL", "HTML"]]]
@@ -39,11 +34,7 @@ layout: page
   %br
   %br
 
-  \# This directive tells Zillabyte what kind of data your function
-  %br
-  \# produces.  In this case, we're saying we will emit a tuple that 
-  %br
-  \# is one-column wide and contains the field 'URL'
+  \# This directive tells Zillabyte what kind of data your function produces.  In this case, we're saying we will emit a tuple that is one-column wide and contains the field 'URL'
   %br
   %br
   &nbsp; fn.emits   [["has_hello_world", ["URL"]]]
@@ -51,11 +42,7 @@ layout: page
   %br
   %br
 
-  \# This is the heart of your algorithm.  It's processed on every
-  %br
-  \# web page.  This algorithm is run in parallel on possibly hundreds
-  %br
-  \# of machines.
+  \# This is the heart of your algorithm.  It's processed on every web page.  This algorithm is run in parallel on possibly hundreds of machines.
   %br
   %br
   &nbsp; fn.execute do |tuple, collector|
@@ -92,6 +79,7 @@ layout: page
 
   end
 
+
 %br
 %br
 
@@ -99,23 +87,13 @@ layout: page
   In the above, zillabyte.simple_function defines a new simple flow which is stored in fn. 
   %br
   %br
-  fn.name will define a name for the
-  flow (this is optional, but makes testing easier as running zillabyte live_run [name] will allow you to test the function
-  interactively). 
+  fn.name will define a name for the flow (this is optional, but makes testing easier as running zillabyte live_run [name] will allow you to test the function interactively).
   %br
   %br
-  fn.emits defines the relations that the function should emit. These are given in a list. Each
-  relation is then given as a list as well, where the first element is the relation name and the second element is yet 
-  another list of the field names for that relation. 
+  fn.emits defines the relations that the function should emit. These are given in a list. Each relation is then given as a list as well, where the first element is the relation name and the second element is yet another list of the field names for that relation.
   %br 
   %br
   fn.prepare executes any prep work required before the function runs. 
   %br
   %br
-  fn.execute includes code that the actual function is meant to execute. The results of execute are emitted by the collector
-  which has a collector.emit method. This method takes in the relation name as the first argument, the tuple to be emited as
-  the second argument and the meta data as an optional third argument. The tuple must be specified in hash format with keys
-  being the fields of the relations specified in "emits" and values being the relevant values computed by the function. The
-  meta fields are optional. Users can specify the confidence of their results (as a float), the timestamp of their results
-  in Java format and the source of the results as a string. If no meta fields are specified, they are defaulted to 1.0,
-  current time and empty string.
+  fn.execute includes code that the actual function is meant to execute. The results of execute are emitted by the collector which has a collector.emit method. This method takes in the relation name as the first argument, the tuple to be emited as the second argument and the meta data as an optional third argument. The tuple must be specified in hash format with keys being the fields of the relations specified in "emits" and values being the relevant values computed by the function. The meta fields are optional. Users can specify the confidence of their results (as a float), the timestamp of their results in Java format and the source of the results as a string. If no meta fields are specified, they are defaulted to 1.0, current time and empty string.

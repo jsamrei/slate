@@ -14,8 +14,6 @@ layout: page
   Hello Worlds in Silicon Valley Quickstart
 
 %br
-%br
-
 .code_snippet
   require 'zillabyte'
 
@@ -27,13 +25,7 @@ layout: page
   %br
   %br
 
-  \# The following matches directive instructs zillabyte to query a
-  %br
-  \# few tables to identify only the web pages of companies within 
-  %br
-  \# Silicon Valley. Your function will have access to: URL, HTML,
-  %br
-  \# COMPANY, LAT and LNG.
+  \# The following matches directive instructs zillabyte to query a few tables to identify only the web pages of companies within Silicon Valley. Your function will have access to: URL, HTML, COMPANY, LAT and LNG.
   %br
   %br
   &nbsp; fn.matches [
@@ -53,11 +45,7 @@ layout: page
   %br
   %br
 
-  \# This directive tells Zillabyte what kind of data your function
-  %br
-  \# produces.  In this case, we're saying we will emit a tuple that
-  %br
-  \# is one-column wide and contains the field 'URL'
+  \# This directive tells Zillabyte what kind of data your function produces.  In this case, we're saying we will emit a tuple that is one-column wide and contains the field 'URL'
   %br
   %br
   &nbsp; fn.emits   [["has_hello_world", ["URL"]]]
@@ -65,11 +53,7 @@ layout: page
   %br
   %br
 
-  \# This is the heart of your algorithm.  It's processed on every
-  %br
-  \# web page.  This algorithm is run in parallel on possibly hundreds
-  %br
-  \# of machines.
+  \# This is the heart of your algorithm.  It's processed on every web page.  This algorithm is run in parallel on possibly hundreds of machines.
   %br
   %br
   &nbsp; fn.execute do |tuple, collector|
@@ -105,12 +89,11 @@ layout: page
   %br
 
   end
+%br
+
 
 %br
 %br
 
 %p
-  The above code is exactly the same as in the previous Hello Worlds example except instead of matches 
-  querying from just a single table, it queries from a number of tables ("web_page", "company" and
-  "location") and joins the results. The results are joined on the columns with the same name. The 
-  function "between" just finds all of the LAT and LNG between the specified coordinates.
+  The above code is exactly the same as in the previous Hello Worlds example except instead of matches querying from just a single table, it queries from a number of tables ("web_page", "company" and "location") and joins the results. The results are joined on the columns with the same name. The function "between" just finds all of the LAT and LNG between the specified coordinates.

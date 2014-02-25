@@ -27,15 +27,7 @@ layout: page
   %br
   %br
 
-  \# The following matches directive instructs zillabyte to query the
-  %br
-  \# patents table as well as the location table to identify only the
-  %br
-  \# patents belonging to companies in Silicon Valley. Your function 
-  %br
-  \# will have access to PATENT_ID, PATENT_TEXT, PATENT_COMPANY, LAT
-  %br
-  \# and LNG.
+  \# The following matches directive instructs zillabyte to query the patents table as well as the location table to identify only the patents belonging to companies in Silicon Valley. Your function will have access to PATENT_ID, PATENT_TEXT, PATENT_COMPANY, LAT and LNG.
   %br
   %br
   &nbsp; fn.matches [
@@ -53,11 +45,7 @@ layout: page
   %br
   %br
 
-  \# This directive tells Zillabyte what kind of data your function
-  %br
-  \# produces.  In this case, we're saying we will emit a tuple that
-  %br
-  \# is one-column wide and contains the field 'URL'
+  \# This directive tells Zillabyte what kind of data your function produces.  In this case, we're saying we will emit a tuple that is one-column wide and contains the field 'URL'
   %br
   %br
   &nbsp; fn.emits   [["has_patent", ["COMPANY", "PATENT"]]]
@@ -65,11 +53,7 @@ layout: page
   %br
   %br
 
-  \# This is the heart of your algorithm.  It's processed on every
-  %br
-  \# web page.  This algorithm is run in parallel on possibly hundreds
-  %br
-  \# of machines.
+  \# This is the heart of your algorithm.  It's processed on every web page.  This algorithm is run in parallel on possibly hundreds of machines.
   %br
   %br
   &nbsp; fn.execute do |tuple, collector|
@@ -110,6 +94,4 @@ layout: page
 %br
 
 %p
-  This is again the same as the previous examples, except we introduce the patents table in matches. 
-  Zillabyte provides many pre-defined data tables that users can pull data from. Descriptions for these
-  will be provided at a later date (once we compile them).
+  This is again the same as the previous examples, except we introduce the patents table in matches.  Zillabyte provides many pre-defined data tables that users can pull data from. Descriptions for these will be provided at a later date (once we compile them).

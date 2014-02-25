@@ -20,46 +20,48 @@ layout: page
   Flows
 
 %br
+  Flows are the foundation of the Zillabyte query process. A flow is a pipeline of information as it comes through the system. Using this flow you can redirect or filter it was you need using our SQL-like query language.
+%br
 
 .cli_command
   flows
 .cli_description
-  Lists all of the flows uploaded by the user.
+  List of all flows defined by the user
 
 .cli_command
   flows : info
 .cli_description
-  Prints flow meta info.
+  Returns and displays the flow metadata
 
 .cli_command
   flows : live_run [operation_name]
 .cli_description
-  Runs the operation through user-interaction.
+  Executes the flow operation
 
 .cli_command
   flows : push
 .cli_description
-  Pushes the flow up to the Zillabyte servers where they are then executed.
+  Deploys the flow to the Zillabyte system where it is then executed. This is similar to `git push` to deploy your own scripts to a server.
 
 .cli_command
   flows : pull [flow_id] [directory]
 .cli_description
-  Pulls the flow corresponding to flow_id into directory.
+  Retrieves and loads the flow corresponding to flow_id into the local directory. This is similar to `git pull` to retrieve the latest code from a repository.
 
 .cli_command
   flows : test [data_set_id]
 .cli_description
-  Tests the flow locally. Uses a custom dataset if specified.
+  Tests the flow locally. This allows you to specify and test using a custom dataset. This is useful for prototyping and testing assumptions about the queries you build.
 
 .cli_command
   flows : status [flow_id]
 .cli_description
-  Gets the flow status.
+  Gets the status of the specified flow.
 
 .cli_command
   flows : kill [flow_id]
 .cli_description
-  Kills the execution of a flow with the specified id.
+  Stops the execution of a flow process with the specified id.
 
 .cli_command
   flows : logs [flow_id]
@@ -76,27 +78,27 @@ layout: page
 .cli_command
   relations
 .cli_description
-  Lists all relations (tables/data) uploaded by the user.
+  List of all datasets uploaded by the user.
 
 .cli_command
   relations : create [relation_name] [file_name (optional)]
 .cli_description
-  Creates a new relation with the specified name on the Zillabyte server. Puts the contents of file_name in the relation if specified.
+  Creates a new dataset with the provided name on the Zillabyte system.
 
 .cli_command
   relations : append [relation_id] [file_name]
 .cli_description
-  Uploads a new file and appends it to the relation indicated by the id.
+  Uploads a new file and appends it to the dataset indicated by the id.
 
 .cli_command
   relations : show [relation_id]
 .cli_description
-  Retrieves the first few rows of the specified relation and displays them to user.
+  Retrieves the first few rows of the specified data set and displays them to user. This is useful to spot check datasets or to ensure you have the right ones available.
 
 .cli_command
   relations : pull [relation_id] [output_file]
 .cli_description
-  Downloads the specified relation to output_file.
+  Uploads a user-defined test dataset for testing flows.
 
 %br
 
@@ -108,7 +110,7 @@ layout: page
 .cli_command
   query : sql [command]
 .cli_description
-  Executes the sql query in command against Zillabyte data.
+  Executes the SQL query in command against Zillabyte data.
 
 .cli_command
   query : sxp [command]

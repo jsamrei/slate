@@ -25,3 +25,4 @@ pickle-email-*.html
 .project
 config/initializers/secret_token.rb
 >>>>>>> 0cf48106707c330cf4d36c541ff5bfc07343fb78
+.idea/*

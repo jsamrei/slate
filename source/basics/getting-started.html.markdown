@@ -4,7 +4,7 @@ title: Getting Started
 
 # Getting Started
 
-Zillabyte is a command-line tool that allows you to write a flow that processes the web. 
+Zillabyte allows you to write a flow that processes the web. 
 
 Zillabyte assumes familiarity with the command-line.  Familiarity with both will go a long way in helping users understand why Zillabyte works the way it does.
 

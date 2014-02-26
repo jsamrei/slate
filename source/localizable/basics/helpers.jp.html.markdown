@@ -137,8 +137,6 @@ content_for(:head) { |param1, param2| ...content... }
 `tag` と `content_tag` はタグ名と指定されたオプションで任意の html タグを生成します。 html タグが "中身" を含む場合, `content_tag` が使われます。例:
 
 ``` html
-<%= tag :img, :src => "/my_image.png" %>
-  # => <img src='/my_image.png'>
 
 <%= content_tag :p, :class => "stuff" do %>
   こんにちわ

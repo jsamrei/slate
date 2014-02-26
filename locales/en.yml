@@ -2,48 +2,25 @@
 en:
   # navigations
   basics:
-    title: Middleman Basics
+    title: Zillabyte Basics
     getting_started: Getting Started
-    templates: Templates
-    template_helpers: Template Helpers
-    frontmatter: Frontmatter
-    dynamic_pages: Dynamic Pages
-    asset_pipeline: Asset Pipeline
-    pretty_urls: Pretty URLs (Directory Indexes)
-    livereload: LiveReload
-    blogging: Blogging
+    hello_world: Hello World Quickstart
+    hello_world_in_silicon_valley: Hello World in Silicon Valley Quickstart
+    app_store_monitoring: App Store Monitoring Quickstart
+    cli_reference: CLI Reference 
+    
 
   advanced:
     title: Advanced Features
-    configuration: Configuring Your Site
-    local_data: Local Data
-    localization: Localization (i18n)
-    sitemap: The Sitemap
-    rack_middleware: Rack Middleware
-    custom: Custom Extensions
-    file_size_optimization: File Size Optimization
-    improving_cacheability: Improving Cacheability
 
   community:
     title: Community
-    extensions: Extensions
-    templates: Project Templates
-    deployment: Deployment Solutions
-    forum: Community Forum
-    github: GitHub Repository
-    built_using_middleman: Sites Built Using Middleman
 
 
   # index
   index:
-    sub_title: Hand-crafted frontend development
-    headline: makes developing websites simple
-    description: Middleman is a static site generator using all the shortcuts and tools in modern web development.
+    sub_title: Search made for developers
+    headline: search made for developers
+    description: Zillabyte is a command-line tool that allows you to search the web from the command line.
     getting_started: Getting started
 
-  # community/built-using-middleman
-  built:
-    title: Sites Built Using Middleman
-    mobile: Mobile Apps Built Using Middleman
-    blog: Blogs Using Middleman
-    fork: Fork and add your site on Github

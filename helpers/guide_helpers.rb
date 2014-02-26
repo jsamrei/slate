@@ -2,7 +2,7 @@ require "pathname"
 
 module GuideHelpers
   def page_title
-    title = "Middleman: "
+    title = "Zillabyte: "
     if data.page.title
       title << data.page.title
     else

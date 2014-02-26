@@ -24,42 +24,42 @@ layout: page
 %br
 
 .cli_command
-  flows
+  zillabyte flows
 .cli_description
   List of all flows defined by the user
 
 .cli_command
-  flows : info
+  zillabyte flows:info
 .cli_description
   Returns and displays the flow metadata
 
 .cli_command
-  flows : live_run [operation_name]
+  zillabyte flows:live_run [operation_name]
 .cli_description
   Executes the flow operation
 
 .cli_command
-  flows : push
+  zillabyte flows:push
 .cli_description
   Deploys the flow to the Zillabyte system where it is then executed. This is similar to `git push` to deploy your own scripts to a server.
 
 .cli_command
-  flows : pull [flow_id] [directory]
+  zillabyte flows:pull [flow_id] [directory]
 .cli_description
   Retrieves and loads the flow corresponding to flow_id into the local directory. This is similar to `git pull` to retrieve the latest code from a repository.
 
 .cli_command
-  flows : test [data_set_id]
+  zillabyte flows:test [data_set_id]
 .cli_description
   Tests the flow locally. This allows you to specify and test using a custom dataset. This is useful for prototyping and testing assumptions about the queries you build.
 
 .cli_command
-  flows : status [flow_id]
+  zillabyte flows:status [flow_id]
 .cli_description
   Gets the status of the specified flow.
 
 .cli_command
-  flows : kill [flow_id]
+  zillabyte flows:kill [flow_id]
 .cli_description
   Stops the execution of a flow process with the specified id.
 
@@ -76,27 +76,27 @@ layout: page
 %br
 
 .cli_command
-  relations
+  zillabyte data
 .cli_description
   List of all datasets uploaded by the user.
 
 .cli_command
-  relations : create [relation_name] [file_name (optional)]
+  zillabyte data:create [data_set_name]
 .cli_description
   Creates a new dataset with the provided name on the Zillabyte system.
 
 .cli_command
-  relations : append [relation_id] [file_name]
+  zillabyte data:append [data_set_id] [file_name]
 .cli_description
   Uploads a new file and appends it to the dataset indicated by the id.
 
 .cli_command
-  relations : show [relation_id]
+  zillabyte data:show [data_set_id]
 .cli_description
   Retrieves the first few rows of the specified data set and displays them to user. This is useful to spot check datasets or to ensure you have the right ones available.
 
 .cli_command
-  relations : pull [relation_id] [output_file]
+  zillabyte data:test [data_set_name] [file_name]
 .cli_description
   Uploads a user-defined test dataset for testing flows.
 
@@ -108,11 +108,58 @@ layout: page
 %br
 
 .cli_command
-  query : sql [command]
+  zillabyte query:sql [command]
 .cli_description
   Executes the SQL query in command against Zillabyte data.
 
 .cli_command
-  query : sxp [command]
+  zillabyte query:sxp [command]
 .cli_description
   Executes the sxp query in command against Zillabyte data.
+
+%br
+
+.cli_topic
+  Relations
+
+%br
+
+.cli_command
+  zillabyte relations
+.cli_description
+  List all of your custom relationships
+
+.cli_command
+  zillabyte relations:append [data_set_id] [file_name]
+.cli_description
+  Uploads a new file and appends it to the dataset indicated by the id.
+
+.cli_command
+  zillabyte relations:create [name]
+.cli_description
+  Creates a new relation with the specified name.
+
+.cli_command
+  zillabyte relations:delete [data_set_id]
+.cli_description
+  Deletes a relation specified by the id.
+
+.cli_command
+  zillabyte relations:pull [data_set_id] [output]
+.cli_description
+  Pulls relation data into output
+
+.cli_command
+  zillabyte relations:pull:s3 [data_set_id] [s3_key] [s3_secret] [s3_bucket] [s3_file_path]
+.cli_description
+  Pulls relation data into the specified Amazon S3 bucket at the specified file path
+
+.cli_command
+  zillabyte relations:show [data_set_id]
+.cli_description
+  Shows the raw data in a relation, use the query interface above for more specific data sets
+
+.cli_command
+  zillabyte relations:status [data_set_id]
+.cli_description
+  Shows the current execution state of the specified relation

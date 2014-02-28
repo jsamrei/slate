@@ -16,7 +16,7 @@ The first step to building any flow is to identify exactly what the flow is inte
 
 Once the problem has been identified, it is time to start talking about how to actually build the flow.  For starters, we needed to determine what information was actually available, and ran into some challenges:
 
-* Without asking, there is no consistent way of determinig whether an application uses two-factor authentication.
+* Without asking, there is no consistent way of determining whether an application uses two-factor authentication.
 * Mobile application download numbers are not made public by Apple.
 * Rankings for Apple feeds only go down to 300.
 

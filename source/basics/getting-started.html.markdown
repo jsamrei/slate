@@ -28,7 +28,7 @@ The installation process will add one new command to your environment, with 3 ma
 * zillabyte query
 * zillabyte flows
 
-The uses of each of these commands will be covered below.
+Let's run through each of these three commands and then you'll be on your way to using Zillabyte!
 
 ## zillabyte relations: datasets available to you
 
@@ -45,8 +45,10 @@ Every Zillabyte user by default can see our web corpus, which has the name 'web_
 For now, to see some of the sample data in a particular dataset:
 
 ``` bash
-zillabyte relations:show ID
+zillabyte relations:show 2
 ```
+
+You will see 20 rows of sample data in the web_pages relation. 
 
 ## zillabyte query: query the available data
 

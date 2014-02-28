@@ -162,7 +162,6 @@ input_tag :password, :value => "secret", :class => "demo"
 <head>
   <%= stylesheet_link_tag 'layout' %>
   <%= javascript_include_tag 'application' %>
-  <%= favicon_tag 'images/favicon.png' %>
 </head>
 <body>
   <p><%= link_to 'Blog', '/blog', :class => 'example' %></p>

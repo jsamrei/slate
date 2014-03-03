@@ -1,7 +1,7 @@
 ---
-title: Hello World
+title: Blog URLs
 ---
-## Hello World: Ruby script
+## URLs with the substring "blog"
 
 ``` bash
 require 'zillabyte'
@@ -10,7 +10,7 @@ Zillabyte.simple_function do |fn|
 
   fn.matches [["web_page", ["URL", "HTML"]]] 
 
-  fn.emits [["has_hello_world", ["URL"]]] 
+  fn.emits [["url_has_blog", ["URL"]]] 
 
   fn.execute do |tuple, collector| 
 
@@ -18,8 +18,8 @@ Zillabyte.simple_function do |fn|
     html = tuple['html'] 
 
 
-    if html.include?('hello world') 
-      collector.emit("has_hello_world",{"url" => url},{"confidence" => 1., "since" => Time.now.to_java, "source" => "") 
+    if url.include?('blog') 
+      collector.emit("url_has_blog",{"url" => url},{"confidence" => 1., "since" => Time.now.to_java, "source" => "") 
     end 
 
   end 

@@ -4,7 +4,7 @@ en:
   basics:
     title: Zillabyte Basics
     getting_started: Getting Started
-    
+
     cli_reference: CLI Reference
     hello_world: Hello World Quickstart
     hello_world_in_silicon_valley: Hello World in Silicon Valley Quickstart
@@ -15,14 +15,15 @@ en:
     hello_world_url: URLs with the substring "hello world"
     your_name_html: Webpages with the substring "your name"
     blog_url: URLs with the substring "blog"
-    app_store_monitoring: App Store Monitoring Quickstart
+    
+
+  advanced:
+    title: Use Cases
     domain_rank: Domain Rank
     market_coverage: Market Coverage
     competitor_coverage: My Competitor(s)'s Web Coverage
-    
+    app_store_monitoring: App Store Monitoring Quickstart
 
-  usecases:
-    usecases: Use Cases
 
   community:
     title: Community

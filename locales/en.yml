@@ -2,13 +2,13 @@
 en:
   # navigations
   basics:
-    title: Basics
+    title: Basic Functionality
     getting_started: Getting Started
     cli_reference: CLI Reference
-    hello_world_html: Webpages with the substring "hello world"
-    hello_world_url: URLs with the substring "hello world"
-    
-
+    hello_world_html: Search HTML, not just text
+    hello_world_url: Search URL names
+    post_hoc_querying: Query your results
+    aggregation: Aggregation
   usecases:
     title: Use Cases
     domain_rank: Domain Rank

@@ -158,7 +158,7 @@ web_stream.sink do |h|
 end
 ```
 
-When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called "domain_rank".  This relation contains two columns, "domain" and "score".  Order is important here, the first field corresponds to the first field in our stream, "target_domain", and the second column corresponds to "count". 
+When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called "domain\_rank".  This relation contains two columns, "domain" and "score".  Order is important here, the first field corresponds to the first field in our stream, "target\_domain", and the second column corresponds to "count". 
 
 
 ## Conclusion & Next Steps 

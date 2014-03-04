@@ -4,15 +4,17 @@ en:
   basics:
     title: Zillabyte Basics
     getting_started: Getting Started
+    cli_reference: CLI Reference
     hello_world: Hello World Quickstart
     hello_world_in_silicon_valley: Hello World in Silicon Valley Quickstart
     app_store_monitoring: App Store Monitoring Quickstart
-    domain_rank: Domain Rank How To
-    cli_reference: CLI Reference
+    domain_rank: Domain Rank
+    market_coverage: Market Coverage
+    competitor_coverage: My Competitor(s)'s Web Coverage
     
 
-  advanced:
-    title: Advanced Features
+  usecases:
+    usecases: Use Cases
 
   community:
     title: Community

@@ -4,11 +4,11 @@ en:
   basics:
     title: Basic Functionality
     getting_started: Getting Started
-    cli_reference: CLI Reference
     hello_world_html: Search HTML, not just text
     hello_world_url: Search URL names
     post_hoc_querying: Query your results
     aggregation: Aggregation
+    
   usecases:
     title: Use Cases
     domain_rank: Domain Rank
@@ -17,9 +17,10 @@ en:
     app_store_monitor: App Store Monitoring Quickstart
 
 
-  community:
-    title: Community
-
+  reference:
+    title: Reference
+    cli_reference: CLI Reference
+    
   # index
   index:
     sub_title: Your own copy of the web

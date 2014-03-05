@@ -2,22 +2,14 @@
 en:
   # navigations
   basics:
-    title: Zillabyte Basics
+    title: Basic Functionality
     getting_started: Getting Started
-
-    cli_reference: CLI Reference
-    hello_world: Hello World Quickstart
-    hello_world_in_silicon_valley: Hello World in Silicon Valley Quickstart
-    hello_world_html: Webpages with the substring "hello world"
-    facebook_html: Webpages with the substring "facebook"
-    twitter_html: Webpages with the substring "twitter"
-    pinterest_html: Webpages with the substring "pinterest"
-    hello_world_url: URLs with the substring "hello world"
-    your_name_html: Webpages with the substring "your name"
-    blog_url: URLs with the substring "blog"
+    hello_world_html: Search HTML, not just text
+    hello_world_url: Search URL names
+    post_hoc_querying: Query your results
+    aggregation: Aggregation
     
-
-  advanced:
+  usecases:
     title: Use Cases
     domain_rank: Domain Rank
     market_coverage: Market Coverage
@@ -28,12 +20,17 @@ en:
 
   community:
     title: Community
+    app_store_monitor: App Store Monitoring Quickstart
 
 
+  reference:
+    title: Reference
+    cli_reference: CLI Reference
+    
   # index
   index:
-    sub_title: Search made for developers
-    headline: search made for developers
-    description: Zillabyte is a command-line tool that allows developers to search the web the way they want.
+    sub_title: Your own copy of the web
+    headline: The data warehouse for the web
+    description: Zillabyte is a command-line tool that allows developers to customize the way they search and process the web.
     getting_started: Getting started
 

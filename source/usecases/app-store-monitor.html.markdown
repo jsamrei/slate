@@ -1,4 +1,4 @@
-# HOWTO: Build a Twilio Flow
+# How To: Build a Twilio Flow
 
 ## Preliminary research
 

@@ -3,7 +3,7 @@ title: Hello World URLs
 ---
 ## URLs with the substring "hello world"
 
-``` bash
+``` ruby
 require 'zillabyte'
 
 Zillabyte.simple_function do |fn| 

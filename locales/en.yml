@@ -17,6 +17,8 @@ en:
     app_store_monitoring: App Store Monitoring Quickstart
     corn_hybrid: Find Corn Hybrids
     finding_job_openings: Finding Job Openings
+  indices:
+    title: Web Index
     social_index: Social Media Index
     commerce_index: Web Tracker Index
 

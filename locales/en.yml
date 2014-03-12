@@ -10,7 +10,7 @@ en:
     aggregation: Aggregation
     
   usecases:
-    title: Use Cases
+    title: Deep Search
     domain_rank: Domain Rank
     market_coverage: Market Coverage
     competitor_coverage: My Competitor(s)'s Web Coverage
@@ -18,7 +18,7 @@ en:
     corn_hybrid: Find Corn Hybrids
     finding_job_openings: Finding Job Openings
   indices:
-    title: Web Index
+    title: Web Indexing
     social_index: Social Media Index
     commerce_index: Web Tracker Index
 

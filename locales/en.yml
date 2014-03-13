@@ -10,9 +10,10 @@ en:
     notifications: Send notifications
     third_party_libraries: Use your favorite libraries
     specific_search: Search specific HTML elements
+    cli_reference: Zillabyte CLI Reference
     
   usecases:
-    title: Deep Search
+    title: Example Searches
     domain_rank: Domain Rank
     market_coverage: Market Coverage
     competitor_coverage: My Competitor(s)'s Web Coverage
@@ -21,7 +22,7 @@ en:
     finding_job_openings: Finding Job Openings
     
   indices:
-    title: Web Indexing
+    title: Example Indexing
     social_index: Social Media Index
     commerce_index: Web Tracker Index
 
@@ -35,6 +36,6 @@ en:
     
   # index
   index:
-    sub_title: Your own copy of the web
+    sub_title: An API for running structured queries on the web
     headline: An API for running structured queries on the web
     getting_started: Click HERE to get started

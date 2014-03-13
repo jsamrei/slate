@@ -7,7 +7,7 @@ en:
     index_your_results: Index your results
     count: Count frequency
     joins: Join disparate data sources
-    notifications: Send notifications
+    notifications: Send email notifications 
     third_party_libraries: Use your favorite libraries
     specific_search: Search specific HTML elements
     cli_reference: Zillabyte CLI Reference

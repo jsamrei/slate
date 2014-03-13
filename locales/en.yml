@@ -2,12 +2,14 @@
 en:
   # navigations
   basics:
-    title: Basic Functionality
-    getting_started: Getting Started
-    hello_world_html: Search HTML, not just text
-    hello_world_url: Search URL names
-    post_hoc_querying: Query your results
-    aggregation: Aggregation
+    title: The Zillabyte Toolkit
+    html_includes: Search the web
+    index: Index your results
+    aggregate_statistics: Aggregate statistics
+    joins: Join disparate data sources
+    notifications: Send notifications
+    third_party_plugins: Use third-party libraries
+    element_search: Search specific HTML elements
     
   usecases:
     title: Deep Search
@@ -17,6 +19,7 @@ en:
     app_store_monitoring: App Store Monitoring Quickstart
     corn_hybrid: Find Corn Hybrids
     finding_job_openings: Finding Job Openings
+    
   indices:
     title: Web Indexing
     social_index: Social Media Index
@@ -34,7 +37,5 @@ en:
   # index
   index:
     sub_title: Your own copy of the web
-    headline: The data warehouse for the web
-    description: Zillabyte is a command-line tool that allows developers to customize the way they search and process the web.
-    getting_started: Getting started
-
+    headline: An API for running structured queries on the web
+    getting_started: Click HERE to get started

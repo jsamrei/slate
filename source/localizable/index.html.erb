@@ -15,9 +15,9 @@ layout: layout
   </div>
 
   <div class="container">
-    <p class="intro"><%= t("index.description") %></p>
+    <p class="intro"><%= link_to t("index.getting_started"), "#{locale_prefix}/basics/getting-started/" %></p>
+    
     <p class="intro sns">
-      <span><i class="icon-github"> <%= link_to 'Watch', 'http://github.com/zillabyte' %></i></span>
       <span><i class="icon-twitter"> <%= link_to 'Get an invite code', 'http://twitter.com/intent/tweet?text=Using+this+tweet+to+get+early+access+to+@zillabyte' %></i></span>
     </p>
 

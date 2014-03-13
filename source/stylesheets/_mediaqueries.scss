@@ -56,16 +56,16 @@
 
 @media screen and ( max-width: $one-column ) {
   #hero {
-    background: $xlight-brown;
+    background: #ffffff;
   }
   #install {
     text-align: center;
     margin: -15px 0 40px 0;
     p{
       display: block;
-      color: $xlight-brown;
+      color: #ffffff;
       @include border-radius(0);
-      background-color: $navy;
+      background-color: #F36D51;
       @include box-shadow( none );
     }
     b {

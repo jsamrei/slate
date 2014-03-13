@@ -1,12 +1,13 @@
 #header {
-  background: $light-brown;
-  border-bottom: 1px solid darken($light-brown, 5%);
+  background: #ffffff;
+  border-bottom: 1px solid darken(#000000, 5%);
   margin: 0 0 50px 0;
-  color: $mid-brown;
+  color: #5A5F5E;
   h1 {
     position: absolute;
     left: 0;
-    bottom: -35px;
+    bottom: -70px;
+    // LOGO
   }
   p {
     @include span-columns(10);
@@ -53,14 +54,12 @@
   }
   pre {
     background: #F8F8F8;
-    @include box-shadow( 0 1px 1px darken(#c6bda8, 15) inset, 0 1px 0 white);
     padding: 0.5em 1em;
     margin: 1.5em 0;
     overflow: auto;
     @include border-radius(4px);
   }
   footer {
-    border-top: 1px solid #c6bda8;
     background: #c6bda8;
     padding: 1em 10px;
     @include clearfix;
@@ -76,11 +75,3 @@
   }
 }
 
-#generated-toc {
-  margin-bottom: 1.5em;
-
-  ul {
-    margin: 0;
-    padding: 0 0 0 1.5em;
-  }
-}

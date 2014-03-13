@@ -2,14 +2,14 @@
 en:
   # navigations
   basics:
-    title: The Zillabyte Toolkit
-    html_includes: Search the web
-    index: Index your results
-    aggregate_statistics: Aggregate statistics
+    title: Algorithm Building Blocks
+    html_search: HTML Search
+    index_your_results: Index your results
+    count: Count frequency
     joins: Join disparate data sources
     notifications: Send notifications
-    third_party_plugins: Use third-party libraries
-    element_search: Search specific HTML elements
+    third_party_libraries: Use your favorite libraries
+    specific_search: Search specific HTML elements
     
   usecases:
     title: Deep Search
@@ -28,7 +28,6 @@ en:
   community:
     title: Community
     app_store_monitor: App Store Monitoring Quickstart
-
 
   reference:
     title: Reference

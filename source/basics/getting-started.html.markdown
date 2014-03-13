@@ -101,7 +101,38 @@ Change into that directory, and look around.
 
 You will see a few files.  The important one is your flow: 'simple_function.rb'.
 
-Open 'simple_function.rb' in your text editor of choice.  It has three parts: input, output, and your algorithm for your flow.  By default, your algorithm looks for html in the webpages relation that includes "hello world".  An HTML search on the web is the simplest thing you can do with Zillabyte.  You can change 'hello world' to be something else, like your name, and to include OR or AND operators, to list a few examples.
+Open 'simple_function.rb' in your text editor of choice.  It has four parts: flow name, input, output, and your algorithm for your flow.  By default, your algorithm looks for html in the webpages relation that includes "hello world".  An HTML search on the web is the simplest thing you can do with Zillabyte.  You can change 'hello world' to be something else, like your name, and to include OR or AND operators, to list a few examples.
+
+```ruby
+require 'zillabyte'
+
+Zillabyte.simple_function do |fn| 
+
+  # step one, give your flow a name
+  fn.name "hello_world"
+
+  # data input
+  fn.matches [["domains", ["url", "html"]]] 
+
+  # data output
+  fn.emits [["hello_world", ["url"]]] 
+  
+  # your algorithm
+  fn.execute do |tuple, collector| 
+    
+  url = tuple['url']
+  html = tuple['html'] 
+  
+  # This 3-line block allows you to filter the web 
+  # for the set of URLs that have HTML which include 
+  # the string "hello world", and create a new dataset
+  # named "hello_world".
+  if html.include?('hello world')
+    controller.emit("hello_world", "URL" => url)
+  end 
+
+end 
+```
 
 ### Step three: 
 

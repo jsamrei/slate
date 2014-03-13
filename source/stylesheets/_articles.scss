@@ -6,7 +6,7 @@
   h1 {
     position: absolute;
     left: 0;
-    bottom: -70px;
+    bottom: -38px;
     // LOGO
   }
   p {
@@ -16,6 +16,7 @@
     margin-top: 14px;
     margin-bottom: 14px;
     font-size: 18px;
+    color: #F36D51;
   }
   .container {
     overflow: visible;
@@ -63,6 +64,7 @@
     background: #c6bda8;
     padding: 1em 10px;
     @include clearfix;
+    
     p {
       margin: 0;
       &.left {

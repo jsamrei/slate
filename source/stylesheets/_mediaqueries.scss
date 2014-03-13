@@ -126,10 +126,10 @@
         background: $navy;
         @include border-radius(0);
         img {
-          width: 180px;
-          height: 180px;
+          width: 219px;
+          height: 58px;
           position: absolute;
-          bottom: 0;
+          bottom: -10px;
           left: 0;
         }
       }

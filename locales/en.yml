@@ -11,7 +11,7 @@ en:
     third_party_libraries: Use your favorite libraries
     specific_search: Search specific HTML elements
     cli_reference: Zillabyte CLI Reference
-    
+    getting_started: Getting Started
   usecases:
     title: Example Searches
     domain_rank: Domain Rank

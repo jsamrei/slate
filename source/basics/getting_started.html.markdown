@@ -17,7 +17,7 @@ Mac OS X comes prepackaged with both Ruby and Rubygems, however, some of the Zil
 Once you have Ruby and RubyGems up and running, execute the following from the command line:
 
 ``` bash
-gem install zillabyte
+$ gem install zillabyte
 ```
 
 This will install Zillabyte, its dependencies and the command-line tools for using Zillabyte.
@@ -93,12 +93,8 @@ As an example, this creates a demo directory in the current working directory, w
 #### Step two:
 
 ``` bash 
-cd demo
+$ cd demo
 ``` 
-
-``` bash 
-ls
-```
 
 Within that directory, you will see a few files.  The important one is your flow: 'simple_function.rb'.
 
@@ -151,7 +147,7 @@ end
 #### Step three: 
 
 ```bash 
-zillabyte test
+$ zillabyte test
 ```
 
 Let us assume you want to look for 'hello world' in HTML.  To quickly test whether this will have results, run the above command.  This will use a local cache of our web corpus and show you a few results. 
@@ -159,7 +155,7 @@ Let us assume you want to look for 'hello world' in HTML.  To quickly test wheth
 #### Step four: 
 
 ``` bash
-zillabyte push
+$ zillabyte push
 ```
 
 Now that you've confirmed some results, push your flow up to our servers, where it will run continously. 

@@ -3,7 +3,17 @@ en:
   # navigations
   basics:
     title: Your toolkit
+    
+    
+    
+    
+    
+    
+    
+    
+    
     html_search: HTML Search
+    
     index_your_results: Index your results
     count: Count frequency
     joins: Join disparate data sources
@@ -12,19 +22,20 @@ en:
     specific_search: Search specific HTML elements
     cli_reference: Zillabyte CLI Reference
     getting_started: Getting Started
+    
   usecases:
     title: Example Searches
     domain_rank: Domain Rank
     market_coverage: Market Coverage
     competitor_coverage: My Competitor(s)'s Web Coverage
-    app_store_monitoring: App Store Monitoring Quickstart
+    app_store_monitoring: App Store Monitoring
     corn_hybrid: Find Corn Hybrids
     finding_job_openings: Finding Job Openings
     
   indices:
-    title: Example Indexing
-    social_index: Social Media Index
-    commerce_index: Web Tracker Index
+    title: Scoring Your Results
+    social_index: Social Media Score
+    commerce_index: Web Tracker Score
 
   community:
     title: Community
@@ -36,6 +47,6 @@ en:
     
   # index
   index:
-    sub_title: An API for running structured queries on the web
-    headline: An API for running structured queries on the web
+    sub_title: An API for searching and processing the web
+    headline: An API for searching and processing the web
     getting_started: Getting started

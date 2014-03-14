@@ -55,8 +55,5 @@ end
 
 Try the above out by copying it to a Zillabyte directory!
 
-
-
-
 [HTML5 Boilerplate]: http://html5boilerplate.com/
 [SMACSS]: http://smacss.com/

@@ -14,7 +14,7 @@ require 'zillabyte'
 
 Zillabyte.simple_function do |fn|
   
-  fn.name "social_index"
+  fn.name "social_score"
   # This directive instructs zillabyte to give your function every 
   # web page in our known universe.  Your function will have access
   # to two fields: URL and HTML

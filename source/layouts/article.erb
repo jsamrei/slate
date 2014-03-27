@@ -1,0 +1,46 @@
+<% wrap_layout :layout do %>
+  <header id="header">
+    <div class="container">
+      <h1><%= link_to image_tag("zillabyte.png", :width => 219, :height => 58, :alt => "Zillabyte"), "#{locale_prefix}/", { :class => 'logo' } %></h1>
+      
+      <p class="console">$ gem install zillabyte</p>
+      <div id="search">
+        <form>
+          <input type="text" id="st-search-input" class="st-search-input" placeholder="Search the documentation" />
+        </form>
+        <div id="st-results-container"></div>
+        <script type="text/javascript">
+          var Swiftype = window.Swiftype || {};
+          (function() {
+            Swiftype.key = 'YBBcgiQBQDKq82gKfhb5';
+            Swiftype.inputElement = '#st-search-input';
+            Swiftype.resultContainingElement = '#st-results-container';
+            Swiftype.attachElement = '#st-search-input';
+            Swiftype.renderStyle = "overlay";
+
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = "//swiftype.com/embed.js";
+            var entry = document.getElementsByTagName('script')[0];
+            entry.parentNode.insertBefore(script, entry);
+          }());
+        </script>
+      </div>
+
+      <a class="toc-nav-link icon-arrow-down" href="#toc">Menu</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav id="toc">
+      <%= partial 'layouts/nav' %>
+    </nav>
+
+    <article id="main" role="main">
+      <%= yield %>
+    </article>
+
+    <%= partial "layouts/support" %>
+  </div>
+<% end %>

@@ -1,0 +1,71 @@
+#hero {
+  padding: 50px 0 30px 0;
+  h1 {
+    width: 225px;
+    margin: 0 auto 0 auto;
+  }
+  h2 {
+    font-size: 36px;
+    font-family: $display-font-family;
+    text-shadow: 0 0 10px #fff;
+    margin: 30px 0 30px 0;
+  }
+  text-align: center;
+}
+
+#install {
+  text-align: center;
+  margin: -15px 0 40px 0;
+  p{
+    display: inline-block;
+    color: #ffffff;
+    @include border-radius( 5px );
+    padding: 15px 25px;
+    background-color: #F36D51;
+  }
+  b {
+    font-size: 24px;
+  }
+}
+  
+.intro {
+  color: #5A5F5E;
+  font-size: 20px;
+  margin: 10px auto;
+  text-align: center;
+  a {
+    color: #5A5F5E;
+  }
+  span {
+    margin: 0 10px;
+  }
+  
+}
+
+.sns {
+  font-size: 16px;
+  a {
+    color: #5A5F5E;
+    @include hover_link;
+    &:hover {
+      color: #F36D51;
+    }
+  }
+  span {
+    margin: 0 10px;
+  }
+}
+
+
+.grid {
+  @include span-columns(20);
+  @include pie-clearfix;
+  .toc-block {
+    @include span-columns(4,12);
+    @include nth-omega(3n);
+    &:nth-child(3n+1) {
+      clear: left;
+    }
+    padding: 1em 0;
+  }
+}

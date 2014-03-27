@@ -1,0 +1,54 @@
+---
+layout: layout
+---
+
+<header id="hero">
+  
+  <h1><%= link_to image_tag("zillabyte.png", :alt => "Zillabyte"), "http://zillabyte.com", { :class => 'logo' } %></h1>
+  <h2><%= t("index.headline") %></h2>
+</header>
+
+<section role="main">
+  <div id="install">
+    <p><b class="console">$ gem install zillabyte</b></p>
+    <div id="search">
+      <form>
+        <input type="text" id="st-search-input" class="st-search-input" placeholder="Search the documentation" />
+      </form>
+      <div id="st-results-container"></div>
+      <script type="text/javascript">
+        var Swiftype = window.Swiftype || {};
+        (function() {
+          Swiftype.key = 'YBBcgiQBQDKq82gKfhb5';
+          Swiftype.inputElement = '#st-search-input';
+          Swiftype.resultContainingElement = '#st-results-container';
+          Swiftype.attachElement = '#st-search-input';
+          Swiftype.renderStyle = "overlay";
+
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.async = true;
+          script.src = "//swiftype.com/embed.js";
+          var entry = document.getElementsByTagName('script')[0];
+          entry.parentNode.insertBefore(script, entry);
+        }());
+      </script>
+    </div>
+    
+  </div>
+
+  <div class="container">
+    <p class="intro"><%= link_to t("index.getting_started"), "#{locale_prefix}/basics/getting_started/" %></p>
+    
+    <p class="intro sns">
+      <span><i class="icon-twitter"> <%= link_to 'Get an invite code', 'http://twitter.com/intent/tweet?text=Using+this+tweet+to+get+early+access+to+@zillabyte' %></i></span>
+      <span><%= link_to 'Sign up', 'http://zillabyte.com/accounts/sign_up'%></span>
+    </p>
+
+    <nav class="grid">
+      <%= partial 'layouts/nav' %>
+    </nav>
+
+    <%= partial "layouts/support" %>
+  </div>
+</section>

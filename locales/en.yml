@@ -2,16 +2,14 @@
 en:
   # navigations
   basics:
-    title: Your toolkit
+    title: Basics
     
+    how_it_works: How it works
+    what_is_a_flow: What is a flow?       
+
+    getting_started: Getting Started
     
-    
-    
-    
-    
-    
-    
-    
+
     html_search: HTML Search
     
     index_your_results: Index your results
@@ -21,7 +19,6 @@ en:
     third_party_libraries: Use your favorite libraries
     specific_search: Search specific HTML elements
     cli_reference: Zillabyte CLI Reference
-    getting_started: Getting Started
     
   usecases:
     title: Example Searches

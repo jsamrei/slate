@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <%= stylesheet_link_tag "site" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Questrial|Arvo" %>
+    <title><%= page_title %></title>
+  </head>
+  <body>
+
+    <%= yield %>
+    
+    <footer id="footer">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2014 <a href="http://zillabyte.com">Zillabyte</a>
+        </p>
+      </div>
+      <div class="container">
+        <p class="copyright">
+          Made with Middleman</a>
+        </p>
+      </div>
+      
+    </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <%= javascript_include_tag "highlight.pack" %>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <%= partial 'layouts/tracking' %>
+  </body>
+</html>

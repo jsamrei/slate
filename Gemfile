@@ -1,16 +1,8 @@
-source :rubygems
+source "https://rubygems.org"
 
-
-gem "haml"
-gem "sass"
+gem "redcarpet"
 gem "builder"
-
-gem "middleman"
-gem "middleman-syntax"
-gem 'bootstrap-sass', '~> 2.2.2.0'
-
-# Compass plugins
-gem 'susy', "~>1.0.1" # Susy
-# gem 'compass-960-plugin' # 960.gs
-
-
+gem "susy"
+gem "middleman", "~> 3.2.0"
+gem "middleman-fjords"
+gem "middleman-livereload"

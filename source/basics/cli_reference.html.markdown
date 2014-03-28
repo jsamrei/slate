@@ -2,217 +2,91 @@
 title: CLI Reference
 ---
 
-## zillabyte relations
+## zillabyte CLI
 
-
-
-  ``` bash
-  zillabyte relations
-  ```
-
-  List all of your custom relationships
-
+The command line interface allows you to interact with our infrastructure. Access these commands by typing "zillabyte COMMAND". The help command is an easy way to refer to this the documentation on this page.
 
   ``` bash
-  zillabyte relations:append [data_set_id] [file_name]
+  $ zillabyte help
+  Usage: zillabyte COMMAND [command-specific-options]
+  
+  Primary help topics, type "zillabyte help TOPIC" for more details:
+  
+    flows      #  manage custom flows
+    query      #  executes queries
+    relations  #  manage custom relations
+  
+  ...
   ```
 
-  Uploads a new file and appends it to the dataset indicated by the id.
+### Flows
 
-
-  ``` bash
-  zillabyte relations:create [name]
-  ```
-
-  Creates a new relation with the specified name.
-
-
-  ``` bash
-  zillabyte relations:delete [data_set_id]
-  ```
-
-  Deletes a relation specified by the id.
-
-
-  ``` bash
-  zillabyte relations:pull [data_set_id] [output]
-  ```
-
-  Pulls relation data into output
-
-
-  ``` bash
-  zillabyte relations:pull:s3 [data_set_id] [s3_key] [s3_secret] [s3_bucket] [s3_file_path]
-  ```
-
-  Pulls relation data into the specified Amazon S3 bucket at the specified file path
-
-
-  ``` bash
-  zillabyte relations:show [data_set_id]
-  ```
-
-  Shows the raw data in a relation, use the query interface above for more specific data sets
-
-
-  ``` bash
-  zillabyte relations:status [data_set_id]
-  ```
-
-  Shows the current execution state of the specified relation
-
-
-## zillabyte query
-
-``` bash
-  zillabyte query:sql [command]
-  ```
-
-  Executes the SQL query in command against Zillabyte data.
-
-
-  ``` bash
-  zillabyte query:sxp [command]
-  ```
-
-  Executes the sxp query in command against Zillabyte data.
-
-
-
-## zillabyte flows
-
-``` bash
-  zillabyte flows
-  ```
-
-  List of all flows defined by the user
-
-
-  ``` bash
-  zillabyte flows:info
-  ```
-
-  Returns and displays the flow metadata
-
-
-  ``` bash
-  zillabyte flows:live_run [operation_name]
-  ```
-
-  Executes the flow operation
-
-
-  ``` bash
-  zillabyte flows:push
-  ```
-
-  Deploys the flow to the Zillabyte system where it is then executed. This is similar to `git push` to deploy your own scripts to a server.
-
-
-  ``` bash
-  zillabyte flows:pull [flow_id] [directory]
-  ```
-
-  Retrieves and loads the flow corresponding to flow_id into the local directory. This is similar to `git pull` to retrieve the latest code from a repository.
-
-
-  ``` bash
-  zillabyte flows:test [data_set_id]
-  ```
-
-  Tests the flow locally. This allows you to specify and test using a custom dataset. This is useful for prototyping and testing assumptions about the queries you build.
-
-
-  ``` bash
-  zillabyte flows:status [flow_id]
-  ```
-
-  Gets the status of the specified flow.
-
-
-  ``` bash
-  zillabyte flows:kill [flow_id]
-  ```
-
-  Stops the execution of a flow process with the specified id.
-
-## zillabyte data
-
-
+Flows are the core data pipeline that defines the stages of processing the data. See --this help doc-- for an overview of flows. 
 
   ```bash
-  zillabyte data
+  $ zillabyte help flows
+
+  flows                      #  list custom flows
+  flows:cycles ID [OPTIONS]  #  operations on the flow's cycles (batches).
+  flows:delete ID            #  deletes a flow. if the flow is running, this command will kill it.
+  flows:info [DIR]           #  outputs the info for the flow in the dir.
+  flows:init [LANG] [DIR]    #  initializes a new executable in DIR
+  flows:kill ID              #  kills the given flow
+  flows:logs FLOW_ID         #  streams logs from the distributed workers
+  flows:prep [DIR]           #  prepares a flow for execution
+  flows:pull ID DIR          #  pulls a flow source to a directory.
+  flows:push [DIR]           #  uploads a flow
+  flows:test [RELATION_ID]   #  tests a local flow with sample data
+
   ```
 
-  List of all datasets uploaded by the user.
+### Relations
 
-
-  ```bash 
-  zillabyte data:create [data_set_name]
-  ```
-
-  Creates a new dataset with the provided name on the Zillabyte system.
-
+Data in the zillabyte infrastructure is saved by default as relations (tables in an RDBMS). 
 
   ```bash
-  zillabyte data:append [data_set_id] [file_name]
+  $ zillabyte help relations
+  
+  relations                                        #  lists your custom relations
+  relations:append ID FILE                         #  adds data to an existing relation
+  relations:create NAME                            #  creates a new relation
+  relations:delete ID                              #  deletes a relation
+  relations:pull ID OUTPUT                         #  pulls relation data into OUTPUT.gz
+  relations:pull:s3 ID KEY SECRET BUCKET FILE_KEY  #  pulls relation data to S3_BUCKET/FILE_KEY/part***.gz
+  relations:show ID                                #  shows raw data in a relation. run 'queries' for more elaborate functionality
   ```
 
-  Uploads a new file and appends it to the dataset indicated by the id.
+### Query
 
+Use the query command to look at sample results from relations visible to you.
 
   ```bash
-  zillabyte data:show [data_set_id]
+  $ zillabyte help query
+
+  query:pull:s3 QUERY KEY SECRET BUCKET FILE_KEY  #  pulls query data to S3_BUCKET/FILE_KEY/part***.gz
+  query:sql EXPRESSION                            #  executes queries against the zillabyte corpus
+  query:sxp EXPRESSION                            #  executes queries against the zillabyte corpus
   ```
 
-  Retrieves the first few rows of the specified data set and displays them to user. This is useful to spot check datasets or to ensure you have the right ones available.
+### Aliases
 
+For the common commands, use the following aliases to reduce keystrokes.
 
   ```bash
-  zillabyte data:test [data_set_name] [file_name]
+  $ zillabyte help aliases
+
+  login                --> auth:login             #  Sets the Zillabyte Auth token
+  logout               --> auth:logout            #  Sets the Zillabyte Auth token
+  info                 --> flows:info             #  outputs the info for the flow in the dir.
+  logs                 --> flows:logs             #  streams logs from the distributed workers
+  prep                 --> flows:prep             #  prepares a flow for execution
+  pull                 --> flows:pull             #  pulls a flow source to a directory.
+  push                 --> flows:push             #  uploads a flow
+  test                 --> flows:test             #  tests a local flow with sample data
+  sql                  --> query:sql              #  executes queries against the zillabyte corpus
+  sxp                  --> query:sxp              #  executes queries against the zillabyte corpus
+  append               --> relations:append       #  adds data to an existing relation
   ```
-
-  Uploads a user-defined test dataset for testing flows.
-
-
-
-
-  ``` bash
-  zillabyte data
-  ```
-
-  List of all datasets uploaded by the user.
-
-
-  ``` bash
-  zillabyte data:create [data_set_name]
-  ```
-
-  Creates a new dataset with the provided name on the Zillabyte system.
-
-
-  ``` bash
-  zillabyte data:append [data_set_id] [file_name]
-  ```
-
-  Uploads a new file and appends it to the dataset indicated by the id.
-
-
-  ``` bash
-  zillabyte data:show [data_set_id]
-  ```
-
-  Retrieves the first few rows of the specified data set and displays them to user. This is useful to spot check datasets or to ensure you have the right ones available.
-
-
-  ``` bash
-  zillabyte data:test [data_set_name] [file_name]
-  ```
-
-  Uploads a user-defined test dataset for testing flows.
-
-
-
 
 [HTML5 Boilerplate]: http://html5boilerplate.com/
 [SMACSS]: http://smacss.com/

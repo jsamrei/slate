@@ -11,6 +11,8 @@ layout: layout
 <section role="main">
   <div id="install">
     <p><b class="console">$ gem install zillabyte</b></p>
+    
+
     <div id="search">
       <form>
         <input type="text" id="st-search-input" class="st-search-input" placeholder="Search the documentation" />
@@ -34,21 +36,20 @@ layout: layout
         }());
       </script>
     </div>
-    
+
+    <div class="container">    
+      <h5 class="intro sns">
+        <span><i class="icon-twitter"> <%= link_to 'Get an invite code', 'http://twitter.com/intent/tweet?text=Using+this+tweet+to+get+early+access+to+@zillabyte' %></i></span>
+        <span><%= link_to 'Sign up', 'http://zillabyte.com/accounts/sign_up'%></span>
+      </h5>
+
+      <nav class="grid">
+        <%= partial 'layouts/nav' %>
+      </nav>
+
+      <%= partial "layouts/support" %>
+    </div>
+  
   </div>
 
-  <div class="container">
-    <p class="intro"><%= link_to t("index.getting_started"), "#{locale_prefix}/basics/getting_started/" %></p>
-    
-    <p class="intro sns">
-      <span><i class="icon-twitter"> <%= link_to 'Get an invite code', 'http://twitter.com/intent/tweet?text=Using+this+tweet+to+get+early+access+to+@zillabyte' %></i></span>
-      <span><%= link_to 'Sign up', 'http://zillabyte.com/accounts/sign_up'%></span>
-    </p>
-
-    <nav class="grid">
-      <%= partial 'layouts/nav' %>
-    </nav>
-
-    <%= partial "layouts/support" %>
-  </div>
 </section>

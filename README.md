@@ -1,8 +1,11 @@
-Zillabyte Guides
-================
-
-These are the source files that power the [Zillabyte guides site](http://zillabyte.com/).
-
-The guides are the primary documentation for Zillabyte, explaining the core features and extensions as well as pointing out community extensions.
+How to use this repo: 
 
 
+
+In order to add a page, you must do 3 things. 
+1) add markdown file in the appropriate folder within the SOURCE folder
+2) add your entry to /locales/en.yml
+3) edit /basics/layouts/_nav.erb
+
+to push to s3 and deploy, run 
+`ruby build_deploy.rb`

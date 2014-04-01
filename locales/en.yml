@@ -1,49 +1,47 @@
 ---
 en:
-  # navigations
-  basics:
-    title: Basics
-    
-    how_it_works: How it works
-    what_is_a_flow: What is a flow?       
-
-    getting_started: Getting Started
-    
-
-    html_search: HTML Search
-    
-    index_your_results: Index your results
-    count: Count frequency
-    joins: Join disparate data sources
-    notifications: Send email notifications 
-    third_party_libraries: Use your favorite libraries
-    specific_search: Search specific HTML elements
-    cli_reference: Zillabyte CLI Reference
-    
-  usecases:
-    title: Example Searches
-    domain_rank: Domain Rank
-    market_coverage: Market Coverage
-    competitor_coverage: My Competitor(s)'s Web Coverage
-    app_store_monitoring: App Store Monitoring
-    corn_hybrid: Find Corn Hybrids
-    finding_job_openings: Finding Job Openings
-    
-  indices:
-    title: Scoring Your Results
-    social_index: Social Media Score
-    commerce_index: Web Tracker Score
-
-  community:
-    title: Community
-    app_store_monitor: App Store Monitoring Quickstart
-
-  reference:
-    title: Reference
-    cli_reference: CLI Reference
-    
-  # index
+  # home page
   index:
     sub_title: An API for searching and processing the web
     headline: An API for searching and processing the web
-    getting_started: Getting started
+
+  # navigations
+  quickstart:
+    title: Quickstart
+    getting_started: Getting Started
+    faq: FAQ
+    installation: How to Install
+
+  examples:
+    title: Examples
+    index_commerce: Commerce Index
+    domain_rank: Domain Rank
+    job_openings: Job Openings
+    app_monitor: App Store Analysis
+    market_coverage: Market Coverage in San Francisco
+
+
+  documentation:
+    title: Documentation
+    system: Tech Stack
+    documentation: Official Documentation
+    pipe: The Pipe Programming Paradigm
+
+  reference:
+    title: Reference
+    cli: Command Line
+    api: Restful API
+
+
+  community:
+    title: Community
+    featured_devs: Featured Developers
+    devs: Find a Developer to Help
+    customers: Customers
+
+
+  environments:
+    title: Environments
+    python: Python
+    ruby: Ruby
+    js: Javascript

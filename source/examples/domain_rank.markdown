@@ -1,4 +1,4 @@
-# How To: Domain Rank 
+# How To: Calculate the popularity of a given domain. 
 
 You've probably heard of Page Rank, the algorithm that made Google what it is today.  The basic idea behind Page Rank is straightforward: analyze all the inbound links for a given page then use it to calculate the relevance of that page. 
 

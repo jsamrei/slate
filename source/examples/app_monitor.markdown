@@ -2,7 +2,7 @@
 
 A recent Zillabyte user wanted to generate a marketing leads list targeting startups in the mobile space.  Specifically, this user wanted to identify all the publishers in the App Store and corresponding meta data about each app.  The user postulated that publishers in the App Store with recent spikes in traffic will be ideal leads for their product.
 
-This flow was relatively easy to build in Zillabyte.  Here it is in its entirety: 
+### The Code
 
 ```ruby
 require "zillabyte"

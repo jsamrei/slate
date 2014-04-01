@@ -121,14 +121,13 @@ flow.sink do |node|
 end
 ```
 
-Submiting this code to Zillabyte is easy. Once you've written the above code, save and exit your file. Switch back to the terminal, and in the terminal, run:
+### Push it to our servers
 
-```ruby
-zillabyte push
+```bash
+$ zillabyte push
 ```
 
-This will upload your code to Zillabyte's infrastructure using your credentials.
+### Now your algorithm is being processed with our infrastructure!
 
-### That's it.  You're done. Zillabyte will do the rest of the work from here.
 
 With a few tweaks, you can use this code to extract semantic information from any page exposing information through RDF.

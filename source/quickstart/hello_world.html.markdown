@@ -27,14 +27,14 @@ Zillabyte.simple_function do
   matches "select * from web_pages"
 
   emits [
-    ["hello_world", [{"url"=>:string}]]
+    ["has_hello_world", [{"url"=>:string}]]
   ] 
     
   execute do |tuple| 
     url = tuple['url']
     html = tuple['html'] 
     if html.scan('hello world')
-      emit("hello_world", "URL" => url)
+      emit("hello_world", "url" => url)
     end
   end 
 
@@ -48,17 +48,20 @@ end
 $ zillabyte push
 ```
 
+![Zillabyte simple apps](/images/SimpleApps.png)
+
+When an app is pushed to our service, we run the `execute` block of code across our compute cluster, as seen in the figure above. Each row of the results of the `matches` query are streamed into them. The `emits` clause defines the schema of the output from the `execute` block. This simple data app will process the millions of web pages in our corpus looking for the hello world. The results are automatically saved in a table called "has_hello_world". 
 
 ## View the results
 
 ``` bash
-$ zillabyte relations:show hello_world
+$ zillabyte relations:show has_hello_world
 ```
 
 ## Export the results to your local machine as a gzipped file
 
 ```bash
-$ zillabyte relations:pull hello_world 
+$ zillabyte relations:pull has_hello_world 
 ``` 
 
 Now you have a dataset of thousands of websites that have the term "hello world".  Of course, this is trivial.  The power of Zillabyte is the customizability and its flexibility.  

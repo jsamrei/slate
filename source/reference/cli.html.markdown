@@ -12,31 +12,31 @@ The command line interface allows you to interact with our infrastructure. Acces
   
   Primary help topics, type "zillabyte help TOPIC" for more details:
   
-    flows      #  manage custom flows
+    apps      #  manage custom apps
     query      #  executes queries
     relations  #  manage custom relations
   
   ...
   ```
 
-### Flows
+### Apps
 
-Flows are the core data pipeline that defines the stages of processing the data. See --this help doc-- for an overview of flows. 
+Apps are the core data pipeline that defines the stages of processing the data. See --this help doc-- for an overview of apps. 
 
   ```bash
-  $ zillabyte help flows
+  $ zillabyte help apps
 
-  flows                      #  list custom flows
-  flows:cycles ID [OPTIONS]  #  operations on the flow's cycles (batches).
-  flows:delete ID            #  deletes a flow. if the flow is running, this command will kill it.
-  flows:info [DIR]           #  outputs the info for the flow in the dir.
-  flows:init [LANG] [DIR]    #  initializes a new executable in DIR
-  flows:kill ID              #  kills the given flow
-  flows:logs FLOW_ID         #  streams logs from the distributed workers
-  flows:prep [DIR]           #  prepares a flow for execution
-  flows:pull ID DIR          #  pulls a flow source to a directory.
-  flows:push [DIR]           #  uploads a flow
-  flows:test [RELATION_ID]   #  tests a local flow with sample data
+  apps                      #  list custom apps
+  apps:cycles ID [OPTIONS]  #  operations on the app's cycles (batches).
+  apps:delete ID            #  deletes a app. if the app is running, this command will kill it.
+  apps:info [DIR]           #  outputs the info for the app in the dir.
+  apps:init [LANG] [DIR]    #  initializes a new executable in DIR
+  apps:kill ID              #  kills the given app
+  apps:logs FLOW_ID         #  streams logs from the distributed workers
+  apps:prep [DIR]           #  prepares a app for execution
+  apps:pull ID DIR          #  pulls a app source to a directory.
+  apps:push [DIR]           #  uploads a app
+  apps:test [RELATION_ID]   #  tests a local app with sample data
 
   ```
 
@@ -77,12 +77,12 @@ For the common commands, use the following aliases to reduce keystrokes.
 
   login                --> auth:login             #  Sets the Zillabyte Auth token
   logout               --> auth:logout            #  Sets the Zillabyte Auth token
-  info                 --> flows:info             #  outputs the info for the flow in the dir.
-  logs                 --> flows:logs             #  streams logs from the distributed workers
-  prep                 --> flows:prep             #  prepares a flow for execution
-  pull                 --> flows:pull             #  pulls a flow source to a directory.
-  push                 --> flows:push             #  uploads a flow
-  test                 --> flows:test             #  tests a local flow with sample data
+  info                 --> apps:info             #  outputs the info for the app in the dir.
+  logs                 --> apps:logs             #  streams logs from the distributed workers
+  prep                 --> apps:prep             #  prepares a app for execution
+  pull                 --> apps:pull             #  pulls a app source to a directory.
+  push                 --> apps:push             #  uploads a app
+  test                 --> apps:test             #  tests a local app with sample data
   sql                  --> query:sql              #  executes queries against the zillabyte corpus
   sxp                  --> query:sxp              #  executes queries against the zillabyte corpus
   append               --> relations:append       #  adds data to an existing relation

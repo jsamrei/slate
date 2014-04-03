@@ -19,13 +19,13 @@ require 'zillabyte'
 require 'nokogiri'
 
 
-# Create our 'flow', the DSL to help us orchestrate our app
-flow = Zillabyte.new()
+# Create our 'app', the DSL to help us orchestrate our app
+app = Zillabyte.new()
 
 
-# A 'spout' is the beginning of a flow.  All data originates from the spout.
+# A 'spout' is the beginning of a app.  All data originates from the spout.
 # Below, we will simply find which extrenal domains a given page may link to. 
-stream = flow.spout do |h|
+stream = app.spout do |h|
 
   h.matches "select * from web_pages"  # Let's consume the whole web. 
   h.emits [:source_domain, :target_domain]  # The data this spout emits.
@@ -44,7 +44,7 @@ stream = flow.spout do |h|
       target_uri = URI.join( base_url, link['href'])
       target_domain = target_uri.host.downcase
       
-      # Emit this back to the flow.  This is important because it will allow
+      # Emit this back to the app.  This is important because it will allow
       # Zillabyte to parallelize the operation
       controller.emit :source_domain => source_domain, :target_domain => target_domain
       
@@ -83,18 +83,18 @@ The above code is broken into four parts: (a) a spout, (b) a uniquer, (c) a coun
 
 ### The Spout
 
-All data in a flow must originate from a "spout".  In this particular case, we need to tell Zillabyte what kind of data to source from.  
+All data in a app must originate from a "spout".  In this particular case, we need to tell Zillabyte what kind of data to source from.  
 
 #### Matches and Emitting Data
 
-A spout consumes data from Zillabyte, processes it, and then passes new data to the rest of the flow.  Observe the following lines: 
+A spout consumes data from Zillabyte, processes it, and then passes new data to the rest of the app.  Observe the following lines: 
 
 ```ruby
 h.matches "select * from web_pages"  
 h.emits [:source_domain, :target_domain]  
 ```
 
-The first line instructs Zillabyte to feed your spout all of the records in the `web_pages` corpus.  The `web_pages` corpus is a pre-crawled copy of the web and contains two main fields: `url` and `html`.  This is familiar SQL syntax, and later we'll examine how we can use this to pre-process our flow and expedite processing time.
+The first line instructs Zillabyte to feed your spout all of the records in the `web_pages` corpus.  The `web_pages` corpus is a pre-crawled copy of the web and contains two main fields: `url` and `html`.  This is familiar SQL syntax, and later we'll examine how we can use this to pre-process our app and expedite processing time.
 
 The second line tells the system what kind of data this spout will emit. The fields you define here must match the `emit` functions below. 
 
@@ -115,7 +115,7 @@ h.execute do |tuple, controller|
     target_uri = URI.join( base_url, link['href'])
     target_domain = target_uri.host.downcase
     
-    # Emit this back to the flow.  This is important because it will allow
+    # Emit this back to the app.  This is important because it will allow
     # Zillabyte to parallelize the operation
     controller.emit :source_domain => source_domain, :target_domain => target_domain
     
@@ -137,7 +137,7 @@ stream.unique()
 
 #### The Counter
 
-Now we are going to instruct the flow to start counting.  At this point in the flow, the stream contains two fields: `[source_domain, target_domain]`.  We want to group all the `target_domains` and count the size of it. 
+Now we are going to instruct the app to start counting.  At this point in the app, the stream contains two fields: `[source_domain, target_domain]`.  We want to group all the `target_domains` and count the size of it. 
 
 ```
 stream.count :target_domain
@@ -148,7 +148,7 @@ The above will group by the field `target_domain` and add a new field called `co
 
 #### The Sink
 
-All flows must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
+All apps must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
 
 ```ruby
 web_stream.sink do |h|

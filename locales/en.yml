@@ -8,9 +8,10 @@ en:
   # navigations
   quickstart:
     title: Quickstart
-    getting_started: Getting Started
+    getting_started: Hello, World!
+    flows: Flows
     faq: FAQ
-    installation: How to Install
+    installation: Installation
 
   examples:
     title: Examples

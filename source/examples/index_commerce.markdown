@@ -11,7 +11,7 @@ require 'zillabyte'
 
 Zillabyte.simple_function do |fn|
   
-  # Every Zillabyte flow needs a name
+  # Every Zillabyte app needs a name
   fn.name "commerce_index"
 
   # Your function will have access

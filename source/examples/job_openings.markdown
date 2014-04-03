@@ -36,17 +36,17 @@ require 'equivalent-xml'
 require 'rdf/rdfa'
 require 'sparql'
 
-# We reuse two values several times over the course of this flow: the base address of the RDF schema and
+# We reuse two values several times over the course of this app: the base address of the RDF schema and
 # the list of attributes that define our final schema.  So we define them here.
 SCHEMA = RDF::Vocabulary.new "http://schema.org/"
 
 SCHEMA_ATTRIBUTES = ["address_locality", "hiring_organization", "title", "description", "name"]
 
-flow = Zillabyte.new "zillabyte_indeed"
+app = Zillabyte.new "zillabyte_indeed"
 
 # We start by outputting the URLs from which we wish to extract information.
 # This has been simplified considerably to only deal one page and one search term.
-flow.spout do |node|
+app.spout do |node|
   node.emits [["feed", ["url"]]]
 
   node.next_batch do |controller|
@@ -57,14 +57,14 @@ flow.spout do |node|
 end
 
 # Next, we process each URL by interpreting it as an RDF graph.
-flow.each do |node|
+app.each do |node|
   node.name "each_job_posting"
   node.emits [["indeed_job_posting", SCHEMA_ATTRIBUTES]]
 
   node.execute do |controller, tup|
-    # We wrap the entire flow in a begin-rescue block, so that for unexpected exceptions we do not break our flow
+    # We wrap the entire app in a begin-rescue block, so that for unexpected exceptions we do not break our app
     # completely.  Note that one should *NOT* catch 'Exception', ever--this breaks signal handling and prevents
-    # clean shutdown of a flow.
+    # clean shutdown of a app.
     begin
       # Using the third party library, we first load the graph...
       url = tup["url"]
@@ -103,14 +103,14 @@ flow.each do |node|
         controller.emit "indeed_job_posting", solution.bindings.select { |attribute, *| SCHEMA_ATTRIBUTES.include? attribute.to_s }
       end
     rescue => e
-      # Print to standard error--this is more semantically correct and will show up during execution of `zillabyte flows:test`.
+      # Print to standard error--this is more semantically correct and will show up during execution of `zillabyte apps:test`.
       STDERR.puts "Error:\n" + e.message + "\n" + e.backtrace.join("\n")
     end
   end
 end
 
 # The last step, as always, is to sink our newly extracted information to the database for later analysis.
-flow.sink do |node|
+app.sink do |node|
   node.name "indeed_job_posting"
 
   node.column "address_locality", :string

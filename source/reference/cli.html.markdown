@@ -4,7 +4,7 @@ title: CLI Reference
 
 ## zillabyte CLI
 
-The command line interface allows you to interact with our infrastructure. Access these commands by typing "zillabyte COMMAND". The help command is an easy way to refer to this the documentation on this page.
+The command line interface is the primary you to interact with our infrastructure. Access these commands by typing `zillabyte COMMAND`. The help command is an easy way to refer to this the documentation on this page.
 
   ``` bash
   $ zillabyte help
@@ -13,8 +13,8 @@ The command line interface allows you to interact with our infrastructure. Acces
   Primary help topics, type "zillabyte help TOPIC" for more details:
   
     apps      #  manage custom apps
-    query      #  executes queries
-    relations  #  manage custom relations
+    query     #  executes queries
+    relations #  manage custom relations
   
   ...
   ```
@@ -70,23 +70,25 @@ Use the query command to look at sample results from relations visible to you.
 
 ### Aliases
 
-For the common commands, use the following aliases to reduce keystrokes.
+The following aliases redirect to the commands to reduce keystrokes.
 
   ```bash
   $ zillabyte help aliases
 
-  login                --> auth:login             #  Sets the Zillabyte Auth token
-  logout               --> auth:logout            #  Sets the Zillabyte Auth token
-  info                 --> apps:info             #  outputs the info for the app in the dir.
-  logs                 --> apps:logs             #  streams logs from the distributed workers
-  prep                 --> apps:prep             #  prepares a app for execution
-  pull                 --> apps:pull             #  pulls a app source to a directory.
-  push                 --> apps:push             #  uploads a app
-  test                 --> apps:test             #  tests a local app with sample data
-  sql                  --> query:sql              #  executes queries against the zillabyte corpus
-  sxp                  --> query:sxp              #  executes queries against the zillabyte corpus
-  append               --> relations:append       #  adds data to an existing relation
+  login    --> auth:login       #  Sets the Zillabyte Auth token
+  logout   --> auth:logout      #  Sets the Zillabyte Auth token
+  info     --> apps:info        #  outputs the info for the app in the dir.
+  logs     --> apps:logs        #  streams logs from the distributed workers
+  prep     --> apps:prep        #  prepares a app for execution
+  pull     --> apps:pull        #  pulls a app source to a directory.
+  push     --> apps:push        #  uploads a app
+  test     --> apps:test        #  tests a local app with sample data
+  sql      --> query:sql        #  executes queries against the zillabyte corpus
+  sxp      --> query:sxp        #  executes queries against the zillabyte corpus
+  append   --> relations:append #  adds data to an existing relation
   ```
+
+For detailed help on each alias, type `zillabyte help ALIAS`.
 
 [HTML5 Boilerplate]: http://html5boilerplate.com/
 [SMACSS]: http://smacss.com/

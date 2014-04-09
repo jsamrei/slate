@@ -4,10 +4,11 @@
 
 [Patrick Renschler](mailto:patrick.renschler@zillabyte.com) 
 
-## Expertise in:Python
+## Expertise in: Python
 
 [Patrick Renschler](mailto:patrick.renschler@zillabyte.com) 
 
 ## Expertise in: R
 
-[Patrick Renschler](mailto:patrick.renschler@zillabyte.com) 
+[Patrick Renschler](mailto:patrick.renschler@zillabyte.com)
+

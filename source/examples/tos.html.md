@@ -14,11 +14,11 @@ For simplicity's sake, we search for the keywords porn or cigarette.  A more adv
 
 ### Getting screenshots
 
-[CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  Although we do not yet support Javascript, it can still be used, as these libraries are installed on our servers.  In the following, we wrote an external casperJS file to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
+[CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  Although we do not yet support Javascript, it can still be used, as these libraries are installed on our servers.  In the following, we wrote an external casperJS file, called "screenshot.js" to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
 
 ### Downloading the screenshot files
 
-In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Our servers have s3cmd installed, making this kind of action easy.
+In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Using an external gem like rightAWS makes this easy.
 
 
 

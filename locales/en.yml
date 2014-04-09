@@ -2,9 +2,8 @@
 en:
   # home page
   index:
-    sub_title: An API for searching and processing the web
-    headline: An API for searching and processing the web
-
+    sub_title: Empowering developers to build data applications
+    headline: Empowering developers to build data applications
   # navigations
   quickstart:
     title: Quickstart

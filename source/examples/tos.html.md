@@ -6,9 +6,7 @@ A Zillabyte customer asked us to find all the Stripe-powered companies that sold
 
 We researched Stripe in order to find out what signaled a Stripe-powered payment processor. 
 
-We determined, by looking at Stripe documentation, that the following were signals. 
-
-"js.stripe.com" and "checkout.stripe.com"
+We determined, by looking at Stripe documentation, that the following were signals: "js.stripe.com" and "checkout.stripe.com"
 
 ### Identifying porn and cigarette sites
 
@@ -16,11 +14,11 @@ For simplicity's sake, we search for the keywords porn or cigarette.  A more adv
 
 ### Getting screenshots
 
-[Casperjs](casperjs.org) is a great scripting & testing utility, written in Javascript.  Although we do not yet support Javascript, it can still be used, as these libraries are installed on our servers.  In the following, we wrote an external casperjs file to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
+[CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  Although we do not yet support Javascript, it can still be used, as these libraries are installed on our servers.  In the following, we wrote an external casperJS file to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
 
-### Downloading the screenshot files. 
+### Downloading the screenshot files
 
-In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Our servers also have s3cmd installed, making this kind of action easy.
+In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Our servers have s3cmd installed, making this kind of action easy.
 
 
 
@@ -46,7 +44,7 @@ Zillabyte.simple_app do
     url = tuple['url']
     html = tuple['html']
 
-    if html.include?('stripe.com')
+    if html.include?('js.stripe.com') || html.include?('checkout.stripe.com')
       if html.include?('cigarette') || html.include?('porn')
 
         emit("stripe_tos", "URL" => url) # write url to the relation

@@ -20,20 +20,22 @@ The entire code for the hello world data app follows:
 ```ruby
 require 'zillabyte' 
 
-Zillabyte.simple_function do 
+Zillabyte.simple_app do 
   
-  name "hello_world"
+  name "hello_world" # the name of your app
 
-  matches "select * from web_pages"
+  matches "select * from web_pages" # where your data is coming from
 
   emits [
-    ["has_hello_world", [{"url"=>:string}]]
+    ["hello_world", [{"url"=>:string}]]
   ] 
     
   execute do |tuple| 
     url = tuple['url']
     html = tuple['html'] 
-    if html.scan('hello world')
+    
+    # if we find hello world, emit it to a new relation
+    if html.includes?('hello world') 
       emit("hello_world", "url" => url)
     end
   end 
@@ -42,7 +44,7 @@ end
 ```
 
 
-## Push to our servers in order to run the app
+## Push to our servers to run the app
 
 ```bash 
 $ zillabyte push
@@ -50,18 +52,18 @@ $ zillabyte push
 
 ![Zillabyte simple apps](/images/SimpleApps.png)
 
-When an app is pushed to our service, we run the `execute` block of code across our compute cluster, as seen in the figure above. Each row of the results of the `matches` query are streamed into them. The `emits` clause defines the schema of the output from the `execute` block. This simple data app will process the millions of web pages in our corpus looking for the hello world. The results are automatically saved in a table called "has_hello_world". 
+When an app is pushed to our service, we run the `execute` block of code across our compute cluster, as seen in the figure above. Each row of the results of the `matches` query are streamed into them. The `emits` clause defines the schema of the output from the `execute` block. This simple data app will process the millions of web pages in our corpus looking for the hello world. The results are automatically saved in a relation called "hello_world". 
 
 ## View the results
 
 ``` bash
-$ zillabyte relations:show has_hello_world
+$ zillabyte relations:show hello_world
 ```
 
-## Export the results to your local machine as a gzipped file
+## Export the results to your local machine as a zipped file
 
 ```bash
-$ zillabyte relations:pull has_hello_world 
+$ zillabyte relations:pull hello_world 
 ``` 
 
 Now you have a dataset of thousands of websites that have the term "hello world".  Of course, this is trivial.  The power of Zillabyte is the customizability and its flexibility.  
@@ -69,9 +71,5 @@ Now you have a dataset of thousands of websites that have the term "hello world"
  
 ## Next steps
 
-If you haven't already done so, you should try our [tutorial](/tutorial). Next, we recommend checking out our [example apps](/examples/index_commerce).
-
-
-
-[HTML5 Boilerplate]: http://html5boilerplate.com/
-[SMACSS]: http://smacss.com/
+If you haven't already done so, you should try our [tutorial](/quickstart/tutorial). Next, we recommend checking out our [example apps](/examples/index_commerce).
+  

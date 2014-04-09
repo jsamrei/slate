@@ -1,6 +1,4 @@
----
-title: Installation
----
+# Installation
 
 Zillabyte is distributed using the RubyGems package manager. This means you will need both the Ruby language runtime installed and RubyGems to begin using Zillabyte.
 
@@ -12,25 +10,23 @@ Once you have Ruby and RubyGems up and running, execute the following from the c
 $ gem install zillabyte
 ```
 
-## Setup 
+If this does not work, you may need to install a ruby that is known to be compatible with Zillabyte. 
 
-First, [sign up](http://api.zillabyte.com/accounts/sign_up) to get your auth token.  You need an auth token to run your own app on Zillabyte. 
-
-Second, install the CLI interface, which will give you access to all zillabyte commands. 
+1) Install [RVM](https://rvm.io/).  
 
 ```bash
-$ gem install zillabyte
-```
+$ \curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
+``` 
 
-Third, authenticate using your auth token. This will prompt you for your auth token.
+2) Install ruby 1.9.3-p448. 
 
 ```bash
-$ zillabyte login
+$ rvm install ruby-1.9.3-p448
 ```
 
-Now you're ready!
+3) Make 1.9.3-p448 the default.  
 
+```bash
+$ rvm use ruby-1.9.3-p448 --default
+```
 
-
-[HTML5 Boilerplate]: http://html5boilerplate.com/
-[SMACSS]: http://smacss.com/

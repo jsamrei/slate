@@ -4,7 +4,7 @@ title: Apps
 
 # Apps
 
-Zillabyte data applications are an easy way of defining data tranformations. An application is executed simultaneously across several machines on our distributed cluster. Data is streamed through this 
+Zillabyte data applications are an easy way of defining data tranformations. An application is executed simultaneously across several machines on our distributed cluster. Data is streamed through this.
 
 ### Parts of an app
 

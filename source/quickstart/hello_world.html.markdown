@@ -18,29 +18,19 @@ Executing this command in an empty folder will place three files.
 The entire code for the hello world data app follows: 
 
 ```ruby
-require 'zillabyte' 
+require 'zillabyte'
 
-Zillabyte.simple_app do 
-  
-  name "hello_world" # the name of your app
+app = Zillabyte.app("test")
 
-  matches "select * from web_pages" # where your data is coming from
-
-  emits [
-    ["hello_world", [{"url"=>:string}]]
-  ] 
-    
-  execute do |tuple| 
-    url = tuple['url']
-    html = tuple['html'] 
-    
-    # if we find hello world, emit it to a new relation
-    if html.includes?('hello world') 
-      emit("hello_world", "url" => url)
-    end
-  end 
-
-end 
+app
+  .source("select * from web_pages")
+  .each { |tuple|
+    emit tuple['url'] if tuple['html'].include? "hello world"
+  }
+  .sink{
+    name "has_hello_world"
+    column "url", :string
+  }
 ```
 
 

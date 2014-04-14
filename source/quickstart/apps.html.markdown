@@ -55,10 +55,10 @@ stream = result_stream.each{ |tuple|
 The sink is a passive component that only defines the schema of the rows that need to be saved. This is the only place in the app that the schema is defined. No other component needs to define the columns in the subsequent `stream` object.
 
 ```ruby
-.sink{
+.sink do
     name "has_hello_world"
     column "url", :string
-  }
+end
 ```
 
 The sink does not have an expanded syntax.
@@ -82,19 +82,19 @@ This clause is agnostic to the schema of the stream, meaning you are free to cha
 
 `source`s can also use data outside of Zillabyte `relation`s. Any external data availabe on the web can be streamed into a Zillabyte app. To do so, we use the expanded syntax of a `source`. 
 
-Note: We expect that the next_tuple call only emits a row at a time, although this is not enforced. 
+Note: We expect that the next_tuple call only emits a few rows at a time, although this is not enforced. For tasks that would take longer than a second, consider using `each`s to perform the same task.
 
 #### Single Stream
 
 ```ruby
-stream = app.source {
+stream = app.source do
   name "single_stream_source" #Optional
-  start_cycle{
+  start_cycle do
     # Initialize the data and any local variables here
     @count = 0
     @rows = fetch_rows_from_external_source # eg: csv/xml/rss
-  }
-  next_tuple {
+  end
+  next_tuple do
     #Emit the next tuple 
     row = @rows.shift
     if row
@@ -102,8 +102,8 @@ stream = app.source {
     else
       end_cycle #Explicit call to signify end of emits
     end
-  }
-}
+  end
+end
 ```
 
 #### Multiple Streams 
@@ -111,21 +111,21 @@ stream = app.source {
 Here is an example of using the `emits` clause within a `source`. 
 
 ```ruby
-stream = app.source {
+stream = app.source do
   name "multiple_stream_source" #Optional
   emits 'stream_a', 'stream_b'
-  next_tuple {
+  next_tuple do
     emit 'stream_a', :foo => 'hi'
     emit 'stream_b', :bar => 3
-  }
-}
+  end
+end
 ```
 
 ### Each
 
 #### Single Stream
 
-This is semantically equal to the simpler syntanx block above, shown here for completeness. 
+This is semantically equal to the simpler syntax block above, shown here for completeness. 
 
 ```ruby
 stream.each do
@@ -149,9 +149,9 @@ has_hello_world_stream, links_stream = stream.each do
     # Do something with tuple
     emit "has_hello_world", {:url => tuple['url']} if tuple['html'].include? "hello world"
     links = parse_links(tuple['html']) # Function that parses links
-    links.each{|link|
+    links.each do |link|
       emit "links", {:link => link}
-    }
+    end
     
   end
 end
@@ -228,20 +228,21 @@ For completeness, the same code in the format as Take 1.
 ```ruby 
 app = Zillabyte.app("multi_stream")
 pages = app.source("select * from web_pages")
-h = pages.each do |page|
+
+hello_stream = pages.each do |page|
   emit page['url'] if page['html'].include? "hello world"
 end
 
-g = pages.each do |page|
-  emit page['url'] if page['html'].include? "bye world"
+goodbye_stream = pages.each do |page|
+  emit page['url'] if page['html'].include? "goodbye world"
 end
 
-h.sink do
+hello_stream.sink do
   name "has_hello_world"
   column "url", :string
 end
 
-b.sink do 
+goodbye_stream.sink do 
   name "has_goodbye_world"
   column "url", :string
 end

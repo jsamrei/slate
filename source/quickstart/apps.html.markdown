@@ -16,7 +16,7 @@ The name of your application is specified in the constructor `"my_app"`. This na
 
 ## Parts of an app: Source, Each, and Sink
 
-We introduce the three primary components that define the data we act on (`source`), what the computation on each row of the data (`each`) and finally where the results are stored(`sink`). The connection between these primary components A `stream` is the flow of data into and/or out of each component. A component can emit one or more `stream` objects. We illustrate the syntaxes of the components in two forms: (1) the simpler syntax which is meant to cover the most common use cases and (2) an expanded syntax for advanced functionality.
+Each application has three primary components: `source`, `each`, and `sink` (described in more detail below). These are connected via a `stream`, which is just the flow of data between these components. A component may emit one or more `stream`s. Zillabyte supports 2 syntax variants for building apps using data streams: (1) The simpler syntax which should be sufficient for most common use cases and (2) an expanded syntax for advanced functionality.
 
 ## Source 
 
@@ -26,7 +26,7 @@ A `source` is the origin of the data flow, defined on the app object. The easies
 result_stream = app.source "select url,html from web_pages"
 ```
 
-In this case, the `sourc`e pulls rows from the public relation `web_pages`, with the columns `url` and `html`. The resulting `stream` object can then be used to define the next component.
+In this case, the `source` pulls rows from the public relation `web_pages`, with the columns `url` and `html`. The resulting `stream` object can then be used to define the next component.
 
 ## Each
 
@@ -52,7 +52,7 @@ stream = result_stream.each{ |tuple|
 
 ## Sink
 
-The sink is a passive component that only defines the schema of the rows that need to be saved. This is the only place in the app that the schema is defined. No other component needs to define the columns in the subsequent `stream` object.
+The sink is a passive component that only defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
 
 ```ruby
 .sink do
@@ -65,13 +65,13 @@ The sink does not have an expanded syntax.
 
 ## Expanded Syntax
 
-This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple `stream`s of data. This is useful when each `stream` has a different set of fields. This is currently applicable only to the `source` and `each` components. To declare that a component that produces more than one stream, we use the `emits` method. The arguments to the emits method is a list of strings that define the name of the streams. 
+This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple `stream`s of data. This is useful when each `stream` has a different set of fields. This is currently applicable only to the `source` and `each` components. A component supplies a list of stream names to the `emits` method to define multiple streams. 
 
 ```ruby
 emits "stream_1", "stream_2"
 ```
 
-This clause is agnostic to the schema of the stream, meaning you are free to change the data types in the stream without having to edit the schema in multiple places! For components that use the emits method, there is now an additional requirement. Each row that is emitted using the `emit` method must explictly name one of the streams to emit to: 
+For components that use the `emits` method, there is now an additional requirement. Each  emitted row must explictly name one of the streams to emit to: 
 
 ```ruby
    emit 'stream_1', :foo => 'hi'
@@ -89,7 +89,7 @@ Note: We expect that the next_tuple call only emits a few rows at a time, althou
 ```ruby
 stream = app.source do
   name "single_stream_source" #Optional
-  start_cycle do
+  begin_cycle do
     # Initialize the data and any local variables here
     @count = 0
     @rows = fetch_rows_from_external_source # eg: csv/xml/rss
@@ -100,7 +100,7 @@ stream = app.source do
     if row
       emit :foo => row
     else
-      end_cycle #Explicit call to signify end of emits
+      emit null #Emit null to signal end of emits
     end
   end
 end
@@ -175,10 +175,10 @@ hello_stream, goodbye_stream = pages.each do
   emits "hello_world", "goodbye_world" # Ordering is important
   execute do |page|
     if page['html'].include? "hello world"
-      emit "hello_world", page['url'] 
+      emit "hello_world", :url => page['url'] 
     end
     if page['html'].include? "goodbye world"
-      emit "goodbye_world", page['url'] 
+      emit "goodbye_world", :url => page['url'] 
     end 
   end
 end
@@ -207,7 +207,7 @@ app = Zillabyte.app("multi_stream")
 pages = app.source("select * from web_pages")
 
 pages.each{ |page|
-  emit page['url'] if page['html'].include? "hello world"
+  emit {:url => page['url']} if page['html'].include? "hello world"
 }
 .sink{
   name "has_hello_world"
@@ -215,7 +215,7 @@ pages.each{ |page|
 }
 
 pages.each { |page|
-  emit page['url'] if page['html'].include? "bye world"
+  emit {:url => page['url']} if page['html'].include? "bye world"
 }
 .sink{ 
   name "has_goodbye_world"
@@ -230,11 +230,11 @@ app = Zillabyte.app("multi_stream")
 pages = app.source("select * from web_pages")
 
 hello_stream = pages.each do |page|
-  emit page['url'] if page['html'].include? "hello world"
+  emit {:url => page['url']} if page['html'].include? "hello world"
 end
 
 goodbye_stream = pages.each do |page|
-  emit page['url'] if page['html'].include? "goodbye world"
+  emit  {:url => page['url']} if page['html'].include? "goodbye world"
 end
 
 hello_stream.sink do

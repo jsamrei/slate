@@ -12,7 +12,7 @@ require 'zillabyte'
 app = Zillabyte.new "my_app"
 ```
 
-The name of your application (`"my_app"`) will identify your application across our infrastructure. 
+The name of your application (`"my_app"`) identifies your application across our infrastructure. 
 
 ## Parts of an app: Source, Each, and Sink
 
@@ -137,7 +137,7 @@ end
 
 #### Multiple Streams
 
-A common use case is to generate multiple streams from a single computation. For example, while parsing the html of a page one stream would only emit the url on existence of a hello_world, while the other stream would emit all links found in the page. 
+A common use case is to generate multiple streams from a single computation. For example, while parsing the html of a page, we may want one `stream` to emit the url only if "hello world" exists in the text, and another `stream` to emit all links found on the page.
 
 ```ruby
 has_hello_world_stream, links_stream = stream.each do

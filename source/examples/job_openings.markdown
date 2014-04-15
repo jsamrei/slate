@@ -1,9 +1,9 @@
-# How To: Find Job Invites on the Web
+# How To: Find Jobs on the Web
 
 One of Zillabyte's core principles is its flexibility.  Many websites expose information using RDF (Research Description Framework), a core component of W3C's semantic web stack.  This example demonstrates how one might process job openings on Indeed using a combination of Zillabyte's native features and its support for third-party gems.
 
 ### Use case
-This use case actually grew out of something we are interested in here ate Zillabyte--namely, which companies are hiring full-time developers to perform large-scale data extraction and analysis tasks?  There are many aggregate job sites on the web, but this example just focuses on Indeed.
+This use case actually grew out of something we are interested in here at Zillabyte--namely, which companies are hiring full-time developers to perform large-scale data extraction and analysis tasks?  There are many aggregate job sites on the web, but this example just focuses on Indeed.
 
 As mentioned above, Indeed uses RDF.  This is easy to determine by analyzing the source code of a search results page:
 

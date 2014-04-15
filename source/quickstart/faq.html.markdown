@@ -6,7 +6,7 @@ title: FAQ
 
 ## What data is available for me to use in a Zillabyte App?
 
-We are making some useful datasets publicly accessible for you to quickly get started. The primary being the `domains`, and `web_pages` 
+We are making some useful datasets publicly accessible for you to quickly get started. The first ones we are providing are `domains` and `web_pages`.  
 
 ## How do I get data into the Zillabyte ecosystem?
 
@@ -20,13 +20,12 @@ To input data into an app that is continously changing, use the source feature o
   
 ## How do I get data out of the Zillabyte ecosystem?
 
-Pulling the entire result set
+### Pulling the entire result set
   - Command line flat file
   - Command line pull to s3
 
-Notifications
+### Notifications
   - Within the flow
-
 
 ## How do I know the progress of my app?
 

@@ -32,7 +32,7 @@ Zillabyte.app("multi_stream")
 ```
 
 
-## Push to our servers in order to run the app
+## Push to our servers to run the app
 
 ```bash 
 $ zillabyte push
@@ -45,13 +45,13 @@ When an app is pushed to our service, we run the `each` block of code across our
 ## View the results
 
 ``` bash
-$ zillabyte relations:show has_hello_world
+$ zillabyte relations:show hello_world
 ```
 
-## Export the results to your local machine as a gzipped file
+## Export the results to your local machine as a zipped file
 
 ```bash
-$ zillabyte relations:pull has_hello_world 
+$ zillabyte relations:pull hello_world 
 ``` 
 
 Now you have a dataset of thousands of websites that have the term "hello world".  Of course, this is trivial.  The power of Zillabyte is the customizability and its flexibility.  
@@ -59,9 +59,5 @@ Now you have a dataset of thousands of websites that have the term "hello world"
  
 ## Next steps
 
-If you haven't already done so, you should try our [tutorial](/tutorial). Next, we recommend checking out our [example apps](/examples/index_commerce).
-
-
-
-[HTML5 Boilerplate]: http://html5boilerplate.com/
-[SMACSS]: http://smacss.com/
+If you haven't already done so, you should try our [tutorial](/quickstart/tutorial). Next, we recommend checking out our [example apps](/examples/index_commerce).
+  

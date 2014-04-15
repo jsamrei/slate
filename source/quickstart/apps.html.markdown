@@ -4,7 +4,7 @@ title: Apps
 
 # Apps
 
-## Create a zillabyte application object 
+## Create a zillabyte application
 
 ```ruby
 require 'zillabyte'
@@ -12,7 +12,7 @@ require 'zillabyte'
 app = Zillabyte.new "my_app"
 ```
 
-The name of your application is specified in the constructor `"my_app"`. This name will identify your application across our infrastructure. 
+The name of your application (`"my_app"`) will identify your application across our infrastructure. 
 
 ## Parts of an app: Source, Each, and Sink
 
@@ -99,8 +99,6 @@ stream = app.source do
     row = @rows.shift
     if row
       emit :foo => row
-    else
-      emit null #Emit null to signal end of emits
     end
   end
 end

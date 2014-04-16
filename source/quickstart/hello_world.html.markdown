@@ -20,13 +20,15 @@ The entire code for the hello world data app follows:
 ```ruby
 require 'zillabyte' 
 
-Zillabyte.app("app_name")
-  .source("select url,html from web_pages")
+app = Zillabyte.app("hello_world_app")
+  .source("select * from web_pages")
   .each{ |page|
-    emit {:url => page['url']} if page['html'].include? "hello world"
+    if page['html'].include? "hello" #  world
+      emit :url => page['url']
+    end
   }
   .sink{
-    name "has_hello_world"
+    name "has_hello"
     column "url", :string
   }
 ```

@@ -18,14 +18,12 @@ Executing this command in an empty folder will place three files.
 The entire code for the hello world data app follows: 
 
 ```ruby
-require 'zillabyte'
+require 'zillabyte' 
 
-app = Zillabyte.app("test")
-
-app
-  .source("select * from web_pages")
-  .each { |tuple|
-    emit tuple['url'] if tuple['html'].include? "hello world"
+Zillabyte.app("multi_stream")
+  .source("select url,html from web_pages")
+  .each{ |page|
+    emit {:url => page['url']} if page['html'].include? "hello world"
   }
   .sink{
     name "has_hello_world"
@@ -40,9 +38,9 @@ app
 $ zillabyte push
 ```
 
-![Zillabyte simple apps](/images/SimpleApps.png)
+![Zillabyte simple apps](/images/HelloWorld.png)
 
-When an app is pushed to our service, we run the `execute` block of code across our compute cluster, as seen in the figure above. Each row of the results of the `matches` query are streamed into them. The `emits` clause defines the schema of the output from the `execute` block. This simple data app will process the millions of web pages in our corpus looking for the hello world. The results are automatically saved in a relation called "hello_world". 
+When an app is pushed to our service, we run the `each` block of code across our compute cluster. Each row of the results of the `source` query are streamed into them. This simple data app will process the millions of web pages in our corpus looking for the words 'hello world' anywhere in the page. The results are then sinked (saved) to a relation called "has_hello_world". The relation has one column, a url (string). 
 
 ## View the results
 

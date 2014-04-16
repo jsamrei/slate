@@ -19,49 +19,39 @@ require 'zillabyte'
 require 'nokogiri'
 
 
-# Create our 'flow', the DSL to help us orchestrate our app
-flow = Zillabyte.new()
+# Create our 'app', the DSL to help us orchestrate our app
+app = Zillabyte.app("domain_rank")
 
 
-# A 'spout' is the beginning of a flow.  All data originates from the spout.
+# A 'source' is the beginning of a app.  All data originates from the source.
 # Below, we will simply find which extrenal domains a given page may link to. 
-stream = flow.spout do |h|
+stream = app.source "select * from web_pages"
 
-  h.matches "select * from web_pages"  # Let's consume the whole web. 
-  h.emits [:source_domain, :target_domain]  # The data this spout emits.
-  
-  
+links = stream.each do |tuple|  
   # This is called on every web page
-  h.execute do |tuple, controller|
+  base_url = tuple['url']
+  html = tuple['html']
+  doc = Nokogiri::HTML(html)
+  
+  doc.css('a').each do |link| 
+    # What domain does this item link to? 
+    target_uri = URI.join( base_url, link['href'])
+    target_domain = target_uri.host.downcase
     
-    base_url = tuple['url']
-    html = tuple['html']
-    doc = Nokogiri::HTML(html)
-    
-    doc.css('a').each do |link| 
-      
-      # What domain does this item link to? 
-      target_uri = URI.join( base_url, link['href'])
-      target_domain = target_uri.host.downcase
-      
-      # Emit this back to the flow.  This is important because it will allow
-      # Zillabyte to parallelize the operation
-      controller.emit :source_domain => source_domain, :target_domain => target_domain
-      
-    end
-    
+    # Emit this to a stream.  This is important because it will allow
+    # Zillabyte to parallelize the operation
+    emit :source_domain => source_domain, :target_domain => target_domain
   end
 end
 
-
 # de-duplicate the stream.  i.e. throw out all tuples that have matching
 # [source_domain, target_domain] pairs
-stream.unique()
+unique_links = links.unique()
 
 
 # Count the number of unique 'target_domain's.  By default, this will create a
 # new field called 'count' and throw away all 'source_domain' values
-stream.count :target_domain
+web_stream = unique_links.count :target_domain
 
 
 # Final step, we need to sink the data into Zillabyte.  Sunk data is persistent
@@ -77,50 +67,39 @@ end
 
 ## What's Going On? 
 
-The above code conforms to the [pipe programming paradigm](). This allows Zillabyte to parallelize the algorithm so we can get results in seconds, not days.  
+The above code conforms to the pipe programming paradigm. This allows Zillabyte to parallelize the algorithm so we can get results in seconds, not days.  
 
-The above code is broken into four parts: (a) a spout, (b) a uniquer, (c) a counter, and finally (d) a sink.  Let's look at each on in detail. 
+The above code is broken into four parts: (a) a source, (b) a uniquer, (c) a counter, and finally (d) a sink.  Let's look at each on in detail. 
 
-### The Spout
+### The Source
 
-All data in a flow must originate from a "spout".  In this particular case, we need to tell Zillabyte what kind of data to source from.  
+All data in a app must originate from a `source`.  In this particular case, we need to tell Zillabyte what kind of data to source from.  
 
 #### Matches and Emitting Data
 
-A spout consumes data from Zillabyte, processes it, and then passes new data to the rest of the flow.  Observe the following lines: 
+A source consumes data from Zillabyte, processes it, and then passes new data to the rest of the app.  
+
+#### The Heart of the ranking
+
+The next component is the `each`.  This is the block of code that actually runs on every web page. 
 
 ```ruby
-h.matches "select * from web_pages"  
-h.emits [:source_domain, :target_domain]  
-```
 
-The first line instructs Zillabyte to feed your spout all of the records in the `web_pages` corpus.  The `web_pages` corpus is a pre-crawled copy of the web and contains two main fields: `url` and `html`.  This is familiar SQL syntax, and later we'll examine how we can use this to pre-process our flow and expedite processing time.
-
-The second line tells the system what kind of data this spout will emit. The fields you define here must match the `emit` functions below. 
-
-#### The Heart of the Spout 
-
-The final component to the spout is the `execute` section.  This is the block of code that actually runs on every web page. 
-
-```ruby
-h.execute do |tuple, controller|
-  
+links = stream.each do |tuple|  
+  # This is called on every web page
   base_url = tuple['url']
   html = tuple['html']
   doc = Nokogiri::HTML(html)
   
   doc.css('a').each do |link| 
-    
     # What domain does this item link to? 
     target_uri = URI.join( base_url, link['href'])
     target_domain = target_uri.host.downcase
     
-    # Emit this back to the flow.  This is important because it will allow
+    # Emit this to a stream.  This is important because it will allow
     # Zillabyte to parallelize the operation
-    controller.emit :source_domain => source_domain, :target_domain => target_domain
-    
+    emit :source_domain => source_domain, :target_domain => target_domain
   end
-  
 end
 ```
 
@@ -128,16 +107,16 @@ The above code does the following: (a) extract the links from a web page, then (
 
 ### The Uniquer
 
-As data emits from the spout, we want to make sure we avoid duplication.  That is, we want to make sure a target domain only gets one point for every source domain.  Because the spout can be parallelized, it makes sense to handle this logic after the spout.  The following line should do the trick:
+As data emits from the source, we want to make sure we avoid duplication.  That is, we want to make sure a target domain only gets one point for every source domain.  Because the source can be parallelized, it makes sense to handle this logic after the source.  The following line should do the trick:
 
-```
+```ruby
 stream.unique()
 ```
 
 
 #### The Counter
 
-Now we are going to instruct the flow to start counting.  At this point in the flow, the stream contains two fields: `[source_domain, target_domain]`.  We want to group all the `target_domains` and count the size of it. 
+Now we are going to instruct the app to start counting.  At this point in the app, the stream contains two fields: `[source_domain, target_domain]`.  We want to group all the `target_domains` and count the size of it. 
 
 ```
 stream.count :target_domain
@@ -148,7 +127,7 @@ The above will group by the field `target_domain` and add a new field called `co
 
 #### The Sink
 
-All flows must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
+All apps must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
 
 ```ruby
 web_stream.sink do |h|
@@ -158,7 +137,7 @@ web_stream.sink do |h|
 end
 ```
 
-When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called "domain\_rank".  This relation contains two columns, "domain" and "score".  Order is important here, the first field corresponds to the first field in our stream, "target\_domain", and the second column corresponds to "count". 
+When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called `domain_rank`.  This relation contains two columns, `domain` and `score`.  Order is important here, the first field corresponds to the first field in our stream, `target_domain`, and the second column corresponds to `count`. 
 
 
 ## Conclusion & Next Steps 

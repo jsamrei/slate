@@ -1,9 +1,9 @@
-# How To: Find Job Invites on the Web
+# How To: Find Jobs on the Web
 
 One of Zillabyte's core principles is its flexibility.  Many websites expose information using RDF (Research Description Framework), a core component of W3C's semantic web stack.  This example demonstrates how one might process job openings on Indeed using a combination of Zillabyte's native features and its support for third-party gems.
 
 ### Use case
-This use case actually grew out of something we are interested in here ate Zillabyte--namely, which companies are hiring full-time developers to perform large-scale data extraction and analysis tasks?  There are many aggregate job sites on the web, but this example just focuses on Indeed.
+This use case actually grew out of something we are interested in here at Zillabyte--namely, which companies are hiring full-time developers to perform large-scale data extraction and analysis tasks?  There are many aggregate job sites on the web, but this example just focuses on Indeed.
 
 As mentioned above, Indeed uses RDF.  This is easy to determine by analyzing the source code of a search results page:
 
@@ -36,35 +36,29 @@ require 'equivalent-xml'
 require 'rdf/rdfa'
 require 'sparql'
 
-# We reuse two values several times over the course of this flow: the base address of the RDF schema and
+# We reuse two values several times over the course of this app: the base address of the RDF schema and
 # the list of attributes that define our final schema.  So we define them here.
 SCHEMA = RDF::Vocabulary.new "http://schema.org/"
 
 SCHEMA_ATTRIBUTES = ["address_locality", "hiring_organization", "title", "description", "name"]
 
-flow = Zillabyte.new "zillabyte_indeed"
+app = Zillabyte.app "zillabyte_indeed"
 
 # We start by outputting the URLs from which we wish to extract information.
 # This has been simplified considerably to only deal one page and one search term.
-flow.spout do |node|
-  node.emits [["feed", ["url"]]]
-
-  node.next_batch do |controller|
-    controller.emit "feed", {
-      "url" => "http://www.indeed.com/jobs/?q=web+crawling"
-    }
+input = app.source do
+  next_tuple do
+    emit :url => "http://www.indeed.com/jobs/?q=web+crawling"
   end
 end
 
 # Next, we process each URL by interpreting it as an RDF graph.
-flow.each do |node|
-  node.name "each_job_posting"
-  node.emits [["indeed_job_posting", SCHEMA_ATTRIBUTES]]
-
-  node.execute do |controller, tup|
-    # We wrap the entire flow in a begin-rescue block, so that for unexpected exceptions we do not break our flow
+stream = input.each do
+  name "each_job_posting"
+  execute do |tup|
+    # We wrap the entire app in a begin-rescue block, so that for unexpected exceptions we do not break our app
     # completely.  Note that one should *NOT* catch 'Exception', ever--this breaks signal handling and prevents
-    # clean shutdown of a flow.
+    # clean shutdown of a app.
     begin
       # Using the third party library, we first load the graph...
       url = tup["url"]
@@ -103,21 +97,21 @@ flow.each do |node|
         controller.emit "indeed_job_posting", solution.bindings.select { |attribute, *| SCHEMA_ATTRIBUTES.include? attribute.to_s }
       end
     rescue => e
-      # Print to standard error--this is more semantically correct and will show up during execution of `zillabyte flows:test`.
-      STDERR.puts "Error:\n" + e.message + "\n" + e.backtrace.join("\n")
+      # Print to standard error--this is more semantically correct and will show up during execution of `zillabyte apps:test`.
+      log "Error:\n" + e.message + "\n" + e.backtrace.join("\n")
     end
   end
 end
 
 # The last step, as always, is to sink our newly extracted information to the database for later analysis.
-flow.sink do |node|
-  node.name "indeed_job_posting"
+stream.sink do
+  name "indeed_job_posting"
 
-  node.column "address_locality", :string
-  node.column "hiring_organization", :string
-  node.column "title", :string
-  node.column "description", :string
-  node.column "name", :string
+  column "address_locality", :string
+  column "hiring_organization", :string
+  column "title", :string
+  column "description", :string
+  column "name", :string
 end
 ```
 

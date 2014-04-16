@@ -26,8 +26,7 @@ Each application has three primary components: `source`, `each`, and `sink` (des
 A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
 
 ```ruby
-result_stream = app.source "select url,html from 
-  web_pages"
+result_stream = app.source "select url,html from web_pages"
 ```
 
 In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next component.
@@ -58,7 +57,7 @@ stream = result_stream.each{ |tuple|
 The `sink` is a passive component that defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
 
 ```ruby
-.sink do
+stream.sink do
     name "has_hello_world"
     column "url", :string
 end
@@ -113,15 +112,16 @@ end
 Here is an example of using the `emits` clause within a `source`. 
 
 ```ruby
-stream = app.source do
-  name "multiple_stream_source" #Optional
-  emits 'stream_a', 'stream_b'
+stream_a, stream_b = app.source do
+  name "multiple_stream_source" #Optional name to uniquely identify the source component
+  emits 'a', 'b' # The emit below uses these strings
   next_tuple do
-    emit 'stream_a', :foo => 'hi'
-    emit 'stream_b', :bar => 3
+    emit 'a', :foo => 'hi' # Emitting to first stream
+    emit 'b', :bar => 3    # Emitting to the second stream
   end
 end
 ```
+
 
 ### Each
 
@@ -173,7 +173,7 @@ This example shows the hello world example with a twist. This also executes an e
 app = Zillabyte.app("multi_stream")
 pages = app.source("select * from web_pages")
 hello_stream, goodbye_stream = pages.each do 
-  name "all_worlds"
+  name "all_worlds" # Refer to the figure
   emits "hello_world", "goodbye_world" # Ordering is important
   execute do |page|
     if page['html'].include? "hello world"

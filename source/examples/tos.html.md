@@ -27,63 +27,51 @@ In the following, for each screenshot, we saved it to the server, pushed it to a
 require 'zillabyte'
 require 'right_aws'
 
+app = Zillabyte.new "tos"
 
-Zillabyte.simple_app do
-
-  name "stripe_tos" # describe your app with a name
+input = app.source "select url, html from web_pages"
   
-  matches "select * from web_pages" # use zillabyte web corpus as input 
-  
-  emits [ 
-          [ 
-            "stripe_tos", [ {"URL"=>:string}, {"png_location"=>:string}]
-          ]
-        ]
+stream = input.each do |tuple|
+  if html.include?('stripe.com')
+    if not html.scan($regex).empty?
 
+      # in order to name our .png files
+      domain_regex = /http:\/\/w{3}?(\w*)/
+      truncate_url = url.scan(domain_regex)
+      
+      $s3bucket = "stripe_tos"
+      s3 = RightAws::S3.new(accesskey, secretkey)
+      $bucket1 = RightAws::S3::Bucket.create(s3, $s3bucket, true)
+      $regex = Regexp.union('cigarette','porn')
+      
 
-  prepare do
-    $s3bucket = "stripe_tos"
-    s3 = RightAws::S3.new(accesskey, secretkey)
-    $bucket1 = RightAws::S3::Bucket.create(s3, $s3bucket, true)
-    $regex = Regexp.union('cigarette','porn')
-  end
+      if `casperjs screenshot.js #{url}` # use external casperjs file to take screenshot
+        STDERR.puts "screenshot taken" # I use STDERR to write to the logs.
 
+        key = RightAws::S3::Key.create($bucket1, "#{Date.today.to_s}/#{truncate_url[0][0]}.png") 
 
-  execute do |tuple|
-    
-    url = tuple['url']
-    html = tuple['html']
+        x = File.read("match.png")
+        key.put(x)
+        
+        emit{"URL" => url, "png_location"=> "s3://#{$s3bucket}/#{Date.today.to_s}/#{truncate_url[0][0]}.png"} # write url to the site
 
-    if html.include?('stripe.com')
-      if not html.scan($regex).empty?
+        STDERR.puts "file saved in s3"
 
-        # in order to name our .png files
-        domain_regex = /http:\/\/w{3}?(\w*)/
-        truncate_url = url.scan(domain_regex)
+        cleanup = `rm match.png`
 
-        if `casperjs screenshot.js #{url}` # use external casperjs file to take screenshot
-          STDERR.puts "screenshot taken" # I use STDERR to write to the logs.
+        STDERR.puts "file deleted from cluster"
+      else
+        STDERR.puts "screenshot not taken"
 
-          key = RightAws::S3::Key.create($bucket1, "#{Date.today.to_s}/#{truncate_url[0][0]}.png") 
-
-          x = File.read("match.png")
-          key.put(x)
-          
-          emit("stripe_tos", "URL" => url, "png_location"=> "s3://#{$s3bucket}/#{Date.today.to_s}/#{truncate_url[0][0]}.png") # write url to the site
-
-          STDERR.puts "file saved in s3"
-
-          cleanup = `rm match.png`
-
-          STDERR.puts "file deleted from cluster"
-        else
-          STDERR.puts "screenshot not taken"
-
-        end
       end
     end
   end
-
+  
+  
+stream.sink do 
+  name "tos"
+  column "url", :string
+  column "png_location", :string
 end
 ```
 

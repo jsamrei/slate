@@ -30,6 +30,9 @@ app = Zillabyte.app "tos"
 input = app.source "select * from web_pages"
   
 stream = input.each do |tuple|
+
+  html = tuple['html']
+  url = tuple['url']
   if html.include?("js.payment.processor.com")
     if not html.scan($regex).empty?
 

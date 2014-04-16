@@ -46,14 +46,14 @@ app = Zillabyte.app "zillabyte_indeed"
 
 # We start by outputting the URLs from which we wish to extract information.
 # This has been simplified considerably to only deal one page and one search term.
-app.source do
+input = app.source do
   next_tuple do
     emit :url => "http://www.indeed.com/jobs/?q=web+crawling"
   end
 end
 
 # Next, we process each URL by interpreting it as an RDF graph.
-app.each do
+stream = input.each do
   name "each_job_posting"
   execute do |tup|
     # We wrap the entire app in a begin-rescue block, so that for unexpected exceptions we do not break our app
@@ -104,7 +104,7 @@ app.each do
 end
 
 # The last step, as always, is to sink our newly extracted information to the database for later analysis.
-app.sink do
+stream.sink do
   name "indeed_job_posting"
 
   column "address_locality", :string

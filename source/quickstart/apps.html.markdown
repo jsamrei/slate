@@ -9,7 +9,7 @@ title: Apps
 ```ruby
 require 'zillabyte'
 
-app = Zillabyte.new "my_app"
+app = Zillabyte.app "my_app"
 ```
 
 The name of your application (`"my_app"`) identifies your application across our infrastructure. 

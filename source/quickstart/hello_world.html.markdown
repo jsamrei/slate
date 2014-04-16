@@ -20,7 +20,7 @@ The entire code for the hello world data app follows:
 ```ruby
 require 'zillabyte' 
 
-Zillabyte.app("multi_stream")
+Zillabyte.app("app_name")
   .source("select url,html from web_pages")
   .each{ |page|
     emit {:url => page['url']} if page['html'].include? "hello world"

@@ -4,7 +4,7 @@ title: Apps
 
 # Apps
 
-## Create a zillabyte application
+## Create a Zillabyte application
 
 ```ruby
 require 'zillabyte'
@@ -14,28 +14,32 @@ app = Zillabyte.new "my_app"
 
 The name of your application (`"my_app"`) identifies your application across our infrastructure. 
 
-## Parts of an app: Source, Each, and Sink
 
-Each application has three primary components: `source`, `each`, and `sink` (described in more detail below). These are connected via a `stream`, which is just the flow of data between these components. A component may emit one or more `stream`s. Zillabyte supports two syntax variants for building apps using data streams: (1) The simpler syntax which should be sufficient for most common use cases and (2) an expanded syntax for advanced functionality.
+Zillabyte supports two syntax variants for building apps using data streams: (1) A simple syntax which should be sufficient for most common use cases and (2) an expanded syntax for advanced functionality. The following goes through the first then the second. 
+
+## Parts of an app: `Source`, `Each`, and `Sink`
+
+Each application has three primary components: `source`, `each`, and `sink` (described in more detail below). These are connected via a stream, which is the flow of data between these components. A component may emit one or more streams. 
 
 ## Source 
 
-A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use `relation`s. The `source` method takes in a single sql string, producing a `stream` object.
+A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
 
 ```ruby
-result_stream = app.source "select url,html from web_pages"
+result_stream = app.source "select url,html from 
+  web_pages"
 ```
 
-In this case, the `source` pulls rows from the public relation `web_pages`, with the columns `url` and `html`. The resulting `stream` object can then be used to define the next component.
+In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next component.
 
 ## Each
 
-The `each` block can be thought of as a Ruby `map` that runs across multiple machines. Rows of the stream are distributed across the systems. The result of the each is another `stream` object that will contain the emitted rows. The input argument `tuple` contains a single row, stored as a Ruby hash.
-
+The `each` block can be thought of as a Ruby map operation that runs across multiple machines. Rows of the stream are distributed across the systems and processed. The result of the `each` is another stream object that will contain the emitted rows. The input argument `tuple` contains a single row, stored as a Ruby hash.
 
 ```ruby
 stream = result_stream.each do |tuple|
-  emit :url => tuple['url'] if tuple['html'].include? "hello_world"
+  emit :url => tuple['url'] if tuple['html'].include? 
+  "hello_world"
 end
 ```
 
@@ -49,10 +53,9 @@ stream = result_stream.each{ |tuple|
 }
 ```
 
-
 ## Sink
 
-The sink is a passive component that only defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
+The `sink` is a passive component that defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
 
 ```ruby
 .sink do
@@ -65,13 +68,13 @@ The sink does not have an expanded syntax.
 
 ## Expanded Syntax
 
-This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple `stream`s of data. This is useful when each `stream` has a different set of fields. This is currently applicable only to the `source` and `each` components. A component supplies a list of stream names to the `emits` method to define multiple streams. 
+This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple streams of data. This is useful when each stream has a different set of fields. This is currently applicable only to the `source` and `each` components. A component supplies a list of stream names to the `emits` method to define multiple streams. 
 
 ```ruby
 emits "stream_1", "stream_2"
 ```
 
-For components that use the `emits` method, there is now an additional requirement. Each  emitted row must explictly name one of the streams to emit to: 
+For components that use the `emits` method, there is now an additional requirement. Each emitted row must explictly name one of the streams to emit to: 
 
 ```ruby
    emit 'stream_1', :foo => 'hi'
@@ -80,9 +83,9 @@ For components that use the `emits` method, there is now an additional requireme
 
 ### Source
 
-`source`s can also use data outside of Zillabyte `relation`s. Any external data availabe on the web can be streamed into a Zillabyte app. To do so, we use the expanded syntax of a `source`. 
+A `source` can also use data outside of Zillabyte relations. Any external data available on the web can be streamed into a Zillabyte app. To do so, we use the expanded syntax of a `source`. 
 
-Note: We expect that the next_tuple call only emits a few rows at a time, although this is not enforced. For tasks that would take longer than a second, consider using `each`s to perform the same task.
+Note: We expect that the next_tuple call only emits a few rows at a time, although this is not enforced. For tasks that would take longer than a second, consider using `each` to perform the same task.
 
 #### Single Stream
 
@@ -92,7 +95,8 @@ stream = app.source do
   begin_cycle do
     # Initialize the data and any local variables here
     @count = 0
-    @rows = fetch_rows_from_external_source # eg: csv/xml/rss
+    @rows = fetch_rows_from_external_source 
+    # eg: csv/xml/rss
   end
   next_tuple do
     #Emit the next tuple 
@@ -123,7 +127,7 @@ end
 
 #### Single Stream
 
-This is semantically equal to the simpler syntax block above, shown here for completeness. 
+This is semantically equal to the simple syntax block above, shown here for completeness. 
 
 ```ruby
 stream.each do
@@ -160,7 +164,7 @@ end
 
 ### Hello, Goodbye, World: Take One
 
-This example shows the hello world example with a twist. This also executes an extra string search looking for a `'goodbye world'` and storing it in a seperate sink. In this code block, the `each` component emits multiple streams using the expanded syntax.
+This example shows the hello world example with a twist. This also executes an extra string search looking for a `'goodbye world'` and storing it in a separate sink. In this code block, the `each` component emits multiple streams using the expanded syntax.
 
 ![Zillabyte Multiple stream apps: Take 1](/images/Apps-Example1.png)
 

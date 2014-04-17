@@ -27,7 +27,7 @@ stream = input.each do |tuple|
   end
   
   emit {:url => tuple['url'], :score => score}
-
+end
 stream.sink do 
   name "commerce_index"
   column "url", :string

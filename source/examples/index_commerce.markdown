@@ -9,11 +9,12 @@ A Zillabyte customer came to us wanting to rank the web according to the use of 
 ```ruby
 require 'zillabyte'
 
-app = Zillabyte.new "commerce_index_"
+app = Zillabyte.app "commerce_index"
 
-input = app.source "select url,html from web_pages"
+input = app.source "select * from web_pages"
   
-stream = input.each do |tuple| 
+stream = input.each do |tuple|
+  html = tuple['html']
   score = 0
   if html.include?('bluekai.com')
     score += 0.7
@@ -26,7 +27,7 @@ stream = input.each do |tuple|
   end
   
   emit {:url => tuple['url'], :score => score}
-
+end
 stream.sink do 
   name "commerce_index"
   column "url", :string

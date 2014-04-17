@@ -51,7 +51,7 @@ unique_links = links.unique()
 
 # Count the number of unique 'target_domain's.  By default, this will create a
 # new field called 'count' and throw away all 'source_domain' values
-unique_links.count :target_domain
+web_stream = unique_links.count :target_domain
 
 
 # Final step, we need to sink the data into Zillabyte.  Sunk data is persistent

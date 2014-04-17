@@ -24,7 +24,8 @@ app = Zillabyte.app("shopify")
 input = app.source "select * from web_pages"
 
 stream = input.each do |tuple|
-
+  html = tuple['html']
+  url = tuple['url']
   # look for pages that are built on shopify.  
   if html.scan('myshopify.com') or html.scan('shopify.shop') or html.scan('shopify.theme') 
 

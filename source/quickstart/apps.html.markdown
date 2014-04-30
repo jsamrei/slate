@@ -127,11 +127,14 @@ end
 
 #### Single Stream
 
-This is semantically equal to the simple syntax block above, shown here for completeness. 
+This is semantically equal to the simple syntax block above, shown here for completeness. The syntax allows for additional functions `name` and `prepare`. 
 
 ```ruby
 stream.each do
   name "component_name" #Optional
+  prepare do # Optional
+   # Initialization step that happens once per component
+  end
   execute do |tuple|
     # Do something with tuple
     emit {:column => "value"}
@@ -147,6 +150,9 @@ A common use case is to generate multiple streams from a single computation. For
 has_hello_world_stream, links_stream = stream.each do
   name "component_name" #Optional
   emits "has_hello_world", "links"
+  prepare do # Optional
+   # Initialization step that happens once per component
+  end
   execute do |tuple|
     # Do something with tuple
     emit "has_hello_world", {:url => tuple['url']} if tuple['html'].include? "hello world"

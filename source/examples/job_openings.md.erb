@@ -1,0 +1,38 @@
+# How To: Find Job Invites on the Web
+
+One of Zillabyte's core principles is its flexibility.  Many websites expose information using RDF (Research Description Framework), a core component of W3C's semantic web stack.  This example demonstrates how one might process job openings on Indeed using a combination of Zillabyte's native features and its support for third-party gems.
+
+### Use case
+This use case actually grew out of something we are interested in here ate Zillabyte--namely, which companies are hiring full-time developers to perform large-scale data extraction and analysis tasks?  There are many aggregate job sites on the web, but this example just focuses on Indeed.
+
+As mentioned above, Indeed uses RDF.  This is easy to determine by analyzing the source code of a search results page:
+
+```html
+<div class="row " id="p_c2c36f4266233baf" itemscope itemtype="http://schema.org/JobPosting">
+```
+
+The use of itemtype in particular is generally a strong clue that a site is using RDF.   Sites that use RDF encode semantic information alongside regular HTML tags describing relationships between entities on the page (or potentially across a larger scope).  As such, they are particularly well-suited to automated extraction and analysis.
+
+RDF sports a formidable set of specifications (you may read them [[http://www.w3.org/RDF/ here]]).  Fortunately, many of its features have been implemented in third-party Ruby gems, including:
+
+*   rdf-rdfa
+*   sparql
+*   and of course Ruby's own RDF module (part of its standard library).
+
+This article is not intended as an introduction to RDF, but as an example of how powerful Zillabyte can be when combined with a set of rbobust third-party libraries.  Without further ado, here is a core snippet of the code we use to parse Indeed:
+
+```ruby
+<%= link_file("example_repo/job_openings/app.rb") %>
+
+```
+
+### Push it to our servers
+
+```bash
+$ zillabyte push
+```
+
+### Now your algorithm is being processed with our infrastructure!
+
+
+With a few tweaks, you can use this code to extract semantic information from any page exposing information through RDF.

@@ -19,53 +19,41 @@ Let's look at the complete code ([Github Link](https://github.com/zillabyte/exam
 
 ```
 
-
 ## What's Going On? 
 
-The above code conforms to the [pipe programming paradigm](). This allows Zillabyte to parallelize the algorithm so we can get results in seconds, not days.  
+The above code conforms to the pipe programming paradigm. This allows Zillabyte to parallelize the algorithm so we can get results in seconds, not days.  
 
 The above code is broken into four parts: (a) a source, (b) a uniquer, (c) a counter, and finally (d) a sink.  Let's look at each on in detail. 
 
 ### The Source
 
-All data in a app must originate from a "source".  In this particular case, we need to tell Zillabyte what kind of data to source from.  
+All data in a app must originate from a `source`.  In this particular case, we need to tell Zillabyte what kind of data to source from.  
 
 #### Matches and Emitting Data
 
-A source consumes data from Zillabyte, processes it, and then passes new data to the rest of the app.  Observe the following lines: 
+A source consumes data from Zillabyte, processes it, and then passes new data to the rest of the app.  
+
+#### The Heart of the ranking
+
+The next component is the `each`.  This is the block of code that actually runs on every web page. 
 
 ```ruby
-h.matches "select * from web_pages"  
-h.emits [:source_domain, :target_domain]  
-```
 
-The first line instructs Zillabyte to feed your source all of the records in the `web_pages` corpus.  The `web_pages` corpus is a pre-crawled copy of the web and contains two main fields: `url` and `html`.  This is familiar SQL syntax, and later we'll examine how we can use this to pre-process our app and expedite processing time.
-
-The second line tells the system what kind of data this source will emit. The fields you define here must match the `emit` functions below. 
-
-#### The Heart of the Source 
-
-The final component to the source is the `execute` section.  This is the block of code that actually runs on every web page. 
-
-```ruby
-h.execute do |tuple, controller|
-  
+links = stream.each do |tuple|  
+  # This is called on every web page
   base_url = tuple['url']
   html = tuple['html']
   doc = Nokogiri::HTML(html)
   
   doc.css('a').each do |link| 
-    
     # What domain does this item link to? 
     target_uri = URI.join( base_url, link['href'])
     target_domain = target_uri.host.downcase
     
-    # Emit this back to the app.  This is important because it will allow
+    # Emit this to a stream.  This is important because it will allow
     # Zillabyte to parallelize the operation
-    controller.emit :source_domain => source_domain, :target_domain => target_domain
-    
+    emit :source_domain => source_domain, :target_domain => target_domain
   end
-  
 end
 ```
 
@@ -75,7 +63,7 @@ The above code does the following: (a) extract the links from a web page, then (
 
 As data emits from the source, we want to make sure we avoid duplication.  That is, we want to make sure a target domain only gets one point for every source domain.  Because the source can be parallelized, it makes sense to handle this logic after the source.  The following line should do the trick:
 
-```
+```ruby
 stream.unique()
 ```
 
@@ -93,7 +81,7 @@ The above will group by the field `target_domain` and add a new field called `co
 
 #### The Sink
 
-All flows must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
+All apps must come to an end.  A sink allows our new data to return to persistent storage inside Zillabyte.  This data can be downloaded later via the Zillabyte CLI.  
 
 ```ruby
 web_stream.sink do |h|
@@ -103,7 +91,7 @@ web_stream.sink do |h|
 end
 ```
 
-When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called "domain\_rank".  This relation contains two columns, "domain" and "score".  Order is important here, the first field corresponds to the first field in our stream, "target\_domain", and the second column corresponds to "count". 
+When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called `domain_rank`.  This relation contains two columns, `domain` and `score`.  Order is important here, the first field corresponds to the first field in our stream, `target_domain`, and the second column corresponds to `count`. 
 
 
 ## Conclusion & Next Steps 

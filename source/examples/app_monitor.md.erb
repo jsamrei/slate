@@ -58,9 +58,9 @@ end
 
 ```
 
-This is a fairly elaborate flow with three main components. Lets dissect and discuss piece by piece. 
+This is a fairly elaborate app with three main components. Lets dissect and discuss piece by piece. 
 
-### The Spout
+### The Source
 
 A source is responsible for sourcing all data in the flow.  In this case, the source is responsible for identifying all the App Store URLs to crawl.  The following accomplishes this and emits all URLs to the next operation. 
 

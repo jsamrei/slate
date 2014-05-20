@@ -1,4 +1,4 @@
-#!/user/bin/env ruby
+#!/usr/bin/env ruby
 puts "Building Documentation using Middleman..."
 build = system('middleman build')
 

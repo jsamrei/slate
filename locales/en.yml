@@ -2,23 +2,25 @@
 en:
   # home page
   index:
-    sub_title: An API for searching and processing the web
-    headline: An API for searching and processing the web
-
+    sub_title: Empowering developers to build data applications
+    headline: Empowering developers to build data applications
   # navigations
   quickstart:
     title: Quickstart
-    getting_started: Getting Started
+    getting_started: Hello, World!
     faq: FAQ
-    installation: How to Install
+    installation: Installation
+    apps: Apps
+    tutorial: Tutorial
 
   examples:
     title: Examples
     index_commerce: Commerce Index
     domain_rank: Domain Rank
-    job_openings: Job Openings
+    job_openings: Job Aggregation
     app_monitor: App Store Analysis
     market_coverage: Market Coverage in San Francisco
+    tos: Terms of Service Monitoring
 
 
   documentation:

@@ -42,3 +42,6 @@ end
 ::Middleman::Extensions.register(:code_linker, CodeLinker)
 
 activate :code_linker
+activate :google_analytics do |ga|
+  ga.tracking_id = 'UA-51025679-3'
+end

@@ -60,8 +60,9 @@
 
 
 .grid {
-  @include span-columns(20);
+  @include span-columns(24);
   @include pie-clearfix;
+
   .toc-block {
     @include span-columns(4,12);
     @include nth-omega(3n);

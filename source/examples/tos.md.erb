@@ -1,0 +1,37 @@
+# How To: Terms of Service Monitoring
+
+A Zillabyte customer asked us to find all the companies that use their payment processor service but violate the terms of their service. For legal reasons, it is required that a screenshot of each site matching the query.  Here's how we did it.
+
+### Identifying companies powered by a payment processor
+
+Payment processers conveniently have a unique signal in the form of a javascript widget. In this example, the tag is: `"js.payment.processor.com"`.
+
+### Identifying sites that violate TOS
+
+For simplicity's sake, we search for specific keywords that would violate the TOS. In our example we'll use the list of words: `['illegal','contraband','nefarious']`.  A more advanced search, which is possible through Zillabyte is to include a dictionary of words, or an algorithm with a set of rules to define violators.
+
+### Getting screenshots
+
+[CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  This library was installed on our servers for this functionality.  We wrote an external casperJS file, called "screenshot.js" to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
+
+### Downloading the screenshot files
+
+In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Using an external gem like rightAWS makes this easy.
+
+
+
+### The Code
+```ruby
+<%= link_file("example_repo/tos/app.rb") %>
+
+```
+
+### Push it to our servers
+
+```bash
+$ zillabyte push
+```
+
+### Now your algorithm is being processed with our infrastructure!
+
+Once we support Javascript, all of the above can be easily written in Javascript. 

@@ -2,8 +2,8 @@
 en:
   # home page
   index:
-    sub_title: Empowering developers to build data applications
-    headline: Empowering developers to build data applications
+    sub_title: an AWS solution for processing big datasets 
+    headline: an AWS solution for processing big datasets
   # navigations
   quickstart:
     title: Quickstart

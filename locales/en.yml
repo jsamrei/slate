@@ -2,8 +2,8 @@
 en:
   # home page
   index:
-    sub_title: an AWS solution for processing big datasets 
-    headline: an AWS solution for processing big datasets
+    sub_title: An API for analyzing the world's information 
+    headline: An API for analyzing the world's information
   # navigations
   quickstart:
     title: Quickstart

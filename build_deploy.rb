@@ -1,6 +1,18 @@
 #!/usr/bin/env ruby
+
+#### MAKES SURE LATEST CHANGES ARE ON GITHUB
+if system("git diff --quiet --exit-code HEAD") != 0
+  puts "It looks like you have uncommitted changes... exiting"
+  exit(1)
+end
+puts "PUSHING CHANGES UP..."
+sleep(3)
+system("git push origin")
+
+
+
 puts "Building Documentation using Middleman..."
-build = system('middleman build')
+build = system('bundle exec middleman build')
 
 if build
 	puts "Pushing Documentation to S3 => s3://docs.zillabyte.com"

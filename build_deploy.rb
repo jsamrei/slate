@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 #### MAKES SURE LATEST CHANGES ARE ON GITHUB
-if system("git diff --exit-code HEAD") != 0
+if system("git diff --exit-code --quiet HEAD") == false
   puts "It looks like you have uncommitted changes... exiting"
   exit(1)
 end

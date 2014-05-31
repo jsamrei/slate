@@ -1,0 +1,63 @@
+# How To: Analyzing Website Metadata 
+
+
+A Zillabyte customer interested in SEO asked if were possible to analyze the various metadata keywords utilized on the web. Here is how you can extract web metadata using Zillabyte.
+
+
+### Extracting Web Metadata
+
+To extract HTML metadata, we must first look at the structure of an arbitrary webpage.
+
+```html
+<html>
+  <head>
+    <meta name="keywords" content="foo, bar, baz ">
+  </head>
+  <body>
+    Visible web page content here
+  </body>
+</html>
+```
+
+Web page headers contain various metadata components that allow search engines to understand the subject matter of the website.
+
+Using Zillabyte, valuable insights can be extracted from this information. To extract keyword metadata, a web scraping library such as Nokogiri can be used to extract meta data from each web page.
+
+The metadata extraction code is listed below
+
+```ruby
+<%= link_file("../examples/web_metadata/app.rb") %>
+
+```
+
+
+#### Testing your application
+
+To ensure that your application is working as intended, you can test it on a small dataset. Within the application directory, simply call:
+
+```bash
+$ zillabyte test
+```
+
+This will run sample data through your application and show their results.
+
+```
++-------------------------------------------------+
+|                  web_keywords                   |
++------------------------+------------------------+
+| url                    | keywords               |
++-------------------------------------------------+
+| www.foo.com/           | foo, bar, baz          |
++------------------------|------------------------+
+```
+
+### Push it to our servers
+
+To analyze the entire web, simply push to the Zillabyte servers.
+
+```bash
+$ zillabyte push
+```
+
+
+

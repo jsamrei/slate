@@ -1,0 +1,59 @@
+# How To: Build a breadth-first crawler
+
+A web crawler is a long running task that fetches links from pages, and proceeds to fetch each of those links. We will build such a crawler seeded from our public dataset of a few  million domain names. The entire code to run such an example is available on our [GitHub examples](https://github.com/zillabyte/examples/tree/master/python_crawler) repository. 
+
+The gist of the entire crawler looks something like this:
+
+```python
+app = zillabyte.app(name="python_crawler")
+
+#Create a stream from all the domains we have
+domains           = app.source(matches="select * from domains")
+
+# For each homepage of the domain, fetch all the links
+inner_links       = domains.each(execute=execute_find_links)
+
+# For each link, fetch the page
+first_level_pages = inner_links.each(execute=execute_crawl)
+
+# Finally, save these pages 
+first_level_pages.sink(name="domain_pages", columns=[{"domain":"string"}, {"url":"string"}, {"html":"string"}])
+```
+
+And you're done! 
+
+Well, almost. Let's look into some of the key details for the implementation.
+
+## Fetching html for a url
+
+This uses the `urllib2` from the Python standard library, and ensures that we recover from server exceptions. 
+
+```python
+def open_url(url):
+  try:
+    page = urllib2.urlopen(url).read()
+  except:
+    page = None
+  return page
+```
+
+## Fetch links from a page
+
+Again, for this task, we'll lean on the `BeautifulSoup` library that takes raw HTML and converts that to a more usable DOM (Document Object Model) tree. This two lines get us all the linkes in a webpage: 
+
+```python
+soup = BeautifulSoup(page)
+links = soup.findAll('a', href=True)
+```
+
+For our crawler, we want to make sure that we only crawl within a domain, not external links. We can filter the links we have with this one line:
+
+```python
+same_domain_links = filter(lambda link: domain in str(link["href"]), links)
+```
+
+## Summary
+
+This Zillabyte app is a full breadth-first crawler that executes in parallel across our multi-node cluster. The total line count for this app is less 50 lines of code, and the only thing to execute this is to `zillabyte push`. Let's go crawling
+
+

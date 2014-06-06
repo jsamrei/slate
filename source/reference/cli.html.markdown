@@ -4,7 +4,7 @@ title: CLI Reference
 
 ## zillabyte CLI
 
-The command line interface is the primary you to interact with our infrastructure. Access these commands by typing `zillabyte COMMAND`. The help command is an easy way to refer to this the documentation on this page.
+The command line interface (CLI) is the primary way to interact with the Zillabyte infrastructure.  Details of each command can be viewed by running `zillabyte COMMAND --help`.  The standalone `help` command is also a quick way to see the available commands.
 
   ``` bash
   $ zillabyte help

@@ -28,6 +28,20 @@ configure :build do
   activate :minify_javascript
 end
 
+class CodeLinker < Middleman::Extension
+    def initialize(app, options_hash={}, &block)
+      super
+    end
+
+    helpers do 
+      def link_file(path)
+          out = File.open(path) { |f| f.read}  
+      end
+    end
+end
+::Middleman::Extensions.register(:code_linker, CodeLinker)
+
+activate :code_linker
 activate :google_analytics do |ga|
   ga.tracking_id = 'UA-51025679-3'
 end

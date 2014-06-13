@@ -4,7 +4,7 @@ title: Hello, World!
 
 # Hello, World!
 
-Zillabyte makes it easy to build data applications that scale. This page demonstrates the simple steps to search for occurences of 'hello world' in our corpus of web pages. To reproduce these commands on your machine, make sure you follow the steps on the [installation](/installation) page.
+Zillabyte makes it easy to build data applications that scale. This page demonstrates the simple steps to search for occurences of 'hello world' in our corpus of web pages. To reproduce these commands on your machine, make sure you follow the steps on the [installation](/quickstart/installation) page.
 
 ## Initialize your app
 

@@ -8,7 +8,7 @@ Our goal in this exercise is to count the number of domains that point to other 
 
 ## Analyzing the Web with Zillabyte
 
-Zillabyte makes this task a breeze.  Zillabyte handles crawling the web and running your algorithm; all you need to do is craft your algorithm in a way that Zillabyte can understand.  This is known as the [Pipe Programming Paradigm](), and it is what allows Zillabyte parallelize your code and process billions of records in short order. 
+Zillabyte makes this task a breeze.  Zillabyte handles crawling the web and running your algorithm; all you need to do is craft your algorithm in a way that Zillabyte can understand.  This is known as the [Pipe Programming Paradigm](http://blog.zillabyte.com/2014/05/14/the-pipe-programming-paradigm/), and it is what allows Zillabyte parallelize your code and process billions of records in short order. 
 
 Let's look at the complete code ([Github Link](https://github.com/zillabyte/examples/tree/master/domain_rank)):
 
@@ -144,4 +144,4 @@ When we sink data, we need to give Zillabyte some meta information about the dat
 
 The above example shows how quickly you can analyze large chunks of the world's information.  In less than 50 lines of code, we were able to understand the popularity distribution of domains across the internet.  
 
-To see the output & practical implications of this analysis, please check out the corresponding blog post: [The Long Tail of the Web]()
+To see the output & practical implications of this analysis, please check out the corresponding blog post: [The Long Tail of the Web](http://blog.zillabyte.com/2014/03/13/the-long-tail-of-the-web/)

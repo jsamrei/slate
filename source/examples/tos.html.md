@@ -12,7 +12,7 @@ For simplicity's sake, we search for specific keywords that would violate the TO
 
 ### Getting screenshots
 
-[CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  This library was installed on our servers for this functionality.  We wrote an external casperJS file, called "screenshot.js" to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
+[CasperJS](http://casperjs.org) is a great scripting & testing utility, written in Javascript.  This library was installed on our servers for this functionality.  We wrote an external casperJS file, called "screenshot.js" to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
 
 ### Downloading the screenshot files
 

@@ -20,7 +20,7 @@ To begin, run `zillabyte help` to see the list of available commands that you ca
 
 ## What data is available for me to use in a Zillabyte App?
 
-We are making some useful datasets publicly accessible for you to quickly get started. The first ones we are providing are `domains` and `web_pages`. The `domains` dataset contains the urls of various domains found on the web, and the `web_pages` dataset contains the urls of various domains along with their corresponding html.
+We are making some useful datasets publicly accessible for you to quickly get started. The first ones we are providing are `domains` and `web_pages`. The `domains` dataset contains more than 50 million domains. The `web_pages` dataset contains a sample of a deep web crawl, consisting for more than 5 million urls, with ther html content.
 
 In addition, you can upload your own datasets into Zillabyte, for traditional data processing sped up by Zillabyte.
 
@@ -28,7 +28,7 @@ In addition, you can upload your own datasets into Zillabyte, for traditional da
 
 ### Web data
 
-Web data already exists in relations for your app to source. See the [hello_world](/quickstart/hello_world) example for an explanation of sourcing from the `web_pages` relation.
+A sample of web date already exists in relations for your app to source. See the [hello_world](/quickstart/hello_world) example for an explanation of sourcing from the `web_pages` relation.
 
 ### Static data
 

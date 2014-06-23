@@ -16,15 +16,16 @@ puts "Building Documentation using Middleman..."
 build = system('bundle exec middleman build')
 
 if build
-	puts "Pushing Documentation to S3 => s3://docs.zillabyte.com"
-	push_s3 = system("cd ./build && s3cmd put -P --recursive ./ s3://docs.zillabyte.com")
+  puts "Pushing Documentation to S3 => s3://docs.zillabyte.com"
+  push_s3 = system("cd ./build && s3cmd put -P --recursive ./ s3://docs.zillabyte.com")
 else
-	"[FAIL] Middleman build failed"
+  "[FAIL] Middleman build failed"
 end
 
 if push_s3
-	puts "Pushed to S3 successfully."
-        Zillabyte::Hipchat.room.send('docs', "Documentation was updated.", :message_format => "text", :color=> 'green')        
+  git_branch = `git rev-parse --abbrev-ref HEAD`
+  puts "Pushed to S3 successfully from #{git_branch.chomp}."
+  Zillabyte::Hipchat.room.send('docs', "Documentation was pushed from branch #{git_branch.chomp}.", :message_format => "text", :color=> 'green')        
 else
-	puts "[FAIL] Failed to push build to S3."
+  puts "[FAIL] Failed to push build to S3."
 end

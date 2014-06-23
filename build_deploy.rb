@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require_relative '../common/ruby/hepchat.rb'
 
 #### MAKES SURE LATEST CHANGES ARE ON GITHUB
 if system("git diff --exit-code --quiet HEAD") == false
@@ -22,7 +23,8 @@ else
 end
 
 if push_s3
-		puts "Pushed to S3 successfully."
+	puts "Pushed to S3 successfully."
+        Zillabyte::Hipchat.room.send('docs', "Documentation was updated.", :message_format => "text", :color=> 'green')        
 else
 	puts "[FAIL] Failed to push build to S3."
 end

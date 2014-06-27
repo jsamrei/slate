@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../common/ruby/hepchat.rb'
+require_relative '../common/ruby/hepchat'
 
 #### MAKES SURE LATEST CHANGES ARE ON GITHUB
 if system("git diff --exit-code --quiet HEAD") == false

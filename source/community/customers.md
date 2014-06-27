@@ -1,3 +1,0 @@
-# Customers
-
-Coming soon...

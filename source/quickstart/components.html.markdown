@@ -68,20 +68,13 @@ In a similar manner to component inputs, we declare the component output schema 
 ## Testing your component
 
   The `zillabyte test` command can be run within your component directory to allow you to interactively test your component. 
-  
+
 ## Running your component
 
   To run your component, simply push it to Zillabyte. The command is able to accept RPC calls with individual queries or be intgegrated within other components or applications. Refer to the git/flow management tutorial and CLI reference for instruction as to how to push and manage your component.
 
-## Component Remote Procedure Calls
 
-  Once you have pushed your component to Zillabyte, you can make on demand queries to your component:
-
-  ``` bash
-    $ zillabyte components:rpc [ID] [QUERY_1_INPUTS] [QUERY_2_INPUTS] ...
-  ```
-
-  This component accepts the ID of the component in order to specify which component should be queried. To determine your component ID, use the 'zillabyte components' command to see your component status and view its ID.
+  To view your components:
 
   ``` bash
     $ zillabyte components
@@ -99,16 +92,15 @@ In a similar manner to component inputs, we declare the component output schema 
 
   ```
 
-  In this case, our 'prefix_filter' component has been assigned the ID 13. Now to query the component, run:
+## Component Remote Procedure Calls
 
+  Once you have pushed your component to Zillabyte, you can make on demand queries to your component:
 
   ``` bash
-    $ zillabyte components:rpc 13 ["http://www.zillabyte.com"] 
+    $ zillabyte components:rpc 'prefix_filter' "http://www.zillabyte.com"
   ```
   
-
   This command will yield an execution ID of the ongoing request to the component. For this example the returned run_id is 27
-
 
   For complex components, the results may not be immediate, and thus the status of the component RPC call can be queried:
 
@@ -117,7 +109,6 @@ In a similar manner to component inputs, we declare the component output schema 
   ``` 
 
   Once the tuple has been fully processed by the component, the results will be displayed upon this call.
-
 
 
 ## Nested Components

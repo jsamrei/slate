@@ -2,8 +2,8 @@
 en:
   # home page
   index:
-    sub_title: An API for analyzing the world's information 
-    headline: An API for analyzing the world's information
+    sub_title: A cloud platform for data analysis 
+    headline: A cloud platform for data analysis
   # navigations
   quickstart:
     title: Quickstart

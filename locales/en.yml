@@ -11,6 +11,7 @@ en:
     faq: FAQ
     installation: Installation
     apps: Apps
+    components: Components
     tutorial: Tutorial
 
   examples:
@@ -30,10 +31,13 @@ en:
     documentation: Official Documentation
     pipe: The Pipe Programming Paradigm
 
-  reference:
-    title: Reference
-    cli: Command Line
-    api: Restful API
+  cli_reference:
+    title: Command Line Interface
+    overview: Overview
+    apps: Apps
+    components: Components
+    queries: Queries
+    relations: Relations
 
 
   community:

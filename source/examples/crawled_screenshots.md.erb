@@ -1,0 +1,122 @@
+# How To: Domain Crawls and Screenshot using Components
+
+A Zillabyte customer specified the need to be able for an on-demand solution for crawling a domain's URLs and generating screenshots of their HTML contents for review on a persistance storage service. Here is how you can accomplish this feat using Components.
+
+
+## High Level Overview
+
+The component will take in a web domain URL, and make successive calls to two other components. These components are hosted in the Zillabyte cloud, and can be called invidually via Remote Procedure Calls or integrated within other applications or components. The results of the calls can be integrated with other components, or, in this case, saved to persistent storage.
+
+
+### Declaring the Component
+
+We can configure the identifiers of the two components we call to point to the components that have been pushed under the user's Zillabyte account. See [Quickstart - Components](/quickstart/components) for an overview of components and how to view the ID of your deployed component. 
+
+```ruby
+require 'zillabyte'
+
+CRAWL_DOMAIN_ID = 666
+SCREENSHOT_ID = 999
+
+comp = Zillabyte.component "web_crawl_screenshots"
+```
+
+
+
+
+### Describing the Input
+
+We first instruct the component to accept a schema that contains the field "domain". Any incoming tuples will be required to contain that field within their schema in order to be accepted.
+
+``` ruby
+# Declare the schema for inputs to the component
+input_stream = comp.inputs do
+  field "domain", :string
+end
+```
+
+
+
+### Crawling a domain
+
+This code calls the "crawl_domain" component to process tuples. Here is a link to the code Git repository. [Link](https://github.com/zillabyte/crawl_domain_component) 
+
+``` ruby
+# Call the 'crawl_domain' component; which will crawl the given incoming 'domain'
+# and every tuple found with the form ("url", "html)
+stream = stream.call_component do
+   component_id CRAWL_DOMAIN_ID 
+end
+```
+
+### Uploading HTML
+
+A simple 'eaches' operation allows you to upload to a datastore such as S3.
+
+``` ruby
+# save it to persistent storage... 
+# The stream now contains HTML... save it to a store such as S3 somewhere... 
+
+stream = stream.each do |tuple|
+  
+  url = tuple[:url]
+  html = tuple[:html]
+  
+  # TODO: save html to of the presistent store of your choice
+  log "saving html for: #{url}"
+  
+  # Emit the URL back to the stream for the screenshot.. 
+  emit :url => url
+end
+```
+
+
+
+### Taking screenshots
+
+We can call a second component on the new stream, which accepts URLs and takes a screenshot of their webpage contents. Here is a link to Git repository. [Link](https://github.com/zillabyte/webpage_screenshot_component)
+
+``` ruby
+# Now call the 'web_screenshot' component, which will take a screenshot
+# on the incoming 'url' field and return the tuple ('url', 'png_image_b64'),
+# where 'png_image_b64' holds the image content bytes"
+stream = stream.call_component do 
+  component_id SCREENSHOT_ID
+end
+```
+
+### Uploading screenshots
+
+We can then save the screenshots in the same manner as the HTML.
+
+``` ruby
+# Now, save the png images to a store such as S3 somewhere... 
+stream = stream.each do |tuple|
+  
+  url = tuple[:url]
+  png_b64 = tuple[:png_image_b64]
+  
+  # TODO This is where you can upload your S3
+  # Emit the url back to the stream, just so the caller knows what we've processed... 
+  emit :url => url 
+  
+end
+```
+
+### Output
+
+We can output from streams for other components or applications to utilize.
+
+``` ruby
+# Output tuples
+screenshot_stream.outputs do
+  field :url, :string
+end
+
+```
+
+With components, user defined functions can be queried with ease. Here is the link to the full example Git repository. [Link](https://github.com/zillabyte/crawled_screenshots_component).
+
+
+
+

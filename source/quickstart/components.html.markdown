@@ -74,6 +74,8 @@ In a similar manner to component inputs, we declare the component output schema 
   To run your component, simply push it to Zillabyte. The command is able to accept RPC calls with individual queries or be intgegrated within other components or applications. Refer to the git/flow management tutorial and CLI reference for instruction as to how to push and manage your component.
 
 
+## Viewing your component
+
   To view your components:
 
   ``` bash

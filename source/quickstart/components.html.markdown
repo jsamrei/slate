@@ -67,8 +67,8 @@ In a similar manner to component inputs, we declare the component output schema 
 
 ## Testing your component
 
-  The `zillabyte test` command can be run within your component directory to allow you to interactively test your component. Refer to the TESTING_LINK page for more a detailed overview of local testing.
-
+  The `zillabyte test` command can be run within your component directory to allow you to interactively test your component. 
+  
 ## Running your component
 
   To run your component, simply push it to Zillabyte. The command is able to accept RPC calls with individual queries or be intgegrated within other components or applications. Refer to the git/flow management tutorial and CLI reference for instruction as to how to push and manage your component.
@@ -124,5 +124,4 @@ In a similar manner to component inputs, we declare the component output schema 
 
 Components can be embedded into other components or even applications. When running RPC calls to an application that has an embedded component, that component is joined into the same execution environment as its parent, allowing for high throughput component execution.
 
-To see an advanced example of embedding components within applications, refer to the CRAWLER SCREENSHOT LINK example.
 

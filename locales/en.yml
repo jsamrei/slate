@@ -23,7 +23,8 @@ en:
     app_monitor: App Store Analysis
     market_coverage: Market Coverage in San Francisco
     tos: Terms of Service Monitoring
-    python_crawler: Python Crawler  
+    python_crawler: Python Crawler
+    crawled_screenshots: Domain Crawling and Screenshots with Components
 
   documentation:
     title: Documentation

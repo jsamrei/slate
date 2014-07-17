@@ -47,15 +47,40 @@ body {
   }
 }
 
+pre,
 code {
-  background-color: #F8F8F8;
-  margin: 2px;
-  padding: 2px;
-  border-radius: 3px;
+  font-family: "Menlo", monospace;
+  -webkit-text-size-adjust: 100%;
 }
 
-pre code {
-  margin: 0px;
-  padding: 2px;
-  display: block;
+code {
+  line-height: 17px;
+  font-size: 15px;
+}
+
+pre {
+  border-left: solid 2px #ccc;
+  padding-left: 18px;
+  margin: 2em 0 2em -20px;
+}
+
+#main_header {
+  overflow: auto;
+  margin: 20px auto 50px auto;
+  
+  .main_logo {
+    @include border-radius(4px);
+    overflow: hidden;
+    display: block;
+    width: 350px;
+    margin: auto;
+  }
+  h1 {
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+    color: #666;
+  }
+  
+  
 }

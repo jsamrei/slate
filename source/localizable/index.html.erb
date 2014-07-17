@@ -2,10 +2,9 @@
 layout: layout
 ---
 
-<header id="hero">
-  
-  <h1><%= link_to image_tag("zillabyte.png", :alt => "Zillabyte"), "http://zillabyte.com", { :class => 'logo' } %></h1>
-  <h2><%= t("index.headline") %></h2>
+<header id="main_header">
+  <%= link_to image_tag("zillabyte.svg", :alt => "Zillabyte"), "http://zillabyte.com", { :class => 'main_logo' } %>
+  <h1><%= t("index.headline") %></h``>
 </header>
 
 <section role="main">
@@ -38,10 +37,6 @@ layout: layout
     </div>
 
     <div class="container">    
-      <h5 class="intro sns">
-        <span><%= link_to 'Get an invite code', 'http://invite.zillabyte.com'%></span>
-        <span><%= link_to 'Sign up', 'http://api.zillabyte.com/accounts/sign_up'%></span>
-      </h5>
 
       <nav class="grid">
         <%= partial 'layouts/nav' %>

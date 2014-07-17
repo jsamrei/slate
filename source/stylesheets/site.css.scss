@@ -14,7 +14,7 @@ $grid-padding   : $gutter-width;
 /*			Settings for Project
 --------------------------------------------------- */
 
-$base-font-size: 14px; // leave the px off
+$base-font-size: 16px; // leave the px off
 $body-line-height: 1.5;
 $default-font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 $display-font-family: 'Questrial', $default-font-family;
@@ -33,10 +33,10 @@ $light-brown: #e1d7be;
 $mid-brown: #957642;
 $dark-brown: #655740;
 
-$navy: #002b36;
+$navy: #4682b4;
 
-$copy-color: $dark-brown;
-$heading-color: $navy;
+$copy-color: #000;
+$heading-color: #000;
 $link-color: $navy;
 
 @import "mixins";

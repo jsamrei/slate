@@ -11,6 +11,11 @@ module GuideHelpers
     title
   end
 
+
+  def h2_link(name)
+    "<h2><a href='##{name.underscore}'>#</a>#{name}</h2>"
+  end
+
   def edit_guide_url
     p = Pathname(current_page.source_file).relative_path_from(Pathname(root))
     "https://github.com/middleman/middleman-guides/blob/master/#{p}"

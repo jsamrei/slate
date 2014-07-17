@@ -9,7 +9,7 @@ Zillabyte makes it easy to build data applications that scale. This page demonst
 ## Initialize your app
 
 ```bash
-$ zillabyte apps:init
+$ zillabyte apps:init hello_world_app
 ```
 Executing this command in an empty folder will place three files. 
  
@@ -44,7 +44,7 @@ $ zillabyte push
 
 When an app is pushed to our service, we run the `each` block of code across our compute cluster. Each row of the results of the `source` query are streamed into them. This simple data app will process the millions of web pages in our corpus looking for the words 'hello world' anywhere in the page. The results are then sinked (saved) to a relation called "has_hello_world". The relation has one column, a url (string). 
 
-## View the results
+## View the results 
 
 ``` bash
 $ zillabyte relations:show hello_world

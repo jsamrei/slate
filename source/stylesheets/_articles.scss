@@ -1,13 +1,35 @@
+.column {
+  margin: auto;
+  width: 900px;
+  position: relative;
+  overflow: visible;
+}
+
+
 #header {
-  background: #ffffff;
-  margin: 0 0 50px 0;
-  color: #5A5F5E;
-  h1 {
-    position: absolute;
-    left: 0;
-    bottom: -38px;
-    // LOGO
+  margin: 0px 0 50px 0;
+  
+  .linkbar {
+    margin: 15px 0 0 0;
+    a {
+      margin-right: 20px;
+    }
   }
+  .sub_header {
+    margin: 20px 0 0 0;
+    overflow: auto;
+    .logo {
+      float: left;
+      width: 300px;
+    }
+    #search {
+      float: right;
+      position: relative;
+      top: 10px;
+    }
+  }
+  
+
   p {
     @include span-columns(10);
     @include push(6);
@@ -41,25 +63,46 @@
   }
 }
 
-#main {
-  @include span-columns(13);
-  @include squish(1,1);
-  h1:first-child {
-    line-height: 1;
-    font-weight: bold;
+article {
+  width: 720px;
+  position: relative;
+  
+  aside {
+    font-size: small;
+    left: 780px;
+    position: absolute;
+    width: 180px;
   }
-  h2,
+  
+  h1 {
+    font-size: 50px;
+    line-height: 1.1;
+    margin-bottom: 0.5em;
+    letter-spacing: -2px;
+
+    white-space: nowrap;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
+  h2 a {
+    color: #ccc;
+    &:visited, &:hover, &:focus, &:active {
+      color: #ccc;
+    }
+    left: -25px;
+    position: absolute;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+    font-weight: bold;  
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+  }
+  
   h3 {
     margin-top: 1em;
   }
-  pre {
-    background: #F8F8F8;
-    padding: 0.5em 1em;
-    margin: 1.5em 0;
-    word-wrap:break-word;
-    @include border-radius(4px);
-    font-size: 12px;
-  }
+
   footer {
     background: #c6bda8;
     padding: 1em 10px;

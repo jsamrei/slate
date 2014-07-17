@@ -13,11 +13,13 @@ module GuideHelpers
 
 
   def h2_link(name)
-    "<h2><a href='##{name.underscore}'>#</a>#{name}</h2>"
+    anchor = name.gsub(/\s/,'_').gsub(/\W/,'').downcase
+    "<h2><a name='#{anchor}' href='##{anchor}'>#</a>#{name}</h2>"
   end
   
   def h3_link(name)
-    "<h3><a href='##{name.underscore}'>#</a>#{name}</h3>"
+    anchor = name.gsub(/\s/,'_').gsub(/\W/,'').downcase
+    "<h3><a name='#{anchor}' href='##{anchor}'>#</a>#{name}</h3>"
   end
 
   def edit_guide_url

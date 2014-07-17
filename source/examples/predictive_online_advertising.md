@@ -1,6 +1,7 @@
----
-How To: Predictive Online Advertising
----
+<h1>
+  <small>HOW TO:</small>
+  Predictive Online Advertising
+</h1>
 
 Getting a benchmark for what other companies spend on marketing can help put your own efforts into perspective.  We boiled down the myriad factors to search for down to three indexes: commerce, social, and security. 
 

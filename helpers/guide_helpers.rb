@@ -15,6 +15,10 @@ module GuideHelpers
   def h2_link(name)
     "<h2><a href='##{name.underscore}'>#</a>#{name}</h2>"
   end
+  
+  def h3_link(name)
+    "<h3><a href='##{name.underscore}'>#</a>#{name}</h3>"
+  end
 
   def edit_guide_url
     p = Pathname(current_page.source_file).relative_path_from(Pathname(root))

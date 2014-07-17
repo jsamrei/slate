@@ -1,14 +1,19 @@
-# How To: Domain Crawls and Screenshot using Components
+<h1>
+  <small>HOW TO:</small>
+  Take Screenshots of the Web
+</h1>
+
+
 
 A Zillabyte customer specified the need to be able for an on-demand solution for crawling a domain's URLs and generating screenshots of their HTML contents for review on a persistance storage service. Here is how you can accomplish this feat using Components.
 
 
-## High Level Overview
+<%= h2_link("High Level Overview") %>
 
 The component will take in a web domain URL, and make successive calls to two other components. These components are hosted in the Zillabyte cloud, and can be called invidually via Remote Procedure Calls or integrated within other applications or components. The results of the calls can be integrated with other components, or, in this case, saved to persistent storage.
 
 
-### Declaring the Component
+<%= h3_link("Declaring the Component") %>
 
 We can configure the identifiers of the two components we call to point to the components that have been pushed under the user's Zillabyte account. See [Quickstart - Components](/quickstart/components) for an overview of components and how to view the ID of your deployed component. 
 
@@ -23,8 +28,7 @@ comp = Zillabyte.component "web_crawl_screenshots"
 
 
 
-
-### Describing the Input
+<%= h3_link("Describing the Input") %>
 
 We first instruct the component to accept a schema that contains the field "domain". Any incoming tuples will be required to contain that field within their schema in order to be accepted.
 
@@ -36,8 +40,7 @@ end
 ```
 
 
-
-### Crawling a domain
+<%= h3_link("Crawling a domain") %>
 
 This code calls the "crawl_domain" component to process tuples. Here is a link to the code Git repository. [Link](https://github.com/zillabyte/crawl_domain_component) 
 
@@ -49,7 +52,7 @@ stream = stream.call_component do
 end
 ```
 
-### Uploading HTML
+<%= h3_link("Uploading HTML") %>
 
 A simple 'eaches' operation allows you to upload to a datastore such as S3.
 
@@ -71,8 +74,7 @@ end
 ```
 
 
-
-### Taking screenshots
+<%= h3_link("Taking screenshots") %>
 
 We can call a second component on the new stream, which accepts URLs and takes a screenshot of their webpage contents. Here is a link to Git repository. [Link](https://github.com/zillabyte/webpage_screenshot_component)
 
@@ -85,7 +87,8 @@ stream = stream.call_component do
 end
 ```
 
-### Uploading screenshots
+
+<%= h3_link("Uploading screenshots") %>
 
 We can then save the screenshots in the same manner as the HTML.
 
@@ -103,7 +106,8 @@ stream = stream.each do |tuple|
 end
 ```
 
-### Output
+
+<%= h2_link("Output") %>
 
 We can output from streams for other components or applications to utilize.
 

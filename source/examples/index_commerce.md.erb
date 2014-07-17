@@ -1,4 +1,7 @@
-# Creating a Commerce Index
+<h1>
+  <small>HOW TO:</small>
+  Create a Commerce Index
+</h1>
 
 Zillabyte aggregates data from the entire web and creates an index based on your criteria. 
 
@@ -10,14 +13,18 @@ A Zillabyte customer came to us wanting to rank the web according to the use of 
 <%= link_file("../examples/index_commerce/app.rb") %>
 ```
 
-
-
-## Push it to our servers
+<%= h2_link("Push to Zillabyte") %>
 
 ```bash
+# in your terminal
 $ zillabyte push
 ```
 
-## Now your algorithm is being processed with our infrastructure!
+<%= h2_link("Download Data") %>
+
+```bash
+# in your terminal
+$ zillabyte data:download commerce_index
+```
 
 

@@ -1,4 +1,7 @@
-# How To: Calculate the popularity of a given domain. 
+<h1>
+  <small>HOW TO:</small>
+  Domain Rank
+</h1>
 
 You've probably heard of Page Rank, the algorithm that made Google what it is today.  The basic idea behind Page Rank is straightforward: analyze all the inbound links for a given page then use it to calculate the relevance of that page. 
 
@@ -6,26 +9,30 @@ Let's take that same concept, but apply it to domains.  That is, we wish to dete
 
 Our goal in this exercise is to count the number of domains that point to other domains.  For example, if "http://foo.com/" points to "http://bar.com", then we should give "bar.com" a score of 1.  Likewise, if "http://foo.com/page_1" and "http://bar.com/page_2" point to "baz.com", then we should give "baz.com" a score of 2. 
 
-## Analyzing the Web with Zillabyte
+
+
+<%= h2_link("Analyzing the Web") %>
 
 Zillabyte makes this task a breeze.  Zillabyte handles crawling the web and running your algorithm; all you need to do is craft your algorithm in a way that Zillabyte can understand.  This is known as the [Pipe Programming Paradigm](http://blog.zillabyte.com/2014/05/14/the-pipe-programming-paradigm/), and it is what allows Zillabyte parallelize your code and process billions of records in short order. 
 
 Let's look at the complete code ([Github Link](https://github.com/zillabyte/examples/tree/master/domain_rank)):
 
-### The Code
+
+<%= h2_link("The Code") %>
 
 ```ruby
 <%= link_file("../examples/domain_rank/app.rb") %>
-
 ```
 
-## What's Going On? 
+
+<%= h2_link("What's Going On?") %>
 
 The above code conforms to the pipe programming paradigm. This allows Zillabyte to parallelize the algorithm so we can get results in seconds, not days.  
 
 The above code is broken into four parts: (a) a source, (b) a uniquer, (c) a counter, and finally (d) a sink.  Let's look at each on in detail. 
 
-### The Source
+
+<%= h2_link("The Source") %>
 
 All data in a app must originate from a `source`.  In this particular case, we need to tell Zillabyte what kind of data to source from.  
 
@@ -33,7 +40,7 @@ All data in a app must originate from a `source`.  In this particular case, we n
 
 A source consumes data from Zillabyte, processes it, and then passes new data to the rest of the app.  
 
-#### The Heart of the ranking
+#### The Heart of the Ranking
 
 The next component is the `each`.  This is the block of code that actually runs on every web page. 
 
@@ -59,7 +66,8 @@ end
 
 The above code does the following: (a) extract the links from a web page, then (b) extract the domain of that link, then (c) emit the domain back to the stream.  Zillabyte allows you to reuse 3rd party libraries.  In this case, we're using [Nokogiri](http://nokogiri.org/) to handle our HTML parsing. 
 
-### The Uniquer
+
+<%= h2_link("The Uniquer") %>
 
 As data emits from the source, we want to make sure we avoid duplication.  That is, we want to make sure a target domain only gets one point for every source domain.  Because the source can be parallelized, it makes sense to handle this logic after the source.  The following line should do the trick:
 
@@ -94,7 +102,7 @@ end
 When we sink data, we need to give Zillabyte some meta information about the data being sunk.  In the above, the sink creates a new relation called `domain_rank`.  This relation contains two columns, `domain` and `score`.  Order is important here, the first field corresponds to the first field in our stream, `target_domain`, and the second column corresponds to `count`. 
 
 
-## Conclusion & Next Steps 
+<%= h2_link("Conclusion & Next Steps ") %>
 
 The above example shows how quickly you can analyze large chunks of the world's information.  In less than 50 lines of code, we were able to understand the popularity distribution of domains across the internet.  
 

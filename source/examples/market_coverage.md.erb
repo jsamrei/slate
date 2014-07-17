@@ -1,31 +1,56 @@
-# How To: Determining Market Coverage of Shopify in San Francisco
+<h1>
+  <small>HOW TO:</small>
+  Determine Market Coverage of Shopify in San Francisco
+</h1>
 
 A Zillabyte customer asked us to find all the Shopify-powered companies in San Francisco. Here's how we did it.
 
-### Identifying Shopify-powered companies
+<%= h2_link("Identifying Shopify-powered companies") %>
 
-We researched Shopify sites, in order to find out what signaled a shopify site. 
 
-We determined, by looking at a few Shopify sites, that the following were likely signals. 
+We researched Shopify sites, in order to find out what signaled a shopify site. We determined, by looking at a few Shopify sites, that the following were likely signals. 
 
+```
 "myshopify.com", "Shopify.shop", "Shopify.theme"
+```
 
-### Identifying San Francisco companies
-
-San Francisco has the following zipcodes:  94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114, 94115, 94116, 94117, 94118, 94121, 94122, 94123, 94124, 94127, 94129, 94130, 94131, 94132, 94133, 94134, 94158.  Interestingly, they all begin with 941, a fact we can take advantage of. 
+<%= h2_link("Identifying San Francisco companies") %>
 
 
-### The Code
+San Francisco has the following zipcodes:  
+
+```
+94102, 94103, 94104, 94105, 94107, 
+94108, 94109, 94110, 94111, 94112, 
+94114, 94115, 94116, 94117, 94118, 
+94121, 94122, 94123, 94124, 94127, 
+94129, 94130, 94131, 94132, 94133, 
+94134, 94158
+```  
+
+Interestingly, they all begin with 941, a fact we can take advantage of. 
+
+
+<%= h2_link("The Code") %>
+
 ```ruby
 <%= link_file("../examples/market_coverage/app.rb") %>
 
 ```
-### Push it to our servers
+
+<%= h2_link("Push to Zillabyte") %>
+
 
 ```bash
 $ zillabyte push
 ```
 
-### Now your algorithm is being processed with our infrastructure!
 
-In the near future, we will be adding a geographic information system data relation, enabling you to easily plot this onto maps!
+
+<%= h2_link("Download Data") %>
+
+```bash
+# in your terminal
+$ zillabyte data:download shopify_SF
+```
+

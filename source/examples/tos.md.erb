@@ -1,36 +1,44 @@
-# How To: Terms of Service Monitoring
+<h1>
+  <small>HOW TO:</small>
+  Terms of Service Monitoring
+</h1>
+
 
 Many web applications have a terms of service (TOS) agreement that they ask their clients to follow.  Detecting clients who break the TOS is often a difficult task.  A recent user of Zillabyte solved this problem by building a data application that can quickly detect violators based on the client's homepage.  In this particular case, the developer is a payment processor and wishes to assert that a given client is not associated with nefarious activity.  To do this, the developer instructs Zillabyte to take a screenshot of the client's homepage after some textual analysis.
 
-### Identifying companies powered by a payment processor
+<%= h2_link("Identifying Candidates") %>
 
 Payment processers conveniently have a unique signal in the form of a javascript widget. In this example, the tag is: `"js.payment.processor.com"`.
 
-### Identifying sites that violate TOS
+<%= h2_link("Identify Violators") %>
+
 
 For simplicity's sake, we search for specific keywords that would violate the TOS. In our example we'll use the list of words: `['illegal','contraband','nefarious']`.  A more advanced search, which is possible through Zillabyte is to include a dictionary of words, or an algorithm with a set of rules to define violators.
 
-### Getting screenshots
+<%= h2_link("Web Screenshot") %>
 
 [CasperJS](casperjs.org) is a great scripting & testing utility, written in Javascript.  This library was installed on our servers for this functionality.  We wrote an external casperJS file, called "screenshot.js" to take screenshots, given an argument of a URL.  Within the simple_app script we used bash calls to run it. 
 
-### Downloading the screenshot files
+
+<%= h2_link("Download Screenshots") %>
 
 In the following, for each screenshot, we saved it to the server, pushed it to an s3 bucket, and deleted it from the server.  Using an external gem like rightAWS makes this easy.
 
 
+<%= h2_link("The Code") %>
 
-### The Code
 ```ruby
 <%= link_file("../examples/tos/app.rb") %>
 
 ```
 
-### Push it to our servers
+<%= h2_link("Push to Zillabyte") %>
 
 ```bash
 $ zillabyte push
 ```
 
-### Now your algorithm is being processed with our infrastructure!
+<%= h2_link("Download Data") %>
+
+Within a few seconds, Zillabyte will start populating taking screenshots and saving files to your s3 bucket.  You can then use any S3 tool to actually retrieve the data.
 

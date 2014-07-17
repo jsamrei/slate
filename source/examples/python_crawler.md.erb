@@ -1,4 +1,8 @@
-# How To: Build a breadth-first crawler
+<h1>
+  <small>HOW TO:</small>
+  Build a Python Crawler
+</h1>
+
 
 A web crawler is a long running task that extracts links from pages, and proceeds to fetch each of those links. We will build such a crawler seeded from our public dataset of a few  million domain names. The entire code to run such an example is available on our [GitHub examples](https://github.com/zillabyte/examples/tree/master/python_crawler) repository. 
 
@@ -8,10 +12,10 @@ The gist of the entire crawler looks something like this:
 app = zillabyte.app(name="python_crawler")
 
 #Create a stream from all the domains we have
-domains           = app.source(matches="select * from domains")
+domains = app.source(matches="select * from domains")
 
 # For each homepage of the domain, fetch all the links
-inner_links       = domains.each(execute=execute_find_links)
+inner_links = domains.each(execute=execute_find_links)
 
 # For each link, fetch the page
 first_level_pages = inner_links.each(execute=execute_crawl)
@@ -20,11 +24,10 @@ first_level_pages = inner_links.each(execute=execute_crawl)
 first_level_pages.sink(name="domain_pages", columns=[{"domain":"string"}, {"url":"string"}, {"html":"string"}])
 ```
 
-And you're done! 
+And you're done! Well, almost. Let's look into some of the key details for the implementation.
 
-Well, almost. Let's look into some of the key details for the implementation.
 
-## Fetching html for a url
+<%= h2_link("Fetching HTML") %>
 
 This uses the `urllib2` from the Python standard library, and ensures that we recover from server exceptions. 
 
@@ -37,7 +40,8 @@ def open_url(url):
   return page
 ```
 
-## Extract links from a page
+
+<%= h2_link("Extract Links") %>
 
 Again, for this task, we'll lean on the `BeautifulSoup` library that takes raw HTML and converts that to a more usable DOM (Document Object Model) tree. This two lines get us all the linkes in a webpage: 
 
@@ -52,7 +56,7 @@ For our crawler, we want to make sure that we only crawl within a domain, not ex
 same_domain_links = filter(lambda link: domain in str(link["href"]), links)
 ```
 
-## Summary
+<%= h2_link("Summary") %>
 
 This Zillabyte app is a full breadth-first crawler that executes in parallel across our multi-node cluster. The total line count for this app is less than 50 lines of code, and the only command needed to execute this is `zillabyte push`. Let's go crawling!
 

@@ -5,8 +5,8 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta content='width=device-width, initial-scale=1.0' name='viewport'>
     
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/googlecode.min.css">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+    <%= stylesheet_link_tag "highlight" %>
+    <%= javascript_include_tag "highlight.pack" %>
     <script>hljs.initHighlightingOnLoad();</script>
     
     <%= stylesheet_link_tag "site" %>
@@ -29,22 +29,18 @@
     <%= yield %>
     
     <footer id="footer">
-      <div class="container">
-        <p class="copyright">
-          &copy; 2014 <a href="http://zillabyte.com">Zillabyte</a>
-        </p>
-      </div>
-      <div class="container">
-        <p class="copyright">
-          <a href="mailto:support@zillabyte.com">Need help? Contact us here!</a>
-        </p>
-      </div>
-      
+      <p class="copyright">
+        &copy; 2014 <a href="http://zillabyte.com">Zillabyte</a>
+        <br/>
+        <a href="mailto:support@zillabyte.com">support@zillabyte.com</a>
+      </p>
     </footer>
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    
+    
     <%= partial 'layouts/tracking' %>
-        
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
@@ -72,5 +68,6 @@
     /* custom configuration goes here (www.olark.com/documentation) */
     olark.identify('2033-640-10-2419');/*]]>*/</script><noscript><a href="https://www.olark.com/site/2033-640-10-2419/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
     <!-- end olark code -->
+    
   </body>
 </html>

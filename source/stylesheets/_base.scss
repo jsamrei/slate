@@ -26,10 +26,55 @@ body {
   word-spacing: 0.3em;
 }
 
-#footer {
-  background-color: #ffffff;
-  padding: 20px 0;
-  margin-top: 30px;
+
+
+pre,
+code {
+  font-family: "Menlo", monospace;
+  -webkit-text-size-adjust: 100%;
+}
+
+code {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+pre {
+  border-left: solid 2px #ccc;
+  padding-left: 18px;
+  margin: 2em 0 2em -20px;
+}
+
+#main_header {
+  margin: 20px auto 50px auto;
+  
+  .main_logo {
+    @include border-radius(4px);
+    overflow: hidden;
+    display: block;
+    width: 350px;
+    margin: auto;
+  }
+  h1 {
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+    color: #666;
+  }
+  
+}
+
+.column {
+  margin: auto;
+  max-width: 900px;
+  position: relative;
+  overflow: visible;
+}
+
+footer {
+  margin: 50px auto 30px auto;
+  padding-bottom: 30px;
+  max-width: 900px;
   p {
     color: #5A5F5E;
     margin: 0;
@@ -47,40 +92,8 @@ body {
   }
 }
 
-pre,
-code {
-  font-family: "Menlo", monospace;
-  -webkit-text-size-adjust: 100%;
-}
 
-code {
-  line-height: 17px;
-  font-size: 15px;
-}
-
-pre {
-  border-left: solid 2px #ccc;
-  padding-left: 18px;
-  margin: 2em 0 2em -20px;
-}
-
-#main_header {
-  overflow: auto;
-  margin: 20px auto 50px auto;
-  
-  .main_logo {
-    @include border-radius(4px);
-    overflow: hidden;
-    display: block;
-    width: 350px;
-    margin: auto;
-  }
-  h1 {
-    font-size: 30px;
-    margin: auto;
-    text-align: center;
-    color: #666;
-  }
-  
-  
+.homepage_main_container {
+  max-width: 950px;
+  margin: auto;
 }

@@ -1,0 +1,164 @@
+---
+layout: layout
+---
+
+:sass 
+  .home2_container
+    max-width: 900px
+    margin: 0 auto
+    
+    header
+      overflow: auto
+      position: relative
+      height: 500px
+      width: 100%
+      .lhs
+        position: absolute
+        left: -40px
+        .blueprint
+          width: 120%
+        
+      .rhs
+        position: absolute
+        right: 0
+        z-index: 1
+        .logo
+          padding: 30px 0 0 0
+          width: 300px
+        h2
+          color: #666
+          font-size: 22px
+        #install
+          margin: 40px 0 0 0
+          text-align: left
+          
+    .main_section
+      overflow: auto
+      border-bottom: 1px solid #ccc
+      margin-bottom: 20px
+      padding-bottom: 20px
+      .lhs
+        float: left
+        width: 350px
+        margin: 30px 0 0 40px
+        h3
+          color: #333
+          font-size: 28px
+          font-weight: bold
+      .rhs
+        float: left
+        width: 440px
+        
+`
+
+.home2_container
+
+  %header
+    .lhs
+      %img.blueprint{:src => "/images/blue_print.jpg"}
+    .rhs
+      %img.logo{:src => "/images/zillabyte.svg", :alt => "Zillabyte"}
+      %h2
+        A Cloud Platform for Data Analysis
+      #install
+        %p
+          %b.console
+            gem install zillabyte
+    
+  
+  .main_section
+    .lhs
+      %h3
+        Getting Started
+    .rhs
+      %p 
+        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+      %ul
+        %li 
+          %a{:href => "#"}
+            Understanding Zillabyte
+        %li 
+          %a{:href => "#"}
+            Installing the CLI
+        %li 
+          %a{:href => "#"}
+            Hello World
+        %li 
+          %a{:href => "#"}
+            Testing & Pushing Your App
+        %li 
+          %a{:href => "#"}
+            Retrieving Data
+
+  .main_section
+    .lhs
+      %h3
+        Examples
+    .rhs
+      %p 
+        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+      %ul
+        %li 
+          %a{:href => "#"}
+            Understanding Zillabyte
+        %li 
+          %a{:href => "#"}
+            Installing the CLI
+        %li 
+          %a{:href => "#"}
+            Hello World
+        %li 
+          %a{:href => "#"}
+            Testing & Pushing Your App
+        %li 
+          %a{:href => "#"}
+            Retrieving Data
+            
+  .main_section
+    .lhs
+      %h3
+        CLI Reference
+    .rhs
+      %p 
+        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+      %ul
+        %li 
+          %a{:href => "#"}
+            Understanding Zillabyte
+        %li 
+          %a{:href => "#"}
+            Installing the CLI
+        %li 
+          %a{:href => "#"}
+            Hello World
+        %li 
+          %a{:href => "#"}
+            Testing & Pushing Your App
+        %li 
+          %a{:href => "#"}
+            Retrieving Data
+            
+  .main_section
+    .lhs
+      %h3
+        API Reference
+    .rhs
+      %p 
+        blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah 
+      %ul
+        %li 
+          %a{:href => "#"}
+            Understanding Zillabyte
+        %li 
+          %a{:href => "#"}
+            Installing the CLI
+        %li 
+          %a{:href => "#"}
+            Hello World
+        %li 
+          %a{:href => "#"}
+            Testing & Pushing Your App
+        %li 
+          %a{:href => "#"}
+            Retrieving Data  
+  

@@ -1,0 +1,86 @@
+---
+title: FAQ
+---
+
+# Frequently Asked Questions
+
+<%= h2_link("What is Zillabyte?") %>
+
+Zillabyte makes it easy to build data applications that scale. Using Zillabyte, you can process large datasets, including provided datasets such as the content of the web. Applications can be created in common languages such as Ruby or Python, and run on Zillabyte servers in the cloud.
+
+
+
+<%= h2_link("How do I use Zillabyte?") %>
+
+To use the Zillabyte CLI, run the `zillabyte` command from your terminal. A simple usage of Zillabyte involves two topics: `data`, which are the datasets to process, and applications(`apps`), which are run in order to process and transform data. 
+
+To begin, run `zillabyte help` to see the list of available commands that you can use for your Zillabyte projects.
+
+
+<%= h3_link("What is the Command Line Interface (CLI)?") %>
+
+
+<%= h3_link("What is an App?") %>
+
+
+<%= h3_link("What is a Component?") %>
+
+
+
+
+<%= h2_link("What Data is Available?") %>
+
+We are making some useful datasets publicly accessible for you to quickly get started. The first ones we are providing are `domains` and `web_pages`. The `domains` dataset contains more than 50 million domains. The `web_pages` dataset contains a sample of a deep web crawl, consisting for more than 5 million urls, with ther html content.
+
+In addition, you can upload your own datasets into Zillabyte, for traditional data processing sped up by Zillabyte.
+
+
+
+<%= h2_link("How do I Analyze Web Data?") %>
+
+A sampled copy of the web already exists for your app to source. See the [hello_world](/quickstart/hello_world) example for an explanation of sourcing from the `web_pages` dataset.
+
+
+
+<%= h2_link("How do I Analyze Private Data?") %>
+
+To upload your own datasets into Zillabyte, a dataset first must be created to hold the data. Run the `zillabyte data:create NAME` function to create a new dataset with the name NAME. This command allows you to define the schema of the relation or directly upload a dataset during the creation.
+
+To add CSV datasets to a dataset, use the `data:append` function. 
+
+Csv files should be uploaded using the CLI `data:append ID FILE` function. This appends the file FILE to the relation with an id(or name) ID. Once this relation has been populated with data, it can be sourced in the same manner as web data.
+
+
+
+<%= h3_link("How do I Analyze Streaming Data?") %>
+
+To input data into an app that is continously changing, use the source feature of the app to pull in data. You can define run cycles of an application, in order to periodically check data sources for new entries. Refer to the [apps](/quickstart/apps) guide for information on custom sources.
+
+
+
+<%= h3_link("How do I View Data?") %>
+
+Running the `zillabyte data` command will allow you to view your relations. Running the `zillabyte data:show ID` command using the id or name of your relation will show a sample subset of your the dataset's data.   <% #' %>
+
+In addition, Zillabyte datasets can be queried using standard SQL via the `zillabyte sql` command. A sample command may look like `zillabyte sql 'select * from web_pages'`. 
+
+
+
+<%= h3_link("How do I Download Data?") %>
+
+To pull a dataset to your local machine, call the `zillabyte data:pull ID OUTPUT` command. This command downloads the relation identified by ID into the file OUTPUT.gz (the default filetype is a CSV). 
+
+Datasets can also be pulled into your specified directory on Amazon S3 for further integration with other cloud based applications. To do so, use the `zillabyte data:pull:s3` command.
+
+
+
+
+
+
+
+
+
+
+
+[HTML5 Boilerplate]: http://html5boilerplate.com/
+[SMACSS]: http://smacss.com/

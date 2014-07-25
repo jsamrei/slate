@@ -42,18 +42,18 @@ $ zillabyte push
 
 ![Zillabyte simple apps](/images/HelloWorld.png)
 
-When an app is pushed to our service, we run the `each` block of code across our compute cluster. Each row of the results of the `source` query are streamed into them. This simple data app will process the millions of web pages in our corpus looking for the words 'hello world' anywhere in the page. The results are then sinked (saved) to a relation called "has_hello_world". The relation has one column, a url (string). 
+When an app is pushed to our service, we run the `each` block of code across our compute cluster. Each row of the results of the `source` query are streamed into them. This simple data app will process the millions of web pages in our corpus looking for the words 'hello world' anywhere in the page. The results are then sinked (saved) to a dataset called `has_hello_world`. The data set has one column, a `url` (string). 
 
 ## View the results 
 
 ``` bash
-$ zillabyte relations:show hello_world
+$ zillabyte data:show has_hello_world
 ```
 
 ## Export the results to your local machine as a zipped file
 
 ```bash
-$ zillabyte relations:pull hello_world 
+$ zillabyte data:pull has_hello_world output.gz
 ``` 
 
 Now you have a dataset of thousands of websites that have the term "hello world".  Of course, this is trivial.  The power of Zillabyte is the customizability and its flexibility.  

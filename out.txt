@@ -1,0 +1,23 @@
+Usage: zillabyte COMMAND [command-specific-options]
+
+Primary help topics, type "zillabyte help TOPIC" for more details:
+
+  apps        #  manage custom apps
+  components  #  manage custom components
+  data        #  manage custom datasets
+  query       #  executes queries
+  rpc         #  remote procedure call a component
+
+Additional topics:
+
+  auth     #  manage zillabyte accounts
+  git      #  manage git for apps
+  help     #  list commands and display help
+  keys     #  manage authentication keys
+  repl     #  REPL console for zillabyte commands
+  version  #  display version number
+
+Type "zillabyte help aliases" for shortcuts to common commands.
+
+Visit our documentation for more help: http://docs.zillabyte.com. 
+

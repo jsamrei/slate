@@ -5,14 +5,24 @@ Setting up a web crawler can be a substantial project... Especially if you would
 ...or, you can use Zillabyte: 
 
 ```bash
-$ zillabyte execute "domain_crawl" "example.com"
+$ zillabyte execute "domain_crawl" "zillabyte.com"
 ```
 
 ```bash
 # output
-asdfasdf sdf asdf
-asdfasdfa dfasdfa sdf
-asdfasdfa asdf asdf
+Request submitted
+Query ["zillabyte.com"]:
+  {
+    "crawl": [
+      {
+        "url": "http://zillabyte.com/",
+        "html": "<!DOCTYPE html>\n<html>\n<head>\n<title>Zillabyte</title>\...
+      },
+      {
+        "url": "http://zillabyte.com/pricing",
+        "html": "<!DOCTYPE html>\n<html>\n<head>\n<title>Zillabyte</title>\...
+      },
+  # ... 
 ```
 
 ## What's Going On? 
@@ -23,7 +33,7 @@ Zillabyte offers a feature known as 'components'.  [Components](http://docs.zill
 
 Zillabyte charges by machine hours.  You only pay for what you use.  Zillabyte's pricing can be [found here](http://zillabyte.com/pricing).  In my trials of crawling a few domains, I only racked up a few fractions of a machine hour, so cost hasn't been an issue.  As an added bonus, you get $50 in platform credits when you register.
 
-## I Need More Control
+## Need More Control?
 
 The `domain_crawl` component is 100% open source.  You are free to clone it and tweak it however you wish. 
 

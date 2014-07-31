@@ -45,7 +45,7 @@ You will, however, need to name it something other than `domain_crawl`.  For exa
 $ zillabyte execute "domain_outbound_links" "example.com"
 ```
 
-Tweaking the actual code is fairly simple once you understand the stream-programming paradigm.  For your convenience, you can see the above `domain_outbound_links` in the corresponding [branch on github](#TODO) (or view the [diff here](#TODO)).  If you're new to stream-programming, then check out this article: [TODO:PPP](TODO)
+Tweaking the actual code is fairly simple once you understand the pipe programming paradigm.  For your convenience, you can see the above `domain_outbound_links` in the corresponding [branch on github](https://github.com/zillabyte/domain_crawl/tree/outbound_links) (or view the [diff here](https://github.com/zillabyte/domain_crawl/compare/outbound_links)).  If you're new to pipe-programming, then check out this article: [The Pipe Programming Paradigm](http://blog.zillabyte.com/2014/05/14/the-pipe-programming-paradigm/)
 
 
 

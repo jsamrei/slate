@@ -1,0 +1,170 @@
+---
+layout: layout
+---
+
+:sass 
+  .home2_container
+    margin: 0 auto
+    
+    header
+      margin: 0 auto
+      position: relative
+      top: -30px
+      .blueprint
+        position: relative
+        left: -50px
+        max-width: 1000px
+        max-height: 90%
+        
+        margin: 0 auto
+        display: block
+      .sub_bar
+        max-width: 800px
+        margin: 0 auto 
+        padding-bottom: 20px
+        overflow: auto
+        border-bottom: 1px solid #ccc
+        .logo_area
+          float: left
+          span
+            font-family: arial
+            font-size: 48px
+            font-weight: 800
+            color: #AAC
+            position: relative
+            top: -2px
+            left: 5px
+            letter-spacing: -3px
+        .logo 
+          float: left
+        #install
+          float: right
+          position: relative
+          top: -20px
+          margin-bottom: 0
+          p 
+            background-color: #DDDDDD
+      
+
+          
+    .main_section
+      max-width: 900px
+      margin: 0 auto
+      overflow: auto
+      border-bottom: 1px solid #ccc
+      margin-bottom: 20px
+      padding-bottom: 20px
+      .lhs
+        float: left
+        width: 350px
+        margin: 30px 0 0 40px
+        h3
+          color: #333
+          font-size: 28px
+          font-weight: bold
+      .rhs
+        float: left
+        width: 440px
+        
+`
+
+.home2_container
+
+  %header
+    %img.blueprint{:src => "/images/blueprint_800x580.jpg"}
+    .sub_bar
+      .logo_area
+        %img.logo{:src => "/images/zillabyte.svg", :alt => "Zillabyte"}
+        %span
+          DOCS
+      / #install
+      /   %p
+      /     %b.console
+      /       gem install zillabyte
+    
+  
+  .main_section
+    .lhs
+      %h3
+        Getting Started
+    .rhs
+      %p 
+        Everything you need to know to build and deploy your first Data App. 
+      %ul
+        %li 
+          %a{:href => "/quickstart/understanding_zillabyte"}
+            Understanding Zillabyte
+        %li 
+          %a{:href => "/quickstart/hello_world/"}
+            Hello World
+        %li 
+          %a{:href => "/quickstart/apps/"}
+            Apps
+          and
+          %a{:href => "/quickstart/components/"}
+            Components
+        %li 
+          %a{:href => "/quickstart/faq"}
+            Frequently Asked Questions
+
+  .main_section
+    .lhs
+      %h3
+        Examples
+    .rhs
+      %p 
+        Learn Zillabyte with examples ranging from simple web analysis to complex economic modeling. 
+      %ul
+        %li 
+          %a{:href => "/examples/web_metadata/"}
+            Extracting Web Metadata
+        %li 
+          %a{:href => "/examples/index_commerce/"}
+            Installing the CLI
+        %li 
+          %a{:href => "/examples/domain_rank/"}
+            The Domain Rank Algorithm
+        %li 
+          %a{:href => "/examples/job_openings/"}
+            Finding Job Openings
+        %li 
+          %a{:href => "/examples/python_crawler/"}
+            Python Crawler 
+        %li 
+          %a{:href => "/examples/tos/"}
+            Monitoring Terms of Service
+        %li 
+          %a{:href => "/examples/market_coverage/"}
+            Market Analysis
+        %li 
+          %a{:href => "/examples/crawled_screenshots/"}
+            Components
+        
+            
+            
+  .main_section
+    .lhs
+      %h3
+        CLI Reference
+    .rhs
+      %p 
+        An introduction to the CLI's high level commands
+      %ul
+        %li 
+          %a{:href => "/cli_reference/overview/"}
+            Overview
+        %li 
+          %a{:href => "/cli_reference/apps"}
+            The 'apps' Command
+        %li 
+          %a{:href => "/cli_reference/data"}
+            The 'data' Command
+        %li 
+          %a{:href => "/cli_reference/components"}
+            The 'components' Command
+        %li 
+          %a{:href => "/cli_reference/queries"}
+            The 'query' Command
+        
+        
+  

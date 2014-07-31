@@ -1,6 +1,12 @@
 /**
  WE USE GOOGLE-CODE for ruby, python, js;  
 **/
+code {
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
 code.ruby, 
 code.python, 
 code.javascript, 
@@ -10,6 +16,8 @@ code.html,
   Google Code style (c) Aahan Krish <geekpanth3r@gmail.com>
   */
 
+  border: none;
+  
   &.hljs {
     display: block;
     overflow-x: auto;
@@ -285,5 +293,6 @@ code.bash {
     color: #aaa;
   }
 
+  border: none;
 }
 

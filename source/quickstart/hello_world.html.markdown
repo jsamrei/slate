@@ -4,37 +4,54 @@ title: Hello, World!
 
 # Hello, World!
 
-Zillabyte makes it easy to build data applications that scale. This page demonstrates the simple steps to search for occurences of 'hello world' in our corpus of web pages. To reproduce these commands on your machine, make sure you follow the steps on the [installation](/quickstart/installation) page.
+This page demonstrates the simple steps to search for occurences of the phrase 'hello world' in our open dataset, `web_pages`.  The `web_pages` corpus represents a crawled subset of the web.  It is crawled every week or so by Zillabyte and contains a few million pages of the most popular sites on the web.  
 
-## Initialize your app
+Before getting started, be sure to register and [install the Zillabyte CLI](/quickstart/installation) by running: 
+
+```bash
+# install the CLI
+$ gem install zillabyte
+
+# register
+$ zillabyte login
+```
+
+## Initialize the Data App
 
 ```bash
 $ zillabyte apps:init hello_world_app
 ```
-Executing this command in an empty folder will place three files. 
- 
-## The code 
 
-The entire code for the hello world data app follows: 
+This command will create a new directory with the necessary files to run the app.  By default, the app is initialized in Ruby, although you are free to use other languages as well.  Run `zillabyte init --help` for more options. 
+ 
+## App Code
+
+The code for the Data App is as follows: 
 
 ```ruby
 require 'zillabyte' 
 
 app = Zillabyte.app("hello_world_app")
-  .source("select * from web_pages")
+  .source("web_pages")
   .each{ |page|
     if page['html'].include? "hello" #  world
       emit :url => page['url']
     end
   }
   .sink{
-    name "has_hello"
+    name "has_hello_world"
     column "url", :string
   }
 ```
 
+The `source("web_pages")` line indicates that the App should read all data from the `web_pages` corpus.  The `web_pages` corpus is an open dataset and is publicly available to everyone.  However, you could just as easily swap out this dataset for another. 
 
-## Push to our servers to run the app
+The next segment is the `each` block.  This is the heart of this particular algorithm.  This block will execute on every tuple produced by the previous `source`.  In this case, we're going to consume every web page in the `web_pages` corpus and simply detect if the phrase "hello world" exists on the page.  If so, then we will `emit` the URL of the page back into the stream.
+
+Tuples emitted from the `each` block are then sent to the `sink`.  As the name implies, the `sink` is where tuples are persisted to the Zillabyte data store.  Data the flows into the `sink` can be inspected with the `zillabyte data` sub command. 
+
+
+## Push to the Cloud
 
 ```bash 
 $ zillabyte push
@@ -42,24 +59,30 @@ $ zillabyte push
 
 ![Zillabyte simple apps](/images/HelloWorld.png)
 
-When an app is pushed to our service, we run the `each` block of code across our compute cluster. Each row of the results of the `source` query are streamed into them. This simple data app will process the millions of web pages in our corpus looking for the words 'hello world' anywhere in the page. The results are then sinked (saved) to a dataset called `has_hello_world`. The data set has one column, a `url` (string). 
+When the app is pushed, Zillabyte will automatically scale the code across a cluster of machines.  Zillabyte does this by inspecting the operations (`source`, `each`, `sink`) and instantiating multiple instances of each one, depending on data volume. 
 
-## View the results 
+Once the app has been pushed, you may want to see the log output.  This is a convenient way to debug and inspect the status of your app. 
+
+```bash
+$ zillabyte logs
+```
+
+## View the Results 
+
+When the app has finished, you are free to take the output dataset.  To quickly view a sampling of the data, run the following: 
 
 ``` bash
 $ zillabyte data:show has_hello_world
 ```
 
-## Export the results to your local machine as a zipped file
+More likely, however, you will want to download the data to your local machine.  In that case, run the following: 
 
 ```bash
 $ zillabyte data:pull has_hello_world output.gz
 ``` 
-
-Now you have a dataset of thousands of websites that have the term "hello world".  Of course, this is trivial.  The power of Zillabyte is the customizability and its flexibility.  
-
  
-## Next steps
+## Next Steps
 
-If you haven't already done so, you should try our [tutorial](/quickstart/tutorial). Next, we recommend checking out our [example apps](/examples/index_commerce).
-  
+The above Data App is fairly simple.  However, it demonstrates how quickly one can tap into the distributed analysis on large datasets, such as the web.  It is hopefully obvious how the above app can be expanded to do more elaborate analysis on the web. 
+
+For a list of more examples, please refer to [docs.zillabyte.com](/)

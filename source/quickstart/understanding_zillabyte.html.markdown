@@ -2,11 +2,11 @@
 
 Zillabyte is an analysis platform for developers.  It allows developers to focus on building their unique applications instead of low level infrastructure.  
 
-Because it is hosted in the cloud, Zillabyte can handle most of the pitfalls associated with large-scale & distributed analysis.  Further, as a central location of algorithms, Zillabyte allows developers easily build upon other's contributions.  
+Because it is hosted in the cloud, Zillabyte can handle most of the pitfalls associated with large-scale & distributed analysis.  Further, as a central location of algorithms, Zillabyte allows developers easily build upon others' contributions.  
 
-The central unit in Zillabyte is called a "Data App".  A Data App is a block of code that inputs data, performs one to many operations on it, and then produces a corresponding output.  Data may be [source'd](/quickstart/faq#whats_a_source) and [sink'ed](/quickstart/faq#whats_a_sink) from a variety of locations & formats, including Zillabyte's [Open Datasets](http://zillabyte.com/data), which includes an fresh crawl of the web, patents, etc. 
+The central unit in Zillabyte is called a "Data App."  A Data App is a block of code that inputs data, performs one to many operations on it, and then produces a corresponding output.  Data may be [source'd](/quickstart/faq#whats_a_source) and [sink'ed](/quickstart/faq#whats_a_sink) from a variety of locations & formats, including Zillabyte's [Open Datasets](http://zillabyte.com/data), which includes an fresh crawl of the web, patents, etc. 
 
-As a developer, you work in the programming language of your choice.  Currently supported languages are [listed here](/quickstart/faq#what_languages_are_supported).  In this regard, Zillabyte is like a [DSL](/quickstart/faq#what_is_a_dsl):  you code in any supported language, but you must code in a way that Zillabyte can understand.  This is known as the [Stream Programming Model](http://blog.zillabyte.com/2014/05/14/the-pipe-programming-paradigm/), and it allows Zillabyte to scale & modularize your code.  
+As a developer, you work in the programming language of your choice.  Currently supported languages are [listed here](/quickstart/faq#what_languages_are_supported).  In this regard, Zillabyte is like a [DSL](/quickstart/faq#what_is_a_dsl):  you code in any supported language, but you must code in a way that Zillabyte can understand.  This is known as the [Pipe Programming Paradigm](http://blog.zillabyte.com/2014/05/14/the-pipe-programming-paradigm/), and it allows Zillabyte to scale & modularize your code.  
 
 Most of your work will be on your local machine as you iterate and build your Data App.  When you are ready to run at scale, you use the Zillabyte CLI to push your code to the cloud.  A typical workflow includes these steps: 
 

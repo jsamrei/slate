@@ -26,7 +26,7 @@ Each application has three primary components: `source`, `each`, and `sink` (des
 A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
 
 ```ruby
-result_stream = app.source "select url,html from web_pages"
+result_stream = app.source "web_pages"
 ```
 
 In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next component.

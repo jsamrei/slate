@@ -101,7 +101,9 @@ In a similar manner to component inputs, we declare the component output schema 
   ``` bash
     $ zillabyte rpc 'prefix_filter' "http://www.zillabyte.com"
   ```
+
   OR
+
   ``` bash
     $ zillabyte execute 'prefix_filter' "http://www.zillabyte.com"
   ```

@@ -34,15 +34,6 @@ Usage: zillabyte query:pull:s3 QUERY S3_KEY S3_SECRET S3_BUCKET s3_FILE_KEY
 
 ```bash
 $ zillabyte help query:sql
-Usage: zillabyte query:pull QUERY FILE
-
- Executes a query and downloads the results to FILE.
-pig:cli_reference xiaoyingxu$ zl help query:pull:s3
-Alias: query:pull:s3 redirects to query:pull_to_s3
-Usage: zillabyte query:pull:s3 QUERY S3_KEY S3_SECRET S3_BUCKET s3_FILE_KEY
-
- Executes a query and pulls data to S3_BUCKET/FILE_KEY/part***.gz.
-pig:cli_reference xiaoyingxu$ zl help query:sql
 Usage: zillabyte query:sql EXPRESSION
 
  Executes SQL queries against the zillabyte corpus.

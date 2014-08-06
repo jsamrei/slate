@@ -29,7 +29,7 @@ A `source` is the origin of the data flow, defined on the app object. The easies
 result_stream = app.source "web_pages"
 ```
 
-In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next component.
+In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next operation.
 
 ## Each
 
@@ -37,12 +37,11 @@ The `each` block can be thought of as a Ruby map operation that runs across mult
 
 ```ruby
 stream = result_stream.each do |tuple|
-  emit :url => tuple['url'] if tuple['html'].include? 
-  "hello_world"
+  emit :url => tuple['url'] if tuple['html'].include? "hello_world"
 end
 ```
 
-This is syntactically equivalent to the following code snippet. The hello world example uses the brace `{}` syntax to chain components together, without having to name variables for each generated stream object. 
+This is syntactically equivalent to the following code snippet. The hello world example uses the brace `{}` syntax to chain operations together, without having to name variables for each generated stream object. 
 
 ```ruby
 stream = result_stream.each{ |tuple|
@@ -54,7 +53,7 @@ stream = result_stream.each{ |tuple|
 
 ## Sink
 
-The `sink` is a passive component that defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
+The `sink` is a passive operation that defines the schema of the rows that need to be saved. Of all the operations where a stream is consumed, only the `sink` requires a schema to be defined. 
 
 ```ruby
 stream.sink do
@@ -67,13 +66,13 @@ The sink does not have an expanded syntax.
 
 ## Expanded Syntax
 
-This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple streams of data. This is useful when each stream has a different set of fields. This is currently applicable only to the `source` and `each` components. A component supplies a list of stream names to the `emits` method to define multiple streams. 
+This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for an operation to generate multiple streams of data. This is useful when each stream has a different set of fields. This is currently applicable only to the `source` and `each` operations. An operation supplies a list of stream names to the `emits` method to define multiple streams. 
 
 ```ruby
 emits "stream_1", "stream_2"
 ```
 
-For components that use the `emits` method, there is now an additional requirement. Each emitted row must explictly name one of the streams to emit to: 
+For operations that use the `emits` method, there is now an additional requirement. Each emitted row must explictly name one of the streams to emit to: 
 
 ```ruby
    emit 'stream_1', :foo => 'hi'
@@ -113,7 +112,7 @@ Here is an example of using the `emits` clause within a `source`.
 
 ```ruby
 stream_a, stream_b = app.source do
-  name "multiple_stream_source" #Optional name to uniquely identify the source component
+  name "multiple_stream_source" #Optional name to uniquely identify the source operation
   emits 'a', 'b' # The emit below uses these strings
   next_tuple do
     emit 'a', :foo => 'hi' # Emitting to first stream

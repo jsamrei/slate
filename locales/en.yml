@@ -40,6 +40,9 @@ en:
     queries: Queries
     relations: Relations
 
+  api_reference:
+    title: Application Programming Interface
+    overview: Overview
 
   community:
     title: Community

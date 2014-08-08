@@ -4,76 +4,67 @@
 Queries allow you to perform analysis on your relations. The Zillabyte SQL engine is compatible with the Postgres 9.4 syntax.
 
 ``` bash
-  query:pull          #  executes a queries and downloads the results to FILE
-  query:pull:s3       #  pulls query data to S3_BUCKET/FILE_KEY/part***.gz
-  query:sql           #  executes queries against the zillabyte corpus
-  query:sxp           #  executes queries against the zillabyte corpus
-
+$ zillabyte help query
+  query:pull QUERY FILE                                       #  Executes a query and downloads the results to FILE.
+  query:pull:s3 QUERY S3_KEY S3_SECRET S3_BUCKET s3_FILE_KEY  #  Executes a query and pulls data to S3_BUCKET/FILE_KEY/part***.gz.
+  query:sql EXPRESSION                                        #  Executes SQL queries against the zillabyte corpus.
+  query:sxp EXPRESSION                                        #  Executes SXP queries against the zillabyte corpus.
 ```
 
 ### query:pull
 
 ```bash
-$ zillabyte query:pull
+$ zillabyte help query:pull
 Usage: zillabyte query:pull QUERY FILE
 
- executes a queries and downloads the results to FILE
-
- pulls query data to OUTPUT.gz
-
+ Executes a query and downloads the results to FILE.
 ``` 
 
 ### query:pull:s3
 
 ```bash
-$ zillabyte query:pull:s3
+$ zillabyte help query:pull:s3
 Alias: query:pull:s3 redirects to query:pull_to_s3
 Usage: zillabyte query:pull:s3 QUERY S3_KEY S3_SECRET S3_BUCKET s3_FILE_KEY
 
- pulls query data to S3_BUCKET/FILE_KEY/part***.gz
- --output_type OUTPUT_TYPE       # specify an output format type i.e. json
-
+ Executes a query and pulls data to S3_BUCKET/FILE_KEY/part***.gz.
 ``` 
 
 ### query:sql
 
 ```bash
-$ zillabyte query:sql
+$ zillabyte help query:sql
 Usage: zillabyte query:sql EXPRESSION
 
- executes queries against the zillabyte corpus
+ Executes SQL queries against the zillabyte corpus.
 
- -o, --offset OFFSET  # skips to the offset (default: 0)
- -l, --limit LIMIT    # sets the result limit (default: 20)
- -t, --tail TAIL      # continuously watches for new results
- -s, --since SINCE    # newer records since
- --no_truncation      # doesn't truncate long strings
- --output_type OUTPUT_TYPE          # The result display type
+ -o, --offset OFFSET                         # Skips to the offset [default: 0]
+ -l, --limit LIMIT                           # Sets the result limit [default: 20]
+ -t, --tail TAIL                             # Continuously watches for new results
+ -s, --since SINCE                           # Grab newer records since SINCE
+ --no_truncation                             # Doesn't truncate long strings
+ --meta                                      # Show meta columns (since, confidence, source)
 
 Examples:
 
  $ zillabyte query:sql "select * from company" --limit 100
-
 ``` 
 
 ### query:sxp
 
 ```bash
-$ zillabyte query:sxp
+$ zillabyte help query:sxp
 Usage: zillabyte query:sxp EXPRESSION
 
- executes queries against the zillabyte corpus
+ Executes SXP queries against the zillabyte corpus.
 
- -o, --offset OFFSET  # skips to the offset (default: 0)
- -l, --limit LIMIT    # sets the result limit (default: 20)
- --output_type OUTPUT_TYPE          # the output format type i.e json
- -t, --tail TAIL      # continuously watches for new results
+ -o, --offset OFFSET                         # Skips to the offset [default: 0]
+ -l, --limit LIMIT                           # Sets the result limit [default: 20]
+ -t, --tail TAIL                             # Continuously watches for new results
+ --meta                                      # Show meta columns (since, confidence, source)
 
 Examples:
 
  $ zillabyte query:sxp "(uses company 'web_css')" --limit 100
 ``` 
-
-
-
 

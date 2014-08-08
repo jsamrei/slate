@@ -17,15 +17,26 @@ To use the Zillabyte CLI, run the `zillabyte` command from your terminal. A simp
 To begin, run `zillabyte help` to see the list of available commands that you can use for your Zillabyte projects.
 
 
-<%= h3_link("What is the Command Line Interface (CLI)?") %>
+<%= h2_link("What is the Command Line Interface (CLI)?") %>
 
+The command line interface (CLI) is the primary way to interact with the Zillabyte infrastructure. Details of each command can be viewed by running zillabyte help COMMAND. The standalone zillabyte help command is also a quick way to see the available commands.
 
-<%= h3_link("What is an App?") %>
+See the [CLI Reference](/cli_reference/overview/) page for a more detailed explaination of the CLI.
 
+<%= h2_link("What is an App?") %>
 
-<%= h3_link("What is a Component?") %>
+An Application(App) is a block of code that inputs data, performs one to many operations on it, and then produces a corresponding output.  
 
+Data may be [source'd](/quickstart/faq#whats_a_source) and [sink'ed](/quickstart/faq#whats_a_sink) from a variety of locations & formats, including Zillabyte's [Open Datasets](http://zillabyte.com/data), which includes an fresh crawl of the web, patents, etc. 
 
+See [Quickstart - Applications](quickstart/apps) for a detailed overview on apps.
+
+<%= h2_link("What is a Component?") %>
+
+A Component is an encapsulated, re-usable function that allow you to run Zillabyte functions on demand.
+
+Components can be queried as a standalone procedure calls or embedded within other applications. See the [Quick Start - Components](/quickstart
+/components) page for a detailed overview on components.
 
 
 <%= h2_link("What Data is Available?") %>

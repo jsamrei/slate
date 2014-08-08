@@ -19,17 +19,18 @@ Zillabyte supports two syntax variants for building apps using data streams: (1)
 
 ## Parts of an app: `Source`, `Each`, and `Sink`
 
-Each application has three primary components: `source`, `each`, and `sink` (described in more detail below). These are connected via a stream, which is the flow of data between these components. A component may emit one or more streams. 
+Each application has three primary operations: `source`, `each`, and `sink` (described in more detail below). These are connected via a stream, which is the flow of data between these operations. An operation may emit one or more streams. 
+
 
 ## Source 
 
 A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
 
 ```ruby
-result_stream = app.source "select url,html from web_pages"
+result_stream = app.source "web_pages"
 ```
 
-In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next component.
+In this case, the `source` pulls rows from the relation `web_pages`, with the columns `url` and `html`. The resulting stream object can then be used to define the next operation.
 
 ## Each
 
@@ -37,12 +38,11 @@ The `each` block can be thought of as a Ruby map operation that runs across mult
 
 ```ruby
 stream = result_stream.each do |tuple|
-  emit :url => tuple['url'] if tuple['html'].include? 
-  "hello_world"
+  emit :url => tuple['url'] if tuple['html'].include? "hello_world"
 end
 ```
 
-This is syntactically equivalent to the following code snippet. The hello world example uses the brace `{}` syntax to chain components together, without having to name variables for each generated stream object. 
+This is syntactically equivalent to the following code snippet. The hello world example uses the brace `{}` syntax to chain operations together, without having to name variables for each generated stream object. 
 
 ```ruby
 stream = result_stream.each{ |tuple|
@@ -54,7 +54,7 @@ stream = result_stream.each{ |tuple|
 
 ## Sink
 
-The `sink` is a passive component that defines the schema of the rows that need to be saved. Of all the components where a stream is consumed, only the `sink` requires a schema to be defined. 
+The `sink` is a passive operation that defines the schema of the rows that need to be saved. Of all the operations where a stream is consumed, only the `sink` requires a schema to be defined. 
 
 ```ruby
 stream.sink do
@@ -67,13 +67,13 @@ The sink does not have an expanded syntax.
 
 ## Expanded Syntax
 
-This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for a component to generate multiple streams of data. This is useful when each stream has a different set of fields. This is currently applicable only to the `source` and `each` components. A component supplies a list of stream names to the `emits` method to define multiple streams. 
+This section is for advanced use cases that are not satisfied by the syntax described above. The primary difference is the ability for an operation to generate multiple streams of data. This is useful when each stream has a different set of fields. This is currently applicable only to the `source` and `each` operations. An operation supplies a list of stream names to the `emits` method to define multiple streams. 
 
 ```ruby
 emits "stream_1", "stream_2"
 ```
 
-For components that use the `emits` method, there is now an additional requirement. Each emitted row must explictly name one of the streams to emit to: 
+For operations that use the `emits` method, there is now an additional requirement. Each emitted row must explictly name one of the streams to emit to: 
 
 ```ruby
    emit 'stream_1', :foo => 'hi'
@@ -113,7 +113,7 @@ Here is an example of using the `emits` clause within a `source`.
 
 ```ruby
 stream_a, stream_b = app.source do
-  name "multiple_stream_source" #Optional name to uniquely identify the source component
+  name "multiple_stream_source" #Optional name to uniquely identify the source operation
   emits 'a', 'b' # The emit below uses these strings
   next_tuple do
     emit 'a', :foo => 'hi' # Emitting to first stream
@@ -131,9 +131,9 @@ This is semantically equal to the simple syntax block above, shown here for comp
 
 ```ruby
 stream.each do
-  name "component_name" #Optional
+  name "operation_name" #Optional
   prepare do # Optional
-   # Initialization step that happens once per component
+   # Initialization step that happens once per operation
   end
   execute do |tuple|
     # Do something with tuple
@@ -148,10 +148,10 @@ A common use case is to generate multiple streams from a single computation. For
 
 ```ruby
 has_hello_world_stream, links_stream = stream.each do
-  name "component_name" #Optional
+  name "operation_name" #Optional
   emits "has_hello_world", "links"
   prepare do # Optional
-   # Initialization step that happens once per component
+   # Initialization step that happens once per operation
   end
   execute do |tuple|
     # Do something with tuple
@@ -170,7 +170,7 @@ end
 
 ### Hello, Goodbye, World: Take One
 
-This example shows the hello world example with a twist. This also executes an extra string search looking for a `'goodbye world'` and storing it in a separate sink. In this code block, the `each` component emits multiple streams using the expanded syntax.
+This example shows the hello world example with a twist. This also executes an extra string search looking for a `'goodbye world'` and storing it in a separate sink. In this code block, the `each` operation emits multiple streams using the expanded syntax.
 
 ![Zillabyte Multiple stream apps: Take 1](/images/Apps-Example1.png)
 
@@ -203,7 +203,7 @@ end
 
 ### Hello, Goodbye, World: Take Two
 
-This code uses two separate `each` components to perform the seperate string searches that are respectively `sink`ed to a relation. Notice here that both `each` components are defined on the same `pages` stream object that was generated by the `source` component. Since the `each`s now only emit one stream, they can use the simpler `each` syntax for terseness.
+This code uses two separate `each` operations to perform the seperate string searches that are respectively `sink`ed to a relation. Notice here that both `each` operations are defined on the same `pages` stream object that was generated by the `source` operation. Since the `each`s now only emit one stream, they can use the simpler `each` syntax for terseness.
 
 ![Zillabyte Multiple stream apps: Take One](/images/Apps-Example2.png)
 

@@ -27,6 +27,10 @@
   
 
 
-**API Contents**  
-### RPC
-  * [RPC](/api_reference/rpc)
+##API Contents
+
+**RPC**
+
+  Query Zillabyte Components
+
+  * [RPC Comamands](/api_reference/rpc)

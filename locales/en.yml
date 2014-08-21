@@ -12,6 +12,7 @@ en:
     installation: Installation
     apps: Apps
     components: Components
+    aggregation: Aggregation
     tutorial: Tutorial
 
   examples:
@@ -40,6 +41,9 @@ en:
     queries: Queries
     relations: Relations
 
+  api_reference:
+    title: Application Programming Interface
+    overview: Overview
 
   community:
     title: Community

@@ -14,23 +14,26 @@ of aggregations can be performed.
 
 ## Group By
 
+### What is a Group By?
+
 The Group By function can be used to implement various features which involve associative computation. Counts, sums, and other desired functions are creating using the following guidelines. Here is a full example of a word count operation in Zillabyte.
-
-
-
 
 ```ruby
 
 count_stream = stream.group_by(:word) do
+
+  # Initialize any counters and data that you would like to use for the aggregation
   begin_group do |g_tuple|
     @word = g_tuple[:word]
     @count = 0
   end
 
+  # Perform aggregation on a tuple by tuple basis
   aggregate do |tuple|
     @count += 1
   end
 
+  # Emit the finalized aggregate data
   end_group do |g_tuple|
     emit :word => @word, :count => @count
   end
@@ -82,8 +85,86 @@ we emit the words along with their counts.
 ```
 
 
-
 ## Join
+
+### What is a Join?
+
+Join's allow you to combine two streams into one in a manner similar to traditional relational systems. Realtime tuple data can be joined to construct
+views combining a variety of sources. Here is an example of a join in Zillabyte.
+
+
+``` ruby
+# This stream contains employees and their departments
+people_stream = app.each do |tuple|  
+  emit :person => tuple[:person], :dept => tuple[:person_dept]
+end  
+          
+# This stream contains departments and their budgets
+budget_stream = app.each do  
+  emit :dept => tuple[:budget_dept], :budget => tuple[:budget] 
+end  
+          
+# Here we join employees and their budgets based on a shared department field
+combined_stream = people_stream.join_with(budget_stream, :on => :dept, :type => :inner)  
+
+
+# The new stream contains the superset of the two streams
+combined_stream.sink do
+  name people_dept_budget
+  column :person, :string
+  column :dept, :string
+  column :budget, :integer
+end
+
+```
+
+### Declaring the join
+
+Joins are declared in the following format :
+
+``` ruby
+output_stream = left_hand_stream.join_with(right_hand_stream, 
+  :on => join_fields,
+  :type => join_type
+  )
+```
+
+The `left_hand_stream` and `right_hand_stream` variables correspond to the streams that you are joining.
+
+### Specifying fields to join upon
+
+Fields can be specified in the following formats:
+
+```ruby
+  :on =>  "shared_field"
+```
+
+This format specifies a single field that is shared between the two streams that is joined upon.
+ 
+ Or:
+
+  ```ruby
+   :on => ["left_hand_field", "right_hand_field"]
+  ```
+
+This format allows joins on fields which differ in key name, but share overlapping values.
+
+
+### Declaring the Join Type
+
+The following join types are available
+
+* :innner       - An inner join
+* :outer        - An full outer join
+* :left         - A left hand join
+* :right        - A right hand join
+
+Specifying the join type (the default is left) allows for the data sets to handle the cases of nulls or mismatches. The functionality of these types adhere to the conventions of standard relational joins.
+
+
+
+
+
 
 
 

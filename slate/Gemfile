@@ -1,14 +1,8 @@
-source "https://rubygems.org"
+# If you have OpenSSL installed, we recommend updating
+# the following line to use "https"
+source 'http://rubygems.org'
 
-gem "builder"
-gem "susy"
 gem "middleman", "~>3.3.0"
-gem "middleman-fjords"
-gem "middleman-livereload"
-gem "middleman-google-analytics"
-gem "hipchat"
-gem "activesupport"
-
 
 # For syntax highlighting
 gem "middleman-syntax"

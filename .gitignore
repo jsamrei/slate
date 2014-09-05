@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **.orig
 *.rbc
 *.sassc
@@ -30,3 +31,27 @@ capybara-*.html
 config/initializers/secret_token.rb
 pickle-email-*.html
 rerun.txt
+=======
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+*.DS_STORE
+build/
+.cache
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+.idea/
+>>>>>>> bd6865585cc56d444a31905d0baeb1c7cea03f30

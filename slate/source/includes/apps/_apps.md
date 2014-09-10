@@ -24,13 +24,13 @@ Each application has three primary operations: `source`, `each`, and `sink` (des
 
 ## Source 
 
-A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
-
-
 ```ruby
 result_stream = app.source "web_pages"
 
 ```
+A `source` is the origin of the data flow, defined on the app object. The easiest way to stream data into a Zillabyte app is to use a Zillabyte relation. The `source` method takes in a single SQL string, producing a stream object.
+
+
 
 ```python
 import 'kittn'
@@ -41,13 +41,15 @@ In this case, the `source` pulls rows from the relation `web_pages`, with the co
 
 ## Each
 
-The `each` block can be thought of as a Ruby map operation that runs across multiple machines. Rows of the stream are distributed across the systems and processed. The result of the `each` is another stream object that will contain the emitted rows. The input argument `tuple` contains a single row, stored as a Ruby hash.
-
 ```ruby
 stream = result_stream.each do |tuple|
   emit :url => tuple['url'] if tuple['html'].include? "hello_world"
 end
 ```
+
+The `each` block can be thought of as a Ruby map operation that runs across multiple machines. Rows of the stream are distributed across the systems and processed. The result of the `each` is another stream object that will contain the emitted rows. The input argument `tuple` contains a single row, stored as a Ruby hash.
+
+
 
 This is syntactically equivalent to the following code snippet. The hello world example uses the brace `{}` syntax to chain operations together, without having to name variables for each generated stream object. 
 
